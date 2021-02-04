@@ -37,8 +37,8 @@ app.use(session({
   }),
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 days
 }));
 
 app.get('/', function (req, res) {
@@ -46,36 +46,28 @@ app.get('/', function (req, res) {
 })
 
 //BOOTHS
-//Get all booths
-app.get('/getbooth', async (req, res) => {
-	let response = await pgdb.getBooths();
-	
-	res.send(response);
+const booths = require('./routes/booths')
+
+app.use('/booths', booths);
+//
+
+//Login function
+const login = require('./routes/login')
+
+app.use('/login', login);
+
+app.post('/logout', async(req,res)=> {
+	req.session.destroy(function(err) {
+  		res.send('Session destroyed')
+	})
 })
+//
 
-//Add a booth 
-//Requires a request body (booth number, booth name, booth annotations as JSON)
-app.post('/addbooth', async (req, res) => {
-	let response = await pgdb.addBooth(uuidv4(), req.body.number, req.body.name, req.body.annotations);
-	
-	res.send(response);
-})
+//Annotations
+const annotations = require('./routes/annotations')
 
-//Delete a booth
-//Requires a request body (uid)
-app.delete('/deletebooth', async (req, res) => {
-	let response = await pgdb.deleteBooth(req.body.uid);
-
-	res.send(response);
-})
-
-//Update a booth
-//Requires a request body (booth uid, booth number, booth name, booth annotations as JSON)
-app.put('/editbooth', async (req, res) => {
-	let response = await pgdb.editBooth(req.body.uid, req.body.number, req.body.name, req.body.annotations);
-
-	res.send(response);
-})
+app.use('/annotations', annotations);
+//
  
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
