@@ -4,6 +4,7 @@ const app = express();
 const pgdb = require('./db/pg');
 const dotenv = require('dotenv');
 dotenv.config();
+const jwt = require('jsonwebtoken');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -22,6 +23,9 @@ app.use(
 
 const { v4: uuidv4 } = require('uuid');
  
+ //SESSION
+ //
+ /*
 const pgPool = new pg.Pool({
     user: process.env.PG_USER,
 	host: process.env.PG_HOST,
@@ -40,16 +44,30 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 days
 }));
+*/
+//
+
+//MIDDLEWARE//
+
+function authToken(req, res, next) {
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
+	if(token == null) return res.sendStatus(401);
+
+	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+		if(err){
+			res.status(403).send(err.toString());
+		}
+		req.user = user;
+		next()
+	})
+}
+
+//ROUTES//
 
 app.get('/', function (req, res) {
   res.send('EXHIBITION CMS BACKEND')
 })
-
-//BOOTHS
-const booths = require('./routes/booths')
-
-app.use('/booths', booths);
-//
 
 //Login function
 const login = require('./routes/login')
@@ -57,16 +75,20 @@ const login = require('./routes/login')
 app.use('/login', login);
 
 app.post('/logout', async(req,res)=> {
-	req.session.destroy(function(err) {
-  		res.send('Session destroyed')
-	})
+	res.send('Logout')
 })
+//
+
+//BOOTHS
+const booths = require('./routes/booths')
+
+app.use('/booths',authToken, booths);
 //
 
 //Annotations
 const annotations = require('./routes/annotations')
 
-app.use('/annotations', annotations);
+app.use('/annotations', authToken, annotations);
 //
  
 app.listen(port, hostname, () => {
