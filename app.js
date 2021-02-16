@@ -7,7 +7,7 @@ dotenv.config();
 const jwt = require('jsonwebtoken');
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = process.env.APP_PORT;
 
 const pg = require('pg')
   , session = require('express-session')
@@ -21,31 +21,16 @@ app.use(
   })
 )
 
+const cors = require('cors')
+app.use(cors())
+
 const { v4: uuidv4 } = require('uuid');
- 
- //SESSION
- //
- /*
-const pgPool = new pg.Pool({
-    user: process.env.PG_USER,
-	host: process.env.PG_HOST,
-	database: process.env.PG_DB,
-	password: process.env.PG_PASS,
-	port: process.env.PG_PORT,
-});
- 
-app.use(session({
-  store: new pgSession({
-    pool : pgPool,                
-    tableName : 'session'   
-  }),
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 days
-}));
-*/
-//
+
+//app.use("/", express.static(__dirname + '/views'));
+app.engine('html', require('ejs').renderFile);
+
+app.set('views');
+app.set('view engine', 'ejs');
 
 //MIDDLEWARE//
 
@@ -66,8 +51,21 @@ function authToken(req, res, next) {
 //ROUTES//
 
 app.get('/', function (req, res) {
-  res.send('EXHIBITION CMS BACKEND')
+  res.send('EXHIBITOR CMS API')
 })
+
+//Auth
+app.post('/auth', authToken, (req, res)=>{
+  if(req.user.email != req.body.user){
+    res.status(403).send({error: true, message: 'Wrong token'})
+  }
+
+  res.send({
+    status: 'Authorized', 
+    user: req.user
+  });
+})
+//
 
 //Login function
 const login = require('./routes/login')
@@ -75,8 +73,15 @@ const login = require('./routes/login')
 app.use('/login', login);
 
 app.post('/logout', async(req,res)=> {
-	res.send('Logout')
+	res.send('Logout') 
 })
+//
+
+//Login function
+const register = require('./routes/register')
+
+app.use('/register', register);
+
 //
 
 //BOOTHS
