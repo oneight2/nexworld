@@ -54,9 +54,9 @@ async function editBooth(uid, bnumber, bname, bannotations){
 
 //USERS
 
-async function registerUser(uid, email, password, role){
+async function registerUser(uid, email, password, role, props){
 	try {
-		let { rows } = await db.query('insert into users (uid, email, password, role) values ($1, $2, $3, $4)', [uid, email, password, role])
+		let { rows } = await db.query('insert into users (uid, email, password, role, props) values ($1, $2, $3, $4, $5)', [uid, email, password, role, props])
 
 		return rows;
 	} catch (err){
@@ -67,6 +67,26 @@ async function registerUser(uid, email, password, role){
 async function getUser(email){
 	try{
 		let { rows } = await db.query('select * from users where email = $1', [email]);
+
+		return rows;
+	} catch (err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function updateUser(email, props){
+	try{
+		let { rows } = await db.query('update users set props = $2 where email = $1',[email, props]);
+
+		return rows;
+	} catch (err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function reRegisterUser(email, password, props){
+	try{
+		let { rows } = await db.query('update users set (password, props) = ($2, $3) where email = $1',[email, password, props]);
 
 		return rows;
 	} catch (err){
@@ -123,6 +143,8 @@ module.exports = {
 	editBooth,
 	registerUser,
 	getUser,
+	updateUser,
+	reRegisterUser,
 	getAnnotations,
 	addAnnotation,
 	deleteAnnotation,
