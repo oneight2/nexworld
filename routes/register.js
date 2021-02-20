@@ -61,9 +61,9 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-		  res.send({status: 'OK', message: 'API called successfully. Returned data: ' + data});
+		  console.log({status: 'OK', message: 'API called successfully. Returned data: ' + data});
 		}, function(error) {
-		  res.status(500).send({error: true, message: error});
+		  console.log({error: true, message: error});
 		});
 	}
 
