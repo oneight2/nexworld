@@ -30,10 +30,27 @@ router.post('/default', async (req, res)=> {
 
 //REGISTER, SEND TOKEN LINK TO EMAIL
 
+function parseMeetingInfo(mi){
+    switch(mi){
+    	case '6mar21-1000':
+    	return {meetingid: '81377875643', meetingpass: 'hasummit21'}
+    	break;
+    	case '7mar21-1000':
+    	return {meetingid: '85811709809', meetingpass: 'hasummit21'}
+    	break;
+    	case '6mar21-1300':
+    	return {meetingid: '88341341245', meetingpass: 'hasummit21'}
+    	break;
+    	case '7mar21-1300':
+    	return {meetingid: '81091976781', meetingpass: 'hasummit21'}
+    	break;
+    }
+}
+
 //Registration api, params: body: {user, props}
 router.post('/autoGenerateByEmail', async (req,res) => {
 
-	function sendLinkEmail(email, token){
+	function sendLinkEmail(email, token, meetinginfo){
 		// Configure API key authorization: api-key
 		var apiKey = defaultClient.authentications['api-key'];
 		apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
@@ -53,7 +70,9 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 		    }],
 		    templateId: 1,
 		    params: {
-		        loginlink: process.env.FRONTEND_ADDRESS + '/login?user=' + email + '&token=' + token
+		        loginlink: process.env.FRONTEND_ADDRESS + '/login?user=' + email + '&token=' + token,
+		        meetingid: meetinginfo.meetingid,
+		        meetingpass: meetinginfo.meetingpass
 		    },
 		    headers: {
 		        'X-Mailin-custom': 'custom_header_1:custom_value_1|custom_header_2:custom_value_2'
@@ -77,7 +96,10 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let response = await pgdb.reRegisterUser(req.body.user, hash, req.body.props);
 
-			sendLinkEmail(req.body.user, userToken);
+			let symData = req.body.props.sympossium;
+			for(i=0; i<symData.length; i++){
+				sendLinkEmail(req.body.user, userToken, symData[i]);
+			}
 			res.send({
 				user: req.body.user,
 				userToken: userToken
@@ -89,7 +111,10 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let response = await pgdb.registerUser(uuidv4(), req.body.user, hash, 'user', req.body.props);
 
-			sendLinkEmail(req.body.user, userToken);
+			let symData = req.body.props.sympossium;
+			for(i=0; i<symData.length; i++){
+				sendLinkEmail(req.body.user, userToken, symData[i]);
+			}
 			res.send({
 		    	user: req.body.user,
 		    	userToken: userToken
