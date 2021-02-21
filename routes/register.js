@@ -33,16 +33,16 @@ router.post('/default', async (req, res)=> {
 function parseMeetingInfo(mi){
     switch(mi){
     	case '6mar21-1000':
-    	return {meetingid: '81377875643', meetingpass: 'hasummit21'}
+    	return {meetingid: '81377875643', meetingpass: 'hasummit21', code: '1'};
     	break;
     	case '7mar21-1000':
-    	return {meetingid: '85811709809', meetingpass: 'hasummit21'}
+    	return {meetingid: '85811709809', meetingpass: 'hasummit21', code: '1'};
     	break;
     	case '6mar21-1300':
-    	return {meetingid: '88341341245', meetingpass: 'hasummit21'}
+    	return {meetingid: '88341341245', meetingpass: 'hasummit21', code: '2'};
     	break;
     	case '7mar21-1300':
-    	return {meetingid: '81091976781', meetingpass: 'hasummit21'}
+    	return {meetingid: '81091976781', meetingpass: 'hasummit21', code: '2'};
     	break;
     }
 }
@@ -98,7 +98,7 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let symData = req.body.props.sympossium;
 			for(i=0; i<symData.length; i++){
-				sendLinkEmail(req.body.user, userToken, symData[i]);
+				sendLinkEmail(req.body.user, userToken, parseMeetingInfo(symData[i]));
 			}
 			res.send({
 				user: req.body.user,
@@ -113,7 +113,7 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let symData = req.body.props.sympossium;
 			for(i=0; i<symData.length; i++){
-				sendLinkEmail(req.body.user, userToken, symData[i]);
+				sendLinkEmail(req.body.user, userToken, parseMeetingInfo(symData[i]));
 			}
 			res.send({
 		    	user: req.body.user,
