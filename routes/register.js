@@ -33,16 +33,16 @@ router.post('/default', async (req, res)=> {
 function parseMeetingInfo(mi){
     switch(mi){
     	case '6mar21-1000':
-    	return {meetingid: '81377875643', meetingpass: 'hasummit21', code: '1'};
+    	return {meetingid: '81377875643', meetingpass: 'hasummit21', code: '1', date: '6 Maret 2021 - 10.00'};
     	break;
     	case '7mar21-1000':
-    	return {meetingid: '85811709809', meetingpass: 'hasummit21', code: '1'};
+    	return {meetingid: '85811709809', meetingpass: 'hasummit21', code: '1', date: '7 Maret 2021 - 10.00'};
     	break;
     	case '6mar21-1300':
-    	return {meetingid: '88341341245', meetingpass: 'hasummit21', code: '2'};
+    	return {meetingid: '88341341245', meetingpass: 'hasummit21', code: '2', date: '6 Maret 2021 - 13.00'};
     	break;
     	case '7mar21-1300':
-    	return {meetingid: '81091976781', meetingpass: 'hasummit21', code: '2'};
+    	return {meetingid: '81091976781', meetingpass: 'hasummit21', code: '2', date: '7 Maret 2021 - 13.00'};
     	break;
     }
 }
@@ -72,7 +72,9 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 		    params: {
 		        loginlink: process.env.FRONTEND_ADDRESS + '/login?user=' + email + '&token=' + token,
 		        meetingid: meetinginfo.meetingid,
-		        meetingpass: meetinginfo.meetingpass
+		        meetingpass: meetinginfo.meetingpass,
+		        meetingcode: meetinginfo.code,
+		        meetingdate: meetinginfo.date
 		    },
 		    headers: {
 		        'X-Mailin-custom': 'custom_header_1:custom_value_1|custom_header_2:custom_value_2'
