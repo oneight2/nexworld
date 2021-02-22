@@ -22,7 +22,7 @@ router.post('/getData', async (req, res) => {
   		if(passwordMatch && userMatch){
   			let response = await pgdb.getUsersData();
 
-	  		res.send(response)
+	  		res.send(response);
   		} else {
   			res.status(500).send({error: true, message: 'Wrong username or password'})
   		}
