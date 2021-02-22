@@ -50,7 +50,7 @@ function parseMeetingInfo(mi){
 //Registration api, params: body: {user, props}
 router.post('/autoGenerateByEmail', async (req,res) => {
 
-	function sendLinkEmail(email, token, meetinginfo){
+	function sendLinkEmail(email, name, token, meetinginfo){
 		// Configure API key authorization: api-key
 		var apiKey = defaultClient.authentications['api-key'];
 		apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
@@ -65,8 +65,8 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 		sendSmtpEmail = {
 		    to: [{
-		        email: 'a.pranasakti@gmail.com',
-		        name: 'Arie'
+		        email: email,
+		        name: name
 		    }],
 		    templateId: 1,
 		    params: {
@@ -100,7 +100,7 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let symData = req.body.props.sympossium;
 			for(i=0; i<symData.length; i++){
-				sendLinkEmail(req.body.user, userToken, parseMeetingInfo(symData[i]));
+				sendLinkEmail(req.body.user, req.body.props.name, userToken, parseMeetingInfo(symData[i]));
 			}
 			res.send({
 				user: req.body.user,
@@ -115,7 +115,7 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 
 			let symData = req.body.props.sympossium;
 			for(i=0; i<symData.length; i++){
-				sendLinkEmail(req.body.user, userToken, parseMeetingInfo(symData[i]));
+				sendLinkEmail(req.body.user, req.body.props.name, userToken, parseMeetingInfo(symData[i]));
 			}
 			res.send({
 		    	user: req.body.user,
