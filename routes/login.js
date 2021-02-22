@@ -39,8 +39,4 @@ router.post('/', async (req, res) => {
 	}
 })
 
-router.get('/check', async(req,res)=> {
-	res.send({user: req.session.user, token: req.session.token});
-})
-
 module.exports = router;

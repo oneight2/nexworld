@@ -95,6 +95,12 @@ const annotations = require('./routes/annotations')
 
 app.use('/annotations', authToken, annotations);
 //
+
+//Admin
+const admin = require('./routes/admin')
+
+app.use('/admin', admin);
+//
  
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

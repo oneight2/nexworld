@@ -74,6 +74,26 @@ async function getUser(email){
 	}
 }
 
+async function getAdmin(){
+	try {
+		let { rows } = await db.query("select * from users where role = 'admin'");
+
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function getUsersData(){
+	try {
+		let { rows } = await db.query("select * from users where role = 'user'")
+
+		return rows;
+	} catch (err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
 async function updateUser(email, props){
 	try{
 		let { rows } = await db.query('update users set props = $2 where email = $1',[email, props]);
@@ -143,6 +163,8 @@ module.exports = {
 	editBooth,
 	registerUser,
 	getUser,
+	getUsersData,
+	getAdmin,
 	updateUser,
 	reRegisterUser,
 	getAnnotations,
