@@ -1,5 +1,6 @@
 const { Pool, Client } = require('pg')
 const dotenv = require('dotenv');
+const moment = require('moment');
 dotenv.config();
 
 const db = new Pool({
@@ -56,7 +57,7 @@ async function editBooth(uid, bnumber, bname, bannotations){
 
 async function registerUser(uid, email, password, role, props){
 	try {
-		let { rows } = await db.query('insert into users (uid, email, password, role, props) values ($1, $2, $3, $4, $5)', [uid, email, password, role, props])
+		let { rows } = await db.query('insert into users (uid, email, password, role, props, register_date) values ($1, $2, $3, $4, $5, $6)', [uid, email, password, role, props, moment().format('MMMM Do YYYY, h:mm:ss a')])
 
 		return rows;
 	} catch (err){
