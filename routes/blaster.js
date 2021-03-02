@@ -53,6 +53,7 @@ router.post('/generateReminders', async (req,res) => {
 		    }],
 		    templateId: 2,
 		    params: {
+		    	loginlink: process.env.FRONTEND_ADDRESS + '/login?user=' + email + '&token=sharedtoken51515151',
 		        meetingid: meetinginfo.meetingid,
 		        meetingpass: meetinginfo.meetingpass,
 		        meetingcode: meetinginfo.code,
