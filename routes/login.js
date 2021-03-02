@@ -39,4 +39,31 @@ router.post('/', async (req, res) => {
 	}
 })
 
+router.post('/admin', async (req, res) => {
+  try {
+
+  		if (validator.isEmail(req.body.user)){//EMAIL VALIDATION
+
+  			let response = await pgdb.getAdmin();
+			let dbpassword = response[0].password
+
+			let match = await bcrypt.compare(req.body.password, dbpassword)
+			if (match){
+				const user = { email: req.body.user , devicetoken: uuidv4()}
+
+				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
+
+				res.send({ jwtToken })
+			} else {
+				res.status(500).send({error: true, message: 'Wrong username or password'})
+			}
+
+  		} else {
+  			res.status(500).send({error:true, message: 'Wrong email format'})
+  		}
+	} catch (err){
+		res.status(500).send({error: true, message: err.toString()});
+	}
+})
+
 module.exports = router;

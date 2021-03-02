@@ -87,7 +87,7 @@ app.use('/register', register);
 //BOOTHS
 const booths = require('./routes/booths')
 
-app.use('/booths',authToken, booths);
+app.use('/booths', authToken, booths);
 //
 
 //Annotations
@@ -100,6 +100,12 @@ app.use('/annotations', authToken, annotations);
 const admin = require('./routes/admin')
 
 app.use('/admin', admin);
+//
+
+//Blast reminder email
+const blaster = require('./routes/blaster')
+
+app.use('/blaster', blaster);
 //
  
 app.listen(port, hostname, () => {
