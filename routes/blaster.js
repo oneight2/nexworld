@@ -16,16 +16,44 @@ const defaultClient = SibApiV3Sdk.ApiClient.instance;
 function parseMeetingInfo(mi){
     switch(mi){
     	case '6mar21-1000':
-    	return {meetingid: '81377875643', meetingpass: 'hasummit21', code: '1', date: '6 Maret 2021 - 10.00', poster: 'http://virtualfest.id/nutricia/email/poster-simposium-1.jpg'};
+    	return {
+    		meetingid: '81377875643', 
+    		meetingpass: 'hasummit21', 
+    		code: '1', 
+    		date: '6 Maret 2021 - 10.00', 
+    		poster: 'http://virtualfest.id/nutricia/email/poster-simposium-1.jpg',
+    		description: 'Di tahun 2040, jumlah populasi >40 meningkat sekitar 1.5x tetapi asupan gizi dan aktivitas fisiknya masih belum mencukupi sehingga berpotensi menjadi tidak sehat.<br><br> Karyawan kantor rawan memiliki pola hidup yang tidak sehat dan dapat berdampak pada kesehatannya.<br><br> Dokter dan tenaga kesehatan memegang peranan penting dalam mendukung masyarakat Indonesia untuk tetap sehat seiring pertambahan usia.'
+    	};
     	break;
     	case '7mar21-1000':
-    	return {meetingid: '85811709809', meetingpass: 'hasummit21', code: '1', date: '7 Maret 2021 - 10.00', poster: 'http://virtualfest.id/nutricia/email/poster-simposium-3.jpg'};
+    	return {
+    		meetingid: '85811709809', 
+    		meetingpass: 'hasummit21', 
+    		code: '1', 
+    		date: '7 Maret 2021 - 10.00', 
+    		poster: 'http://virtualfest.id/nutricia/email/poster-simposium-3.jpg',
+    		description: 'Di tahun 2040, jumlah populasi >40 meningkat sekitar 1.5x tetapi asupan gizi dan aktivitas fisiknya masih belum mencukupi sehingga berpotensi menjadi tidak sehat.<br><br> Pola hidup yang tidak sehat dapat menjadi beban dari negara.<br><br> Dokter dan tenaga kesehatan memegang peranan penting dalam mendukung masyarakat Indonesia untuk tetap sehat seiring pertambahan usia.'
+    	};
     	break;
     	case '6mar21-1300':
-    	return {meetingid: '88341341245', meetingpass: 'hasummit21', code: '2', date: '6 Maret 2021 - 13.00', poster: 'http://virtualfest.id/nutricia/email/poster-simposium-2.jpg'};
+    	return {
+    		meetingid: '88341341245', 
+    		meetingpass: 'hasummit21', 
+    		code: '2', 
+    		date: '6 Maret 2021 - 13.00', 
+    		poster: 'http://virtualfest.id/nutricia/email/poster-simposium-2.jpg',
+    		description: 'Di tahun 2040, jumlah populasi >40 meningkat sekitar 1.5x tetapi asupan gizi dan aktivitas fisiknya masih belum mencukupi sehingga berpotensi menjadi tidak sehat.<br><br> Masyarakat dewasa Indonesia masih banyak yang memiliki asupan gizi yang kurang memadai dan berdampak pada kesehatan jangka panjangnya.<br><br> Dokter dan tenaga kesehatan memegang peranan penting dalam mendukung masyarakat Indonesia untuk tetap sehat seiring pertambahan usia.'
+    	};
     	break;
     	case '7mar21-1300':
-    	return {meetingid: '81091976781', meetingpass: 'hasummit21', code: '2', date: '7 Maret 2021 - 13.00', poster: 'http://virtualfest.id/nutricia/email/poster-simposium-4.jpg'};
+    	return {
+    		meetingid: '81091976781', 
+    		meetingpass: 'hasummit21', 
+    		code: '2', 
+    		date: '7 Maret 2021 - 13.00', 
+    		poster: 'http://virtualfest.id/nutricia/email/poster-simposium-4.jpg',
+    		description: 'Di tahun 2040, jumlah populasi >40 meningkat sekitar 1.5x tetapi asupan gizi dan aktivitas fisiknya masih belum mencukupi sehingga berpotensi menjadi tidak sehat.<br><br> Untuk tetap sehat, tidak hanya mencukupi asupan gizi tetapi juga aktivitas fisik dan kesehatan mental.<br><br> Dokter dan tenaga kesehatan memegang peranan penting dalam mendukung masyarakat Indonesia untuk tetap sehat seiring pertambahan usia.'
+    	};
     	break;
     }
 }
@@ -58,7 +86,8 @@ router.post('/generateReminders', async (req,res) => {
 		        meetingpass: meetinginfo.meetingpass,
 		        meetingcode: meetinginfo.code,
 		        meetingdate: meetinginfo.date,
-		        meetingposter: meetinginfo.poster
+		        meetingposter: meetinginfo.poster,
+		        description: meetinginfo.description
 		    },
 		    headers: {
 		        'X-Mailin-custom': 'custom_header_1:custom_value_1|custom_header_2:custom_value_2'
