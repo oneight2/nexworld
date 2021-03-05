@@ -1,5 +1,6 @@
 body {
     font-family: 'Montserrat';
+    position: relative;
 }
 
 section#home-section {
@@ -8,9 +9,16 @@ section#home-section {
 	background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(51,80,143,1) 0%, rgba(8,28,73,1) 100%);
 }
 
-section#highlight-section {
+section#highlights-section{
 	height:100vh;
 	background-color: #fff;
+	background-image: url('../svg/highlightbackground.svg');
+}
+
+section#partners-section {
+	height:100vh;
+	background-color: #fff;
+	background-image: url('../svg/highlightbackgroundreverse.svg');
 }
 
 #synnexnav {
@@ -33,6 +41,10 @@ section#highlight-section {
 	background-color:transparent;
 	height:100vh;
 	padding-top:35vh;
+}
+
+#synnexsidenav.light-nav li.nav-item > a {
+	color:#081C49;
 }
 
 #synnexsidenav li.nav-item > a {
