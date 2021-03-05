@@ -1,4 +1,5 @@
 const express = require('express');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 const pgdb = require('./db/pg');
@@ -26,11 +27,13 @@ app.use(cors())
 
 const { v4: uuidv4 } = require('uuid');
 
-//app.use("/", express.static(__dirname + '/views'));
+app.use("/", express.static(__dirname + '/views'));
 app.engine('html', require('ejs').renderFile);
 
 app.set('views');
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
+app.set('layout', 'layouts/defaultlayout');
 
 //MIDDLEWARE//
 
@@ -51,7 +54,7 @@ function authToken(req, res, next) {
 //ROUTES//
 
 app.get('/', function (req, res) {
-  res.send('EXHIBITOR CMS API')
+  res.render('index')
 })
 
 //Auth
