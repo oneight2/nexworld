@@ -28,7 +28,7 @@ section#partners-section {
 }
 
 #synnexnav .nav-item .nav-link {
-    font-size: 18px;
+    font-size: 15px;
     color: #ECFFFF !important;
     font-weight: bold;
     text-align: center;
@@ -61,6 +61,11 @@ section#partners-section {
 	    padding-top: 30px;
 	}
 
+	#logo-home {
+		width: 1100px;
+    	margin: auto;
+	}
+
     #synnexnav .navbar-nav,
     #synnexnav #navbarSupportedContent {
         flex-direction: row-reverse;
@@ -69,25 +74,26 @@ section#partners-section {
     #synnexnav .nav-item {
         background-color: #142B5D;
         border-radius: 40px;
-        height: 45px;
-        width: 200px;
+        height: 39px;
+    	width: 177px;
         margin-left: 10px;
         margin-right: 10px;
     }
 
     #homesection-logo {
-		position:absolute;
-		top:20vh;
-		left:15vw;
+		position: relative;
+    	top: 140px;
+    	left: 112px;
+		width: 700px;
 	}
 
 	#homesection-desc {
 		color:#ECFFFF;
 		list-style-type:none;
-		font-size:48px;
-		position:absolute;
-		top:30vh;
-		left:48vw;
+		font-size:40px;
+		position:relative;
+		top: -261px;
+    	left: 600px;
 	}
 
 }
