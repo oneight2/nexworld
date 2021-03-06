@@ -113,7 +113,7 @@ router.post('/generateReminders', async (req,res) => {
 				let dateIndex = currentSympossDate.indexOf('-');
 				let parsedDate = currentSympossDate.slice(0, dateIndex);
 				if (parsedDate == req.body.forsymposs){
-					console.log({parsedDate, bodySymposs: req.body.forsymposs})
+					console.log({process: 'Sending Email Reminders', to: userEmail})
 					sendReminderEmail(userEmail, userEmail, parseMeetingInfo(currentSympossDate));
 				}
 			}
