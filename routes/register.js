@@ -82,7 +82,7 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-		  console.log({status: 'OK', message: 'API called successfully. Returned data: ' + data});
+		  console.log({status: 'OK', message: 'Registration Successful ', email});
 		}, function(error) {
 		  console.log({error: true, message: error});
 		});

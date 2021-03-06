@@ -95,9 +95,9 @@ router.post('/generateReminders', async (req,res) => {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-		  console.log({status: 'OK', message: 'API called successfully. Returned data: ' + data});
+		  console.log({status: 'OK', message: 'Email reminders successfully sent.', email});
 		}, function(error) {
-		  console.log({error: true, message: error});
+		  console.log({error: true, message: error, email});
 		});
 	}
 
@@ -113,7 +113,7 @@ router.post('/generateReminders', async (req,res) => {
 				let dateIndex = currentSympossDate.indexOf('-');
 				let parsedDate = currentSympossDate.slice(0, dateIndex);
 				if (parsedDate == req.body.forsymposs){
-					console.log({parsedDate, bodySymposs: req.body.forsymposs})
+					console.log({process: 'Sending Email Reminders', to: userEmail})
 					sendReminderEmail(userEmail, userEmail, parseMeetingInfo(currentSympossDate));
 				}
 			}
