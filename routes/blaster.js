@@ -95,9 +95,9 @@ router.post('/generateReminders', async (req,res) => {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-		  console.log({status: 'OK', message: 'API called successfully. Returned data: ' + data});
+		  console.log({status: 'OK', message: 'API called successfully. Returned data: ' + data, email});
 		}, function(error) {
-		  console.log({error: true, message: error});
+		  console.log({error: true, message: error, email});
 		});
 	}
 
