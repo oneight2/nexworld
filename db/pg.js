@@ -55,7 +55,7 @@ async function editBooth(uid, bnumber, bname, bannotations){
 
 //USERS
 
-async function registerUser(uid, email, password, role, props){
+async function registerUser(uid, email, password, role, props = {}){
 	try {
 		let { rows } = await db.query('insert into users (uid, email, password, role, props, register_date) values ($1, $2, $3, $4, $5, $6)', [uid, email, password, role, props, moment().format('MMMM Do YYYY, h:mm:ss a')])
 
