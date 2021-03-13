@@ -242,6 +242,49 @@ section#contact-section > * {
 	color:#fff;
 }
 
+.btn-white-medium {
+	color:#081C49;
+	width:240px;
+	font-size:24px;
+	border-radius:40px;
+	background-color: #FAFAFA;
+	display:block;
+	text-align: center;
+	text-decoration: none;
+	height:45px;
+	padding-top:2px;
+	font-weight: bold;
+	border:1px solid #FAFAFA;
+}
+
+#loginModal .modal-content, #registerModal .modal-content{
+	background: rgb(51,80,143);
+	background: linear-gradient(90deg, rgba(51,80,143,1) 0%, rgba(8,28,73,1) 70%);
+	color:#FAFAFA;
+	border-radius: 12px;
+}
+
+#loginModal .modal-content input, #registerModal .modal-content input{
+	background-color: transparent;
+	color:#FAFAFA;
+}
+
+#registerModal .modal-content input::placeholder {
+	color: #C4C4C4;
+}
+
+#loginModal .modal-body, #registerModal .modal-body {
+	padding:50px;
+}
+
+#loginModal .modal-content .btn-close, #registerModal .modal-content .btn-close {
+	float:right;
+}
+
+#loginModal .modal-content .thick-title, #registerModal .modal-content .thick-title {
+	color:#FAFAFA;
+}
+
 #highlights-section .highlights-card .big-title {
 	margin-bottom:50px;
 }
@@ -332,6 +375,9 @@ section#contact-section > * {
     	width:605px;
 	}
 
+	#loginModal .modal-dialog, #registerModal .modal-dialog {
+		max-width:800px;
+	}
 }
 
 @media only screen and (max-width: 576px) {
