@@ -105,6 +105,12 @@ const admin = require('./routes/admin')
 app.use('/admin', admin);
 //
 
+//Activations
+const activation = require('./routes/activation');
+
+app.use('/activation', activation);
+//
+
 //Blast reminder email
 const blaster = require('./routes/blaster')
 
