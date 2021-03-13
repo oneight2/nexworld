@@ -13,7 +13,7 @@ const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 router.post('/default', async (req, res)=> {
 
-	function sendLinkEmail(email, name, token){
+	function sendLinkEmail(email, name, userjwt, token){
 		// Configure API key authorization: api-key
 		var apiKey = defaultClient.authentications['api-key'];
 		apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
@@ -31,9 +31,10 @@ router.post('/default', async (req, res)=> {
 		        email: email,
 		        name: name
 		    }],
-		    templateId: 1,
+		    templateId: 8,
 		    params: {
-		        loginlink: process.env.FRONTEND_ADDRESS + '/login?user=' + email + '&token=' + token,
+		        activationlink: process.env.FRONTEND_ADDRESS + '/activation/email/' + userjwt,
+		        token: token
 		    },
 		    headers: {
 		        'X-Mailin-custom': 'custom_header_1:custom_value_1|custom_header_2:custom_value_2'
@@ -48,20 +49,29 @@ router.post('/default', async (req, res)=> {
 	}
 
 	try{
-	    let userCheck = await pgdb.getUser(req.body.user);
-		
+		if (validator.isEmail(req.body.email) == false){
+			res.status(500).send('Email format is incorrect.')
+		}
+	    let userCheck = await pgdb.getUser(req.body.email);
+
 		if(userCheck.length > 0){
 			res.send({error: true, message: 'The email you are using has already registered.'})
 		} else {
-			let userToken = 'token-'+uuidv4();
+			let userToken = uuidv4();
 			let salt = await bcrypt.genSalt(saltRounds);
 			let hash = await bcrypt.hash(userToken, salt);
-			let response = await pgdb.registerUser(uuidv4(), req.body.user, hash, 'user');
 
-			let emailResponse = await sendLinkEmail(req.body.user, req.body.props.name, userToken);
+			let jwtToken =  await jwt.sign({
+				email: req.body.email, 
+				password: hash, 
+				name: req.body.name,
+				occupation: req.body.occupation, 
+				phone: req.body.phone
+			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
+			let emailResponse = await sendLinkEmail(req.body.email, req.body.name, jwtToken, userToken);
 
 		    res.send({
-		    	user: req.body.user,
+		    	user: req.body.email,
 		    	userToken: userToken
 		    });
 		}

@@ -15,14 +15,19 @@ router.get('/', function (req, res) {
 router.post('/', async (req, res) => {
   try {
 
-  		if (validator.isEmail(req.body.user)){//EMAIL VALIDATION
+  		if (validator.isEmail(req.body.email)){//EMAIL VALIDATION
 
-  			let response = await pgdb.getUser(req.body.user);
-			let dbpassword = response[0].password
+  			let response = await pgdb.getUser(req.body.email);
+
+  			if(response.length == 0) {
+				res.status(500).send({error: true, message: 'Your account does not exist or it has not verified yet.'})  				
+  			}
+
+			let dbpassword = response[0].password;
 
 			let match = await bcrypt.compare(req.body.password, dbpassword)
-			if (match || req.body.password == 'sharedtoken51515151'){
-				const user = { email: req.body.user , devicetoken: uuidv4()}
+			if (match){
+				const user = { email: req.body.email , devicetoken: uuidv4()}
 
 				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
 
