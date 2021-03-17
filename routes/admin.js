@@ -9,6 +9,81 @@ router.get('/', function (req, res) {
   res.send('Get Admin');
 })
 
+router.get('/dashboard', async (req, res) => {
+  try {
+    res.render('admin_dashboard', {
+      title: 'Synnex Admin', 
+      layout: 'layouts/adminsidenav'
+    });
+  } catch(err){
+    res.send(err.toString());
+  }  
+})
+
+router.get('/annotations_selectbooth', async (req, res) => {
+  try{
+    let booths = await pgdb.getBooths();
+
+    res.render('admin_selectbooth', {
+      title: 'Synnex Admin - Annotations', 
+      layout: 'layouts/adminsidenav', 
+      extractScripts: true,
+      booths: booths
+    });
+  } catch(err){
+    res.send(err.toString());
+  }
+})
+
+router.post('/annotations_selectbooth', (req, res) => {
+  res.redirect('/admin/annotations?boothid='+req.body.boothid);
+})
+
+function parsemessage(code){
+  switch(code){
+    case '1':
+    return 'Delete successful!'
+    break;
+  }
+}
+
+router.get('/annotations', async (req, res) => {
+  try{
+    let annotations = await pgdb.getAnnotationsByBooth(req.query.boothid);
+
+    let booth = await pgdb.getBooth(req.query.boothid);
+    let boothId = booth[0].uid;
+    let boothName = booth[0].name;
+
+    res.render('admin_annotations', {
+      title: 'Synnex Admin - Annotations', 
+      layout: 'layouts/adminsidenav', 
+      extractScripts: true,
+      annotations: annotations,
+      boothId: boothId,
+      boothName: boothName,
+      message: req.query.message ? parsemessage(req.query.message) : null
+    });
+  } catch(err){
+    res.send(err.toString());
+  }
+})
+
+router.get('/addannotations', async (req, res) => {
+  try{
+    let booths = await pgdb.getBooths();
+
+    res.render('admin_addannotations', {
+      title: 'Synnex Admin - Annotations', 
+      layout: 'layouts/adminsidenav', 
+      extractScripts: true,
+      boothData: booths
+    });
+  } catch(err){
+    res.send(err.toString());
+  }
+})
+
 router.post('/getData', async (req, res) => {
   try {
   		let adminResponse = await pgdb.getAdmin();

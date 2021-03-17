@@ -22,6 +22,15 @@ async function getBooths(){
 	}
 }
 
+async function getBooth(uid){
+	try {
+		let { rows } = await db.query('SELECT * FROM booths where uid = $1', [uid]);
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
 async function addBooth(uid, bnumber, bname, bannotations){
 	try{
 		let { rows } = await db.query('INSERT into booths(uid, number, name, annotations) values ($1, $2, $3, $4)', [uid, bnumber, bname, bannotations])
@@ -126,9 +135,18 @@ async function getAnnotations(){
 	}
 }
 
-async function addAnnotation(uid, aname, acontent){
+async function getAnnotationsByBooth(boothid){
+	try {
+		let { rows } = await db.query('SELECT * FROM annotations where boothid = $1', [boothid]);
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function addAnnotation(uid, boothid, aname, acontent){
 	try{
-		let { rows } = await db.query('INSERT into annotations(uid, name, content) values ($1, $2, $3)', [uid, aname, acontent])
+		let { rows } = await db.query('INSERT into annotations(uid, boothid, name, content) values ($1, $2, $3, $4)', [uid, boothid, aname, acontent])
 
 		return rows;
 	} catch(err){
@@ -159,6 +177,7 @@ async function editAnnotation(uid, aname, acontent){
 
 module.exports = {
 	getBooths,
+	getBooth,
 	addBooth,
 	deleteBooth,
 	editBooth,
@@ -169,6 +188,7 @@ module.exports = {
 	updateUser,
 	reRegisterUser,
 	getAnnotations,
+	getAnnotationsByBooth,
 	addAnnotation,
 	deleteAnnotation,
 	editAnnotation,

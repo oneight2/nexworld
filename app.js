@@ -34,6 +34,7 @@ app.set('views');
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', 'layouts/defaultlayout');
+app.set("layout extractScripts", true)
 
 //MIDDLEWARE//
 
@@ -96,7 +97,7 @@ app.use('/booths', authToken, booths);
 //Annotations
 const annotations = require('./routes/annotations')
 
-app.use('/annotations', authToken, annotations);
+app.use('/annotations', annotations);
 //
 
 //Admin
