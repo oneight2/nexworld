@@ -5,6 +5,17 @@ const pgdb = require('../db/pg');
 
 const bcrypt = require('bcrypt');
 
+function parsemessage(code){
+  switch(code){
+    case '1':
+    return 'Delete successful!'
+    break;
+    case '2':
+    return 'Add successful!'
+    break;
+  }
+}
+
 router.get('/', function (req, res) {
   res.send('Get Admin');
 })
@@ -14,6 +25,35 @@ router.get('/dashboard', async (req, res) => {
     res.render('admin_dashboard', {
       title: 'Synnex Admin', 
       layout: 'layouts/adminsidenav'
+    });
+  } catch(err){
+    res.send(err.toString());
+  }  
+})
+
+router.get('/booths', async (req, res) => {
+  try {
+    let booths = await pgdb.getBooths();
+
+    res.render('admin_booths', {
+      title: 'Synnex Admin', 
+      layout: 'layouts/adminsidenav',
+      booths: booths,
+      message: req.query.message ? parsemessage(req.query.message) : null
+    });
+  } catch(err){
+    res.send(err.toString());
+  }  
+})
+
+router.get('/addbooths', async (req, res) => {
+  try {
+    let booths = await pgdb.getBooths();
+
+    res.render('admin_addbooth', {
+      title: 'Synnex Admin', 
+      layout: 'layouts/adminsidenav',
+      message: req.query.message ? parsemessage(req.query.message) : null
     });
   } catch(err){
     res.send(err.toString());
@@ -38,14 +78,6 @@ router.get('/annotations_selectbooth', async (req, res) => {
 router.post('/annotations_selectbooth', (req, res) => {
   res.redirect('/admin/annotations?boothid='+req.body.boothid);
 })
-
-function parsemessage(code){
-  switch(code){
-    case '1':
-    return 'Delete successful!'
-    break;
-  }
-}
 
 router.get('/annotations', async (req, res) => {
   try{

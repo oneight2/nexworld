@@ -13,9 +13,13 @@ router.get('/get', async (req, res) => {
 //Add a booth 
 //Requires a request body (booth number, booth name, booth annotations as JSON)
 router.post('/add', async (req, res) => {
-	let response = await pgdb.addBooth(uuidv4(), req.body.number, req.body.name, req.body.annotations);
-	
-	res.send(response);
+	try{
+		let response = await pgdb.addBooth(uuidv4(), req.body.number, req.body.name);
+		
+		res.redirect('/admin/booths?message=2');
+	} catch(err){
+		res.send(err.toString())
+	}
 })
 
 //Delete a booth
@@ -29,7 +33,7 @@ router.delete('/delete', async (req, res) => {
 //Update a booth
 //Requires a request body (booth uid, booth number, booth name, booth annotations as JSON)
 router.put('/edit', async (req, res) => {
-	let response = await pgdb.editBooth(req.body.uid, req.body.number, req.body.name, req.body.annotations);
+	let response = await pgdb.editBooth(req.body.uid, req.body.number, req.body.name);
 
 	res.send(response);
 })

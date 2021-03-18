@@ -1,7 +1,4 @@
-<h1>Annotations List</h1>
-<h3>Booth:
-    <%= locals.boothName ? boothName : '' %>
-</h3>
+<h1>Booths List</h1>
 
 <div id="alert-card" class="alert alert-success" role="alert">
   <%= locals.message ? message : null %>
@@ -12,46 +9,37 @@
         <tr>
             <th scope="col">Number</th>
             <th scope="col">Name</th>
-            <th scope="col">File Name</th>
-            <th scope="col">Type</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        <% locals.annotations ? annotations.forEach(function(annotation){  %>
+        <% locals.booths ? booths.forEach(function(booth){  %>
         <tr>
             <th scope="row">
-                <%= annotation.content.number %>
+                <%= booth.number %>
             </th>
             <td>
-                <%= annotation.name %>
+                <%= booth.name %>
             </td>
-            <td>
-                <%= annotation.content.filename %>
-            </td>
-            <td>
-                <%= annotation.content.type %>
-            </td>
-            <td><button type="button" class="btn btn-danger" onClick="deleteAnn('<%= annotation.uid %>', '<%= annotation.content.filename %>')">Delete</button></td>
+            <td><button type="button" class="btn btn-danger" onClick="deleteBooth('<%= booth.uid %>')">Delete</button></td>
         </tr>
         <% }) : '' %>
     </tbody>
 </table>
 <script>
-function deleteAnn(uid, filename) {
-    fetch('/annotations/delete', {
+function deleteBooth(uid) {
+    fetch('/booths/delete', {
         method: 'DELETE', 
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            uid,
-            filename
+            uid            
         })
     })
     .then(response => response.json())
     .then(data => {
-      window.location.replace("/admin/annotations?boothid="+ '<%= boothId %>' + '&message=1');
+      window.location.replace("/admin/booths" + '?message=1');
     })
     .catch((error) => {
       console.error('Error:', error);

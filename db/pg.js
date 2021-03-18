@@ -15,7 +15,7 @@ const db = new Pool({
 //BOOTHS
 async function getBooths(){
 	try {
-		let { rows } = await db.query('SELECT * FROM booths');
+		let { rows } = await db.query('SELECT * FROM booths order by number ASC');
 		return rows;
 	} catch(err){
 		return ({error: true, message: err.toString()})
@@ -31,9 +31,9 @@ async function getBooth(uid){
 	}
 }
 
-async function addBooth(uid, bnumber, bname, bannotations){
+async function addBooth(uid, bnumber, bname){
 	try{
-		let { rows } = await db.query('INSERT into booths(uid, number, name, annotations) values ($1, $2, $3, $4)', [uid, bnumber, bname, bannotations])
+		let { rows } = await db.query('INSERT into booths (uid, number, name) values ($1, $2, $3)', [uid, bnumber, bname])
 
 		return rows;
 	} catch(err){
@@ -51,9 +51,9 @@ async function deleteBooth(uid){
 	}
 }
 
-async function editBooth(uid, bnumber, bname, bannotations){
+async function editBooth(uid, bnumber, bname){
 	try {
-		let { rows } = await db.query('UPDATE booths SET (number, name, annotations) = ($2, $3, $4) where uid = $1', [uid, bnumber, bname, bannotations])
+		let { rows } = await db.query('UPDATE booths SET (number, name) = ($2, $3) where uid = $1', [uid, bnumber, bname])
 
 		return rows;
 	} catch(err){

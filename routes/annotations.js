@@ -26,7 +26,6 @@ router.get('/get', async (req, res) => {
 //Add a annotations 
 //Requires a request body (annotations uid, booth relations uid, annotation name, annotation content(JSON) as JSON)
 router.post('/add', upload.single('content'), async (req, res) => {
-	
 	try{
 		let content = {
 			number: req.body.number,
@@ -34,7 +33,7 @@ router.post('/add', upload.single('content'), async (req, res) => {
 			type: req.file.mimetype
 		}
 		let response = await pgdb.addAnnotation(uuidv4(), req.body.boothid, req.body.name, JSON.stringify(content));
-		res.send('Annotation successfully uploaded.');
+		res.redirect('/admin/annotations?boothid=' + req.body.boothid + '&message=2');
 	} catch (err){
 		res.send(err.toString());
 	}

@@ -91,7 +91,7 @@ app.use('/register', register);
 //BOOTHS
 const booths = require('./routes/booths')
 
-app.use('/booths', authToken, booths);
+app.use('/booths', booths);
 //
 
 //Annotations
