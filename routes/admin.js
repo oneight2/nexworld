@@ -5,6 +5,9 @@ const pgdb = require('../db/pg');
 
 const bcrypt = require('bcrypt');
 
+//MIDDLEWARE//
+const authMw = require('../middleware/authToken')
+
 function parsemessage(code){
   switch(code){
     case '1':
@@ -18,6 +21,14 @@ function parsemessage(code){
 
 router.get('/', function (req, res) {
   res.send('Get Admin');
+})
+
+router.post('/', authMw.authToken({permissions: ['admin']}), async (req,res)=>{
+  try{
+    res.send({status: 'Success', message: 'Authorized'});
+  } catch(err){
+    res.send({status: 'Error', message: 'Unauthorized'})
+  }
 })
 
 router.get('/dashboard', async (req, res) => {

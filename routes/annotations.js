@@ -6,6 +6,9 @@ const multer  = require('multer');
 const fs = require('fs');
 const mediaPath = 'uploads/';
 
+//MIDDLEWARE//
+const authMw = require('../middleware/authToken')
+
 const path = require('path');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,7 +28,7 @@ router.get('/get', async (req, res) => {
 
 //Add a annotations 
 //Requires a request body (annotations uid, booth relations uid, annotation name, annotation content(JSON) as JSON)
-router.post('/add', upload.single('content'), async (req, res) => {
+router.post('/add', [authMw.authToken({permissions: ['admin']}), upload.single('content')], async (req, res) => {
 	try{
 		let content = {
 			number: req.body.number,
@@ -33,21 +36,21 @@ router.post('/add', upload.single('content'), async (req, res) => {
 			type: req.file.mimetype
 		}
 		let response = await pgdb.addAnnotation(uuidv4(), req.body.boothid, req.body.name, JSON.stringify(content));
-		res.redirect('/admin/annotations?boothid=' + req.body.boothid + '&message=2');
+		res.send({status: 'Success', message: 'Add Annotation Success!'})
 	} catch (err){
-		res.send(err.toString());
+		res.send({status: 'Error', message: err.toString()});
 	}
 })
 
 //Delete a annotations
 //Requires a request body (uid)
-router.delete('/delete', async (req, res) => {
+router.delete('/delete', authMw.authToken({permissions: ['admin']}), async (req, res) => {
 	try {
 		let response = await pgdb.deleteAnnotation(req.body.uid);
 		fs.unlinkSync(mediaPath + req.body.filename);
-		res.send(response);
+		res.send({status: 'Success', message: 'Delete Annotation Success!'});
 	} catch(err){
-		res.send(err.toString());
+		res.send({status: 'Error', message: err.toString()});
 	}
 })
 

@@ -1,9 +1,7 @@
 <h1>Booths List</h1>
-
 <div id="alert-card" class="alert alert-success" role="alert">
-  <%= locals.message ? message : null %>
+    <%= locals.message ? message : null %>
 </div>
-
 <table class="table">
     <thead>
         <tr>
@@ -29,30 +27,32 @@
 <script>
 function deleteBooth(uid) {
     fetch('/booths/delete', {
-        method: 'DELETE', 
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            uid            
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
+            },
+            body: JSON.stringify({
+                uid
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-      window.location.replace("/admin/booths" + '?message=1');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            window.location.replace("/admin/booths" + '?message=1');
+        })
+        .catch(error => {
+            localStorage.removeItem("synnex-admin-user");
+            localStorage.removeItem("synnex-admin-jwt");
+            window.location.replace('/adminlogin?message=2')
+        })
 }
 
 const urlParams = new URLSearchParams(window.location.search);
 const message = urlParams.get('message');
 
-if(message){
+if (message) {
     $('#alert-card').show()
 } else {
     $('#alert-card').hide()
 }
-
 </script>

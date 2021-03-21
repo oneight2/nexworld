@@ -43,6 +43,7 @@ function deleteAnn(uid, filename) {
         method: 'DELETE', 
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
         },
         body: JSON.stringify({
             uid,
@@ -51,10 +52,12 @@ function deleteAnn(uid, filename) {
     })
     .then(response => response.json())
     .then(data => {
-      window.location.replace("/admin/annotations?boothid="+ '<%= boothId %>' + '&message=1');
+        window.location.replace("/admin/annotations?boothid="+ '<%= boothId %>' + '&message=1');
     })
     .catch((error) => {
-      console.error('Error:', error);
+        localStorage.removeItem("synnex-admin-user");
+        localStorage.removeItem("synnex-admin-jwt");
+        window.location.replace('/adminlogin?message=2');
     });
 }
 

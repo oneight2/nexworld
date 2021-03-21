@@ -128,7 +128,7 @@ async function reRegisterUser(email, password, props){
 //ANNOTATIONS
 async function getAnnotations(){
 	try {
-		let { rows } = await db.query('SELECT * FROM annotations');
+		let { rows } = await db.query('SELECT * FROM annotations order by number ASC');
 		return rows;
 	} catch(err){
 		return ({error: true, message: err.toString()})

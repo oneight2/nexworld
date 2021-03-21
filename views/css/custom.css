@@ -333,6 +333,18 @@ section#contact-section > * {
 	padding-top:10vh;
 }
 
+#formadminlogin {
+	border:1px solid #333;
+	padding:20px;
+	width:500px;
+	height:380px;
+	border-radius: 12px;
+	position:absolute;
+	top:40vh;
+	left:50vw;
+	transform: translate(-50%, -50%);
+}
+
 @media only screen and (min-width: 576px) {
 	#synnexnav {
 		background-color: transparent !important;

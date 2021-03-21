@@ -38,10 +38,10 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
+                <a class="nav-link" href="#" onClick="logout()">Sign out</a>
             </li>
         </ul>
     </header>
@@ -127,6 +127,14 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../js/dashboard.js"></script>
+    <script src="../js/globaladmin.js"></script>
+    <script>
+        function logout(){
+            localStorage.removeItem("synnex-admin-user");
+            localStorage.removeItem("synnex-admin-jwt");
+            window.location.replace('/adminlogin');
+        }
+    </script>
     <%- script %>
 </body>
 
