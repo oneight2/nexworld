@@ -1,0 +1,53 @@
+<h1>Add Annotations</h1>
+<div class="mb-3">
+    <label for="annBooth" class="form-label">Booth</label>
+    <select id="annBooth" name="boothid" class="form-select" aria-label="Booth Number">
+        <% locals.boothData ? boothData.forEach(function(booth){  %>
+        <option value="<%= booth.uid %>">
+            <%= booth.number %>.
+            <%= booth.name %>
+        </option>
+        <% }) : '' %>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="annName" class="form-label">Number</label>
+    <input name="number" type="number" class="form-control" id="annNumber" placeholder="Annotation Number">
+</div>
+<div class="mb-3">
+    <label for="annName" class="form-label">Name</label>
+    <input name="name" type="text" class="form-control" id="annName" placeholder="Annotation Name">
+</div>
+<div class="mb-3">
+    <label for="annFile" class="form-label">Content</label>
+    <input name="content" type="file" class="form-control" id="annFile">
+</div>
+<button type="submit" onClick="onSubmit()">Add</button>
+<script>
+function onSubmit() {
+    let formData = new FormData();
+    formData.append('boothid', $('#annBooth').val());
+    formData.append('number', $('#annNumber').val());
+    formData.append('name', $('#annName').val());
+    formData.append('content', $('#annFile')[0].files[0]);
+
+    let requestHeaders = new Headers();
+    requestHeaders.append('Authorization', 'Bearer ' + localStorage.getItem('synnex-admin-jwt'));
+    requestHeaders.delete('Content-Type');
+
+    fetch('/annotations/add', {
+            method: 'POST',
+            headers: requestHeaders,
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.replace("/admin/annotations?boothid=" + $('#annBooth').val() + '&message=2');
+        })
+        .catch(error => {
+            localStorage.removeItem("synnex-admin-user");
+            localStorage.removeItem("synnex-admin-jwt");
+            window.location.replace('/adminlogin?message=2')
+        })
+}
+</script>

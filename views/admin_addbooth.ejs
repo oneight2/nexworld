@@ -1,0 +1,38 @@
+<h1>Add Booth</h1>
+<div class="mb-3">
+    <label for="annName" class="form-label">Number</label>
+    <input name="number" type="number" class="form-control" id="boothNumber" placeholder="Booth Number">
+</div>
+<div class="mb-3">
+    <label for="annName" class="form-label">Name</label>
+    <input name="name" type="text" class="form-control" id="boothName" placeholder="Booth Name">
+</div>
+<button onClick="onSubmit()">Add</button>
+<script>
+function onSubmit() {
+    fetch('/booths/add', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
+            },
+            body: JSON.stringify({
+                number: $('#boothNumber').val(),
+                name: $('#boothName').val()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            switch (data.status) {
+                case 'Success':
+                    window.location.replace('/admin/booths?message=2');
+                    break;
+            }
+        })
+        .catch(error => {
+            localStorage.removeItem("synnex-admin-user");
+            localStorage.removeItem("synnex-admin-jwt");
+            window.location.replace('/adminlogin?message=2')
+        })
+}
+</script>

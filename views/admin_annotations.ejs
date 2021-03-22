@@ -1,0 +1,73 @@
+<h1>Annotations List</h1>
+<h3>Booth:
+    <%= locals.boothName ? boothName : '' %>
+</h3>
+
+<div id="alert-card" class="alert alert-success" role="alert">
+  <%= locals.message ? message : null %>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">File Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% locals.annotations ? annotations.forEach(function(annotation){  %>
+        <tr>
+            <th scope="row">
+                <%= annotation.content.number %>
+            </th>
+            <td>
+                <%= annotation.name %>
+            </td>
+            <td>
+                <%= annotation.content.filename %>
+            </td>
+            <td>
+                <%= annotation.content.type %>
+            </td>
+            <td><button type="button" class="btn btn-danger" onClick="deleteAnn('<%= annotation.uid %>', '<%= annotation.content.filename %>')">Delete</button></td>
+        </tr>
+        <% }) : '' %>
+    </tbody>
+</table>
+<script>
+function deleteAnn(uid, filename) {
+    fetch('/annotations/delete', {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
+        },
+        body: JSON.stringify({
+            uid,
+            filename
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.replace("/admin/annotations?boothid="+ '<%= boothId %>' + '&message=1');
+    })
+    .catch((error) => {
+        localStorage.removeItem("synnex-admin-user");
+        localStorage.removeItem("synnex-admin-jwt");
+        window.location.replace('/adminlogin?message=2');
+    });
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const message = urlParams.get('message');
+
+if(message){
+    $('#alert-card').show()
+} else {
+    $('#alert-card').hide()
+}
+
+</script>
