@@ -12,24 +12,70 @@
 </div>
 <div class="mb-3">
     <label for="annName" class="form-label">Number</label>
-    <input name="number" type="number" class="form-control" id="annNumber" placeholder="Annotation Number">
+    <input name="number" type="number" class="form-control" id="annNumber" placeholder="Annotation Number" required>
 </div>
 <div class="mb-3">
     <label for="annName" class="form-label">Name</label>
-    <input name="name" type="text" class="form-control" id="annName" placeholder="Annotation Name">
+    <input name="name" type="text" class="form-control" id="annName" placeholder="Annotation Name" required>
 </div>
-<div class="mb-3">
-    <label for="annFile" class="form-label">Content</label>
-    <input name="content" type="file" class="form-control" id="annFile">
+<div>
+    <label for="annCtype" class="form-label">Content Type</label>
 </div>
-<button type="submit" onClick="onSubmit()">Add</button>
+<div class="mb-3" id="annCtype">
+    <input type="radio" class="btn-check" name="contenttype" id="singlefile" value="singlefile" autocomplete="off" checked>
+    <label class="btn btn-outline-dark" for="singlefile">Single File</label>
+    <input type="radio" class="btn-check" name="contenttype" id="slider" value="slider" autocomplete="off">
+    <label class="btn btn-outline-dark" for="slider">Slider</label>
+    <input type="radio" class="btn-check" name="contenttype" id="exurl" value="exurl" autocomplete="off">
+    <label class="btn btn-outline-dark" for="exurl">External Url</label>
+</div>
+<div id="contentrow" class="mb-3">
+    <div id="singlefile-content">
+        <label for="annFile" class="form-label">Single File Content</label>
+        <input name="content" type="file" class="form-control" id="annFile">
+    </div>
+    <div id="slider-content" class="d-none">
+        <label for="annSlider" class="form-label">Slider Content</label>
+        <div id="slider-rows">
+            <div class="d-flex flex-row mt-1" id="slider">
+                <input name="slider-content" type="file" class="form-control" id="annSlider" multiple>
+            </div>
+        </div>
+    </div>
+    <div id="exurl-content" class="d-none">
+        <label for="annExUrl" class="form-label">External Url Content</label>
+        <input name="exurl-content" type="text" class="form-control" id="annExUrl" placeholder="External Url">
+    </div>
+</div>
+<div class="mt-5">
+    <button type="submit" onClick="onSubmit()" class="btn btn-primary">Add</button>
+</div>
 <script>
+
 function onSubmit() {
+    let contentType = $("#annCtype input[name='contenttype']:checked").val();
     let formData = new FormData();
     formData.append('boothid', $('#annBooth').val());
     formData.append('number', $('#annNumber').val());
     formData.append('name', $('#annName').val());
-    formData.append('content', $('#annFile')[0].files[0]);
+    formData.append('contentType', contentType);
+    switch(contentType){
+        case 'singlefile':
+        formData.append('content', $('#annFile')[0].files[0]);
+        break;
+        case 'slider':
+        
+        let sliderArr = [];
+        let sliderLength = $('#annSlider')[0].files.length;
+        for(i=0;i<sliderLength; i++){
+            formData.append('content', $('#annSlider')[0].files[i]);
+        }
+
+        break;
+        case 'exurl':
+        formData.append('content', $('#annExUrl').val());
+        break;
+    }
 
     let requestHeaders = new Headers();
     requestHeaders.append('Authorization', 'Bearer ' + localStorage.getItem('synnex-admin-jwt'));
@@ -50,4 +96,28 @@ function onSubmit() {
             window.location.replace('/adminlogin?message=2')
         })
 }
+$(document).ready(function() {
+    $("#annCtype input[name='contenttype']").change(function() {
+        if ($(this).is(":checked")) {
+            let val = $(this).val();
+            switch (val) {
+                case 'singlefile':
+                    $('#contentrow #singlefile-content').removeClass('d-none');
+                    $('#contentrow #slider-content').attr('class', 'd-none');
+                    $('#contentrow #exurl-content').attr('class', 'd-none');
+                    break;
+                case 'slider':
+                    $('#contentrow #singlefile-content').attr('class', 'd-none');
+                    $('#contentrow #slider-content').removeClass('d-none');
+                    $('#contentrow #exurl-content').attr('class', 'd-none');
+                    break;
+                case 'exurl':
+                    $('#contentrow #singlefile-content').attr('class', 'd-none');
+                    $('#contentrow #slider-content').attr('class', 'd-none');
+                    $('#contentrow #exurl-content').removeClass('d-none');
+                    break;
+            }
+        }
+    });
+});
 </script>

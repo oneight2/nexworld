@@ -135,6 +135,15 @@ async function getAnnotations(){
 	}
 }
 
+async function getAnnotation(uid){
+	try {
+		let { rows } = await db.query('SELECT * FROM annotations where uid = $1', [uid]);
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
 async function getAnnotationsByBooth(boothid){
 	try {
 		let { rows } = await db.query('SELECT * FROM annotations where boothid = $1', [boothid]);
@@ -188,6 +197,7 @@ module.exports = {
 	updateUser,
 	reRegisterUser,
 	getAnnotations,
+	getAnnotation,
 	getAnnotationsByBooth,
 	addAnnotation,
 	deleteAnnotation,

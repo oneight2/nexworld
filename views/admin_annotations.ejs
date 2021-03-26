@@ -27,18 +27,18 @@
                 <%= annotation.name %>
             </td>
             <td>
-                <%= annotation.content.filename %>
+                <%= typeof annotation.content.filename == 'string' ? annotation.content.filename : annotation.content.filename.join(", "); %>
             </td>
             <td>
                 <%= annotation.content.type %>
             </td>
-            <td><button type="button" class="btn btn-danger" onClick="deleteAnn('<%= annotation.uid %>', '<%= annotation.content.filename %>')">Delete</button></td>
+            <td><button type="button" class="btn btn-danger" onClick="deleteAnn('<%= annotation.uid %>')">Delete</button></td>
         </tr>
         <% }) : '' %>
     </tbody>
 </table>
 <script>
-function deleteAnn(uid, filename) {
+function deleteAnn(uid) {
     fetch('/annotations/delete', {
         method: 'DELETE', 
         headers: {
@@ -46,8 +46,7 @@ function deleteAnn(uid, filename) {
             'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
         },
         body: JSON.stringify({
-            uid,
-            filename
+            uid
         })
     })
     .then(response => response.json())
