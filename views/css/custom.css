@@ -345,6 +345,12 @@ section#contact-section > * {
 	transform: translate(-50%, -50%);
 }
 
+.slider-number{
+	font-size: 19px;
+    padding: 4px 0px 0 0px;
+    width: 28px;
+}
+
 @media only screen and (min-width: 576px) {
 	#synnexnav {
 		background-color: transparent !important;
