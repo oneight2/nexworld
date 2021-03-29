@@ -394,10 +394,6 @@ li {
         margin-right: 10px;
     }
 
-    #homesection-logo-m {
-    	display:none;
-    }
-
     #homesection-logo {
         position: relative;
         top: 140px;
@@ -455,7 +451,7 @@ li {
     	display:none;
     }
 
-    #homesection-logo-m {
+    #homesection-logo {
         position: relative;
         top: 280px;
         left: 50%;
