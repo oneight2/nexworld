@@ -457,9 +457,9 @@ li {
 
     #homesection-logo-m {
         position: relative;
-        top: 260px;
+        top: 280px;
         left: 50%;
-        width:110vw;
+        width:100vw;
   		transform: translate(-50%, -50%);
         display:block;
     }
@@ -469,9 +469,9 @@ li {
         list-style-type: none;
         font-size: 21px;
 		position: relative;
-		top: -107px;
+		top: -55px;
 		left: 0px;
-		width: 605px;
+		width: 100vw;
     }
 
     #loginModal, #registerModal {
@@ -514,7 +514,7 @@ li {
     #registerPhone {
     	margin-top:20px;
     }
-    
+
     .contact-content {
     	padding-top: 2vh;
 	}
