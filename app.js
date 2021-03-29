@@ -148,6 +148,12 @@ const blaster = require('./routes/blaster')
 
 app.use('/blaster', blaster);
 //
+
+//
+app.get('/uploads/:file', (req, res)=> {
+  res.sendFile('/home/bitnami/synnex/uploads/' + req.params.file)
+})
+//
  
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
