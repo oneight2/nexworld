@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 const port = process.env.APP_PORT;
 
 const pg = require('pg')
