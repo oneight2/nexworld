@@ -14,6 +14,11 @@ li {
     list-style-type: none;
 }
 
+.dark-background {
+	background: rgb(2, 0, 36);
+    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 100%);
+}
+
 .contact-us-socmed i {
     margin-right: 10px;
 }
@@ -338,10 +343,8 @@ li {
 }
 
 @media only screen and (min-width: 576px) {
-    section#home-section.dark-background {
+    section#home-section {
         height: 100vh;
-        background: rgb(2, 0, 36);
-        background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 100%);
     }
 
     section#partners-section{
@@ -391,6 +394,10 @@ li {
         margin-right: 10px;
     }
 
+    #homesection-logo-m {
+    	display:none;
+    }
+
     #homesection-logo {
         position: relative;
         top: 140px;
@@ -412,6 +419,10 @@ li {
     #registerModal .modal-dialog {
         max-width: 800px;
     }
+
+    .custom-bg-size-1 {
+    	background-size:348px 390px !important;
+    }
 }
 
 @media only screen and (max-width: 576px) {
@@ -420,7 +431,12 @@ li {
 	}
 
     #synnexnav {
-        background-color: transparent !important;
+        background-color: rgba(250, 250, 250, 0.9);
+        z-index: 3;
+    }
+
+    #synnexnav .nav-item .nav-link{
+    	background-color: #FAFAFA;
     }
 
     .navbar-toggler {
@@ -430,4 +446,76 @@ li {
     .nav-item {
         background-color: #142B5D;
     }
+
+    #home-section{
+    	min-height:510px;
+    }
+
+    #homesection-logo {
+    	display:none;
+    }
+
+    #homesection-logo-m {
+        position: relative;
+        top: 280px;
+        left: 50%;
+        width:100vw;
+  		transform: translate(-50%, -50%);
+        display:block;
+    }
+
+    #homesection-desc {
+        color: #ECFFFF;
+        list-style-type: none;
+        font-size: 21px;
+		position: relative;
+		top: -55px;
+		left: 0px;
+		width: 100vw;
+    }
+
+    #loginModal, #registerModal {
+    	height:100vh;
+    }
+
+    #highlights-section .row .highlights-card, #pass-section .row .highlights-card,
+    #events-section .row .events-card {
+    	background-size: 357px 308px;
+    }
+
+    #events-section .card-title{
+    	float:left;
+    	margin-bottom: 0px;
+    }
+
+    #events-section .card-desc {
+    	clear:left;
+    }
+
+    .custom-bg-size-1 {
+    	background-size:397px 447px !important;
+    }
+    .partners-images > .d-flex {
+    	flex-wrap: wrap;
+    }
+
+    .contact-footer {
+    	height:initial;
+    	position:initial;
+    	margin-top:30px;
+    	width:100vw;
+    }
+
+    .copyright {
+    	padding:14px;
+    	width:100%;
+    }
+
+    #registerPhone {
+    	margin-top:20px;
+    }
+
+    .contact-content {
+    	padding-top: 2vh;
+	}
 }
