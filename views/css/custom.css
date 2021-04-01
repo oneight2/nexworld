@@ -1,0 +1,636 @@
+body {
+    font-family: 'Montserrat';
+    position: relative;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+.dark-background {
+	background: rgb(2, 0, 36);
+    background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 100%);
+}
+
+.contact-us-socmed i {
+    margin-right: 10px;
+}
+
+.contact-us-socmed {
+    padding-left: 0;
+}
+
+.white-bg {
+    background-image: url('../svg/highlightbackground.svg');
+    background-position: center;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+
+.reverse-white-bg {
+    background-image: url('../svg/highlightbackgroundreverse.svg');
+    background-position: center;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+}
+
+#synnexnav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#synnexnav .nav-item .nav-link {
+    font-size: 15px;
+    color: #142B5D !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+#synnexsidenav {
+    position: fixed;
+    left: 0px;
+    width: 200px;
+    background-color: rgba(250, 250, 250, 0.9);
+    height: 100vh;
+    padding-top: 5vh;
+    z-index: 2;
+}
+
+.sidenavlogo {
+	margin-bottom:25vh;
+	margin-left:20px;
+}
+
+#synnexsidenav.light-nav li.nav-item>a {
+    color: #081C49;
+}
+
+#synnexsidenav li.nav-item>a {
+    color: #081C49;
+}
+
+#synnexsidenav li.nav-item>a.active {
+    color: #D53237;
+}
+
+.highlight-maintext {
+    width: 272px;
+    margin: auto;
+    padding-bottom: 47px;
+    border-bottom: 4px solid #5DEDDD;
+}
+
+.highlight-maintext p {
+    font-weight: 900;
+    color: #081C49;
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+.highlight-secondarytext {
+    width: 220px;
+    margin: auto;
+}
+
+.highlight-secondarytext .bold-text {
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.highlights-content>div {
+    margin-top: 30vh;
+}
+
+.pass-content>div {
+    margin-top: 15vh;
+}
+
+.thick-title {
+    font-weight: 900;
+    color: #081C49;
+    font-size: 40px;
+    line-height: 1.2;
+}
+
+#highlights-section .row .highlights-card,
+#pass-section .row .highlights-card {
+    border-radius: 24px;
+    padding: 50px 10px 0px 10px;
+    color: #fff;
+    height: 350px;
+    position:relative;
+}
+
+.highlight-overlay {
+	background-color: rgba(14, 32, 73, 0.91);
+	color:#FAFAFA;
+	width:100%;
+	height:350px;
+	padding:90px 10px 0px 10px;
+	position:absolute;
+	top:0;
+	border-radius: 24px;
+	transition: opacity 0.4s;
+	opacity: 0;
+}
+
+.highlight-overlay:hover, .highlight-overlay:active {
+	transition: opacity 0.4s;
+	opacity: 1;
+}
+
+#highlights-section .row .highlights-card, 
+#pass-section .row .highlights-card {
+	padding-left: 0px;
+    padding-right: 0px;
+    background-repeat: no-repeat;
+    background-position: -20px -17px;
+    background-size: 326px 308px;
+    margin-bottom:30px;
+} 
+
+/*EVENTS*/
+#events-section .row .events-card {
+    border-radius: 24px;
+    padding: 50px 10px 0px 10px;
+    color: #fff;
+    height: 350px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-repeat: no-repeat;
+    background-position: -20px -17px;
+    background-size: 300px 308px;
+    margin-bottom:30px;
+}
+
+.events-card-text {
+    background-color: #081C49;
+    margin-top: 241px;
+    height: 60px;
+    padding: 8px 15px 15px 15px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    margin-bottom:0px;
+}
+
+.events-card-text .card-desc{
+	float:left;
+	font-size:12px;
+}
+
+/**/
+/**/
+#pass-section .highlights-card {
+	padding-left: 0px;
+    padding-right: 0px;
+    background-repeat: no-repeat;
+    background-position: -20px -17px;
+    background-size: 300px 308px;
+    margin-bottom: 30px;
+}
+
+.big-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.small-text {
+    font-size: 9px;
+    color: #fff;
+}
+
+.contact-footer .col-lg-6 .row a {}
+
+.halls-card-text {
+    padding-top: 5px !important;
+}
+
+.btn-blue-big {
+    color: #fff;
+    width: 300px;
+    font-size: 24px;
+    border-radius: 40px;
+    background-color: #081C49;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    height: 60px;
+    padding-top: 11px;
+    font-weight: bold;
+}
+
+.btn-blue-big:hover {
+    color: #fff;
+}
+
+.btn-white-medium {
+    color: #081C49;
+    width: 240px;
+    font-size: 24px;
+    border-radius: 40px;
+    background-color: #FAFAFA;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    height: 45px;
+    padding-top: 2px;
+    font-weight: bold;
+    border: 1px solid #FAFAFA;
+}
+
+#loginModal .modal-content,
+#registerModal .modal-content {
+    background: rgb(51, 80, 143);
+    background: linear-gradient(90deg, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 70%);
+    color: #FAFAFA;
+    border-radius: 12px;
+}
+
+#loginModal .modal-content input,
+#registerModal .modal-content input {
+    background-color: transparent;
+    color: #FAFAFA;
+}
+
+#registerModal .modal-content input::placeholder {
+    color: #C4C4C4;
+}
+
+#loginModal .modal-body,
+#registerModal .modal-body {
+    padding: 50px;
+}
+
+#loginModal .modal-content .btn-close,
+#registerModal .modal-content .btn-close {
+    float: right;
+}
+
+#loginModal .modal-content .thick-title,
+#registerModal .modal-content .thick-title {
+    color: #FAFAFA;
+}
+
+.highlights-card-text {
+    background-color: #081C49;
+    margin-top: 241px;
+    height: 60px;
+    padding: 15px 15px 15px 15px;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+
+.highlights2-content,
+.partners-content {
+    padding-top: 18vh;
+}
+
+.partners-images>.d-flex img {
+    width: 130px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.copyright {
+    background-color: #D53237;
+    color: #fff;
+    font-size: 14px;
+    padding-top: 14px;
+    width: 100vw;
+}
+
+.contact-footer {
+    background-color: #2D276C;
+    color: #FAFAFA;
+    height: 300px;
+    position: absolute;
+    bottom: 0vh;
+    width: 99vw;
+}
+
+.contact-footer a.active {
+    color: #D53237;
+}
+
+.contact-content {
+    padding-top: 10vh;
+}
+
+#formadminlogin {
+    border: 1px solid #333;
+    padding: 20px;
+    width: 500px;
+    height: 380px;
+    border-radius: 12px;
+    position: absolute;
+    top: 40vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.slider-number {
+    font-size: 19px;
+    padding: 4px 0px 0 0px;
+    width: 28px;
+}
+
+#briefcaseModal #briefcase-title {
+   	border-bottom:3px solid #C4C4C4;
+  	padding-bottom: 10px;
+}
+
+.briefcase-card img {
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+	width:100%;
+	height:75%;
+	object-fit: cover;
+}
+
+.briefcase-card .briefcase-desc {
+	background-color: #081C49;
+	border-bottom-left-radius: 14px;
+	border-bottom-right-radius: 14px;
+	padding:5px 10px 0 10px;
+	color:#FAFAFA;
+	height:25%;
+	font-size:14px;
+}
+
+.briefcase-card .briefcase-desc .briefcase-text svg{
+	margin-right:14px;
+}
+
+.briefcase-card {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width:240px;
+	height:240px;
+}
+
+#briefcaseModal .btn-close {
+	float:right;
+}
+
+#briefcaseModal .modal-body > div.row {
+	margin-bottom:20px;
+} 
+
+#briefcaseModal .modal-body .profile-photo > img{
+	width:125px;
+	height:125px;
+	border:8px solid #081C49;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+#briefcaseModal .modal-body #briefcase-profile .profile-text {
+	margin-top:25px;
+	margin-left:10px;
+}
+
+#briefcaseModal .modal-body  #briefcase-profile {
+	margin-bottom:50px;
+}
+
+#briefcaseModal .modal-body {
+	padding:40px;
+}
+
+#profileNav {
+    position: fixed;
+    right: 100px;
+    top: 35px;
+}
+
+#profileNav .profile-photo{
+    position: relative;
+    top: -85px;
+    right: -205px;
+}
+
+#profileNav #profile-bar {
+    background-color: #081C49;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    width:230px;
+    height:70px;
+    padding-left:30px;
+    margin-top:10px;
+}
+
+#profileNav #profile-bar > * {
+    margin-right:30px;
+    margin-top:10px;
+}
+
+#profileNav #profile-bar .separator {
+    border-right:1px solid #FAFAFA;
+    margin-top:15px;
+    margin-bottom: 15px;
+}
+
+#profileNav .profile-photo > img {
+    width:100px;
+    height:100px;
+    border:5px solid #081C49;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#singlefileModal .modal-header {
+    background-color: #081C49;
+    color:#FAFAFA;
+    padding-left:50px;
+}
+
+.elips-button {
+    border:1px solid #081C49;
+    border-radius:34px;
+    padding: 5px 20px 5px 20px;
+    background-color: #FAFAFA;
+}
+
+@media only screen and (min-width: 576px) {
+    section#home-section {
+        height: 100vh;
+    }
+
+    section#partners-section{
+        height: 100vh;
+        background-color: #fff;
+    }
+
+    section#events-section,
+    section#pass-section {
+    	padding-top:40px;
+    	padding-bottom: 40px;
+    }
+
+    section#join-section {
+        height: 70vh;
+    }
+
+    section#contact-section {
+        height: 30vh;
+    }
+
+    section#contact-section>* {
+        max-width: 99vw;
+    }
+
+    #synnexnav {
+        background-color: transparent !important;
+        padding-top: 30px;
+    }
+
+    #logo-home {
+        width: 1100px;
+        margin: auto;
+    }
+
+    #synnexnav .navbar-nav,
+    #synnexnav #navbarSupportedContent {
+        flex-direction: row-reverse;
+    }
+
+    #synnexnav .nav-item {
+        background-color: #FAFAFA;
+        border-radius: 40px;
+        height: 39px;
+        width: 177px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #homesection-logo {
+        position: relative;
+        top: 140px;
+        left: 112px;
+        width: 700px;
+    }
+
+    #homesection-desc {
+        color: #ECFFFF;
+        list-style-type: none;
+        font-size: 40px;
+        position: relative;
+        top: -261px;
+        left: 600px;
+        width: 605px;
+    }
+
+    #loginModal .modal-dialog,
+    #registerModal .modal-dialog {
+        max-width: 800px;
+    }
+
+    .custom-bg-size-1 {
+    	background-size:348px 390px !important;
+    }
+
+}
+
+@media only screen and (max-width: 576px) {
+	#synnexsidenav {
+		display:none;
+	}
+
+    #synnexnav {
+        background-color: rgba(250, 250, 250, 0.9);
+        z-index: 3;
+    }
+
+    #synnexnav .nav-item .nav-link{
+    	background-color: #FAFAFA;
+    }
+
+    .navbar-toggler {
+        color: #fff;
+    }
+
+    .nav-item {
+        background-color: #142B5D;
+    }
+
+    #home-section{
+    	min-height:510px;
+    }
+
+    #homesection-logo {
+    	display:none;
+    }
+
+    #homesection-logo {
+        position: relative;
+        top: 280px;
+        left: 50%;
+        width:100vw;
+  		transform: translate(-50%, -50%);
+        display:block;
+    }
+
+    #homesection-desc {
+        color: #ECFFFF;
+        list-style-type: none;
+        font-size: 21px;
+		position: relative;
+		top: -55px;
+		left: 0px;
+		width: 100vw;
+    }
+
+    #loginModal, #registerModal {
+    	height:100vh;
+    }
+
+    #highlights-section .row .highlights-card, #pass-section .row .highlights-card,
+    #events-section .row .events-card {
+    	background-size: 357px 308px;
+    }
+
+    #events-section .card-title{
+    	float:left;
+    	margin-bottom: 0px;
+    }
+
+    #events-section .card-desc {
+    	clear:left;
+    }
+
+    .custom-bg-size-1 {
+    	background-size:397px 447px !important;
+    }
+    .partners-images > .d-flex {
+    	flex-wrap: wrap;
+    }
+
+    .contact-footer {
+    	height:initial;
+    	position:initial;
+    	margin-top:30px;
+    	width:100vw;
+    }
+
+    .copyright {
+    	padding:14px;
+    	width:100%;
+    }
+
+    #registerPhone {
+    	margin-top:20px;
+    }
+
+    .contact-content {
+    	padding-top: 2vh;
+	}
+}

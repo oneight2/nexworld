@@ -1,0 +1,15 @@
+<h1>Select Booth</h1>
+<form action="/admin/annotations_selectbooth" method="POST">
+    <div class="mb-3">
+        <label for="annBooth" class="form-label">Booth</label>
+        <select id="annBooth" name="boothid" class="form-select" aria-label="Booth Number">
+            <% locals.booths ? booths.forEach(function(booth){  %>
+            <option value="<%= booth.uid %>">
+                <%= booth.number %>.
+                <%= booth.name %>
+            </option>
+            <% }) : '' %>
+        </select>
+    </div>
+    <button type="submit">Search</button>
+</form>
