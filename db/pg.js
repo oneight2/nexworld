@@ -184,6 +184,46 @@ async function editAnnotation(uid, aname, acontent){
 }
 //
 
+//CUSTOM APP QUERIES
+//BRIEFCASE
+async function getBriefcase(email){
+	try {
+		let {rows} = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
+
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function addBriefcase(email, briefcase){
+	try {
+		let { rows } = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
+
+		let findBriefcase = rows[0].briefcase.find(bc => bc = briefcase);
+		if(findBriefcase){
+			return ({error: true, message: 'briefcase already exist!'})
+		} else {
+			let response = await db.query(`UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') || $2) where email = $1`, [email, briefcase])
+
+			return ({message: 'Add briefcase Succesful!'});
+		}		
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+async function deleteBriefcase(email, briefcase){
+	try {
+		let { rows } = await db.query("UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') - $2) where email = $1", [email, briefcase])
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
+//
+//
+
 module.exports = {
 	getBooths,
 	getBooth,
@@ -202,4 +242,7 @@ module.exports = {
 	addAnnotation,
 	deleteAnnotation,
 	editAnnotation,
+	getBriefcase,
+	addBriefcase,
+	deleteBriefcase
 }

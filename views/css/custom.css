@@ -342,6 +342,124 @@ li {
     width: 28px;
 }
 
+#briefcaseModal #briefcase-title {
+   	border-bottom:3px solid #C4C4C4;
+  	padding-bottom: 10px;
+}
+
+.briefcase-card img {
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+	width:100%;
+	height:75%;
+	object-fit: cover;
+}
+
+.briefcase-card .briefcase-desc {
+	background-color: #081C49;
+	border-bottom-left-radius: 14px;
+	border-bottom-right-radius: 14px;
+	padding:5px 10px 0 10px;
+	color:#FAFAFA;
+	height:25%;
+	font-size:14px;
+}
+
+.briefcase-card .briefcase-desc .briefcase-text svg{
+	margin-right:14px;
+}
+
+.briefcase-card {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	width:240px;
+	height:240px;
+}
+
+#briefcaseModal .btn-close {
+	float:right;
+}
+
+#briefcaseModal .modal-body > div.row {
+	margin-bottom:20px;
+} 
+
+#briefcaseModal .modal-body .profile-photo > img{
+	width:125px;
+	height:125px;
+	border:8px solid #081C49;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+#briefcaseModal .modal-body #briefcase-profile .profile-text {
+	margin-top:25px;
+	margin-left:10px;
+}
+
+#briefcaseModal .modal-body  #briefcase-profile {
+	margin-bottom:50px;
+}
+
+#briefcaseModal .modal-body {
+	padding:40px;
+}
+
+#profileNav {
+    position: fixed;
+    right: 100px;
+    top: 35px;
+}
+
+#profileNav .profile-photo{
+    position: relative;
+    top: -85px;
+    right: -205px;
+}
+
+#profileNav #profile-bar {
+    background-color: #081C49;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+    width:230px;
+    height:70px;
+    padding-left:30px;
+    margin-top:10px;
+}
+
+#profileNav #profile-bar > * {
+    margin-right:30px;
+    margin-top:10px;
+}
+
+#profileNav #profile-bar .separator {
+    border-right:1px solid #FAFAFA;
+    margin-top:15px;
+    margin-bottom: 15px;
+}
+
+#profileNav .profile-photo > img {
+    width:100px;
+    height:100px;
+    border:5px solid #081C49;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#singlefileModal .modal-header {
+    background-color: #081C49;
+    color:#FAFAFA;
+    padding-left:50px;
+}
+
+.elips-button {
+    border:1px solid #081C49;
+    border-radius:34px;
+    padding: 5px 20px 5px 20px;
+    background-color: #FAFAFA;
+}
+
 @media only screen and (min-width: 576px) {
     section#home-section {
         height: 100vh;
@@ -419,6 +537,7 @@ li {
     .custom-bg-size-1 {
     	background-size:348px 390px !important;
     }
+
 }
 
 @media only screen and (max-width: 576px) {
