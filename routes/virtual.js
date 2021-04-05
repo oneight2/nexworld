@@ -9,7 +9,8 @@ const authMw = require('../middleware/authToken')
 router.get('/', async (req, res) => {
 	res.render('virtual', {
       title: 'Synnex Virtual', 
-      layout: 'layouts/virtuallayout'
+      layout: 'layouts/virtuallayout',
+      fileAddr: process.env.DIR
     });
 })
 
@@ -25,7 +26,7 @@ router.post('/getbriefcase', async(req, res) => {
 
 router.post('/briefcase', async(req, res) => {
 	try {
-		let response = await pgdb.addBriefcase(req.body.email, '["'+ req.body.briefcase +'"]');
+		let response = await pgdb.addBriefcase(req.body.email, req.body.briefcase);
 
 		res.send(response);
 	} catch(err){
@@ -33,5 +34,14 @@ router.post('/briefcase', async(req, res) => {
 	}
 }) 
 
+router.get('/getAnnotation/:booth/:annotation', async (req, res) => {
+	try {
+		let response = await pgdb.getAnnotationsSpecificByNumber(req.params.booth, req.params.annotation);
+
+		res.send(response);
+	} catch(err){
+		res.send({error: true, message: err.toString()})
+	}
+})
 
 module.exports = router;
