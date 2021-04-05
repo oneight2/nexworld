@@ -153,6 +153,16 @@ async function getAnnotationsByBooth(boothid){
 	}
 }
 
+async function getAnnotationsSpecificByNumber(boothnumber, annotationnumber){
+	try {
+		let { rows } = await db.query("SELECT * from annotations where boothid = (select uid from booths where number = $1) and content->>'number' = $2", [boothnumber, annotationnumber]);
+		
+		return rows;
+	} catch(err){
+		return ({error: true, message: err.toString()})
+	}
+}
+
 async function addAnnotation(uid, boothid, aname, acontent){
 	try{
 		let { rows } = await db.query('INSERT into annotations(uid, boothid, name, content) values ($1, $2, $3, $4)', [uid, boothid, aname, acontent])
@@ -198,15 +208,17 @@ async function getBriefcase(email){
 
 async function addBriefcase(email, briefcase){
 	try {
+		let parseBriefcase = '["'+ briefcase +'"]';
+
 		let { rows } = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
 
-		let findBriefcase = rows[0].briefcase.find(bc => bc = briefcase);
+		let findBriefcase = rows[0].briefcase.find(bc => bc == briefcase);
 		if(findBriefcase){
-			return ({error: true, message: 'briefcase already exist!'})
+			return ({error: true, message: 'Briefcase already exist!'})
 		} else {
-			let response = await db.query(`UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') || $2) where email = $1`, [email, briefcase])
+			let response = await db.query(`UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') || $2) where email = $1`, [email, parseBriefcase])
 
-			return ({message: 'Add briefcase Succesful!'});
+			return ({error: false, message: 'Add briefcase Succesful!'});
 		}		
 	} catch(err){
 		return ({error: true, message: err.toString()})
@@ -239,6 +251,7 @@ module.exports = {
 	getAnnotations,
 	getAnnotation,
 	getAnnotationsByBooth,
+	getAnnotationsSpecificByNumber,
 	addAnnotation,
 	deleteAnnotation,
 	editAnnotation,

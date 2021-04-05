@@ -377,6 +377,10 @@ li {
 	height:240px;
 }
 
+#briefcase-rows > * {
+    margin-bottom: 30px;
+}
+
 #briefcaseModal .btn-close {
 	float:right;
 }
@@ -447,7 +451,7 @@ li {
     object-fit: cover;
 }
 
-#singlefileModal .modal-header {
+#singlefileModal .modal-header, #pdfModal .modal-header  {
     background-color: #081C49;
     color:#FAFAFA;
     padding-left:50px;
@@ -458,6 +462,19 @@ li {
     border-radius:34px;
     padding: 5px 20px 5px 20px;
     background-color: #FAFAFA;
+}
+
+.virtual-alert {
+    position:fixed;
+    top:100px;
+    left:50%;
+    transform: translate(-50%, -50%);
+    opacity:0;
+    z-index: 1051;
+}
+
+.virtual-alert.active{
+    opacity: 1;
 }
 
 @media only screen and (min-width: 576px) {

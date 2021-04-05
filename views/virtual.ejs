@@ -34,7 +34,7 @@
                 <div id="briefcase-title" class="big-title">My Briefcase</div>
                 <br>
                 <div class="row" id="briefcase-rows">
-                	<!--
+                    <!--
                     <div class="col-lg-3">
                         <div class="briefcase-card">
                             <img src="/svg/briefcaseexample.svg" alt="">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                	-->
+                    -->
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <button id="briefcase-button" class="elips-button float-end mb-3">
+                <button id="briefcase-button-sf" class="elips-button float-end mb-3">
                     Add to Briefcase
                     <span data-feather="briefcase"></span>
                 </button>
@@ -70,67 +70,182 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">PDF</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-pdf" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="500px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">SLIDER</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-pdf" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <div id="sliderCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="" class="d-block w-100" alt="">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#sliderCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#sliderCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Briefcase Added!</strong>
+    <button type="button" class="btn-close" onClick="alertClose('success')"></button>
+</div>
+<div id="alert-warning" class="virtual-alert alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>This briefcase is added before.</strong>
+    <button type="button" class="btn-close" onClick="alertClose('warning')"></button>
+</div>
 <script>
 let briefCaseArr = [];
+let fileAddr = '<% fileAddr %>';
 
-function renderBriefcase(briefcase){
-	$('#briefcaseModal #briefcase-rows').html('')
-	briefcase.forEach(bc => {
-		let addr = 'http://52.74.109.241:3000/uploads/' + bc;
-		$('#briefcaseModal #briefcase-rows').append('<div class="col-lg-3"><div class="briefcase-card"><img src="/svg/briefcaseexample.svg" alt=""><div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>No Wire. No limit.</a></div><div class="briefcase-text"><a href="'+addr+'" download><span data-feather="download"></span>Download</a></div></div></div></div>')
-	})
-}
-
-function loadBriefcase(){
-	fetch('/virtual/getbriefcase', {
-  		method: 'POST',
-  		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			email: 'a.pranasakti@gmail.com',
-		})
-  	})
-  	.then(response => response.json())
-	.then(data => {
-		briefCaseArr = data[0].briefcase;
-		renderBriefcase(briefCaseArr)
-	})
-	.catch(err => console.log(err))
-}
-
-const anModal = new bootstrap.Modal(document.getElementById('singlefileModal'));
-
-function showAnn(an) {
-    switch (an) {
-        case 'an_asus_1':
-            anModal.toggle();
-            $('#singlefileModal #an-video source').attr('src', 'http://52.74.109.241:3000/uploads/35eba2fc-c425-4843-82aa-9bda6b2f9bf9-4.mp4')
-            $('#singlefileModal #an-video')[0].load();
-
-            $('#singlefileModal #briefcase-button').attr('onClick', "addToBriefCase('35eba2fc-c425-4843-82aa-9bda6b2f9bf9-4.mp4')");
+function alertClose(al) {
+    switch (al) {
+        case 'success':
+            $('#alert-success').removeClass('active');
+            break;
+        case 'warning':
+            $('#alert-warning').removeClass('active');
             break;
     }
+}
+
+function renderBriefcase(briefcase) {
+    $('#briefcaseModal #briefcase-rows').html('')
+    briefcase.forEach(bc => {
+        let addr = fileAddr + '/uploads/' + bc;
+        $('#briefcaseModal #briefcase-rows').append('<div class="col-lg-3"><div class="briefcase-card"><img src="/svg/briefcaseexample.svg" alt=""><div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>No Wire. No limit.</a></div><div class="briefcase-text"><a href="' + addr + '" download><span data-feather="download"></span>Download</a></div></div></div></div>')
+        feather.replace()
+    })
+}
+
+function loadBriefcase() {
+    fetch('/virtual/getbriefcase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: 'a.pranasakti@gmail.com',
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            briefCaseArr = data[0].briefcase;
+            renderBriefcase(briefCaseArr)
+        })
+        .catch(err => console.log(err))
+}
+
+const sfvModal = new bootstrap.Modal(document.getElementById('singlefileModal'));
+const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+
+function getData(booth, annotation, cb) {
+    fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            cb(data)
+        })
+        .catch(err => console.log(err))
+}
+
+function showAnn(an) {
+    let parsedArr = an.split('_');
+    let filetype = parsedArr[0];
+    let booth = parsedArr[1];
+    let annotation = parsedArr[2];
+
+    getData(booth, annotation, (data) => {
+        switch (filetype) {
+            case 'sfv':
+                sfvModal.toggle();
+                let dataFile = data[0].content.filename;
+                $('#singlefileModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#singlefileModal #an-video')[0].load();
+                $('#singlefileModal #briefcase-button-sf').attr('onClick', "addToBriefCase('" + dataFile + "')");
+                break;
+            case 'pdf':
+                pdfModal.toggle();
+                let dataPdf = data[0].content.filename;
+                $('#pdfModal #pdf-embed').attr('src', fileAddr + '/uploads/' + dataPdf)
+                $('#pdfModal #briefcase-button-pdf').attr('onClick', "addToBriefCase('" + dataPdf + "')");
+                break;
+        }
+    });
 }
 
 window.addEventListener('message', (event) => {
     showAnn(event.data)
 });
 
-function addToBriefCase(fileurl){
-	fetch('/virtual/briefcase', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			email: 'a.pranasakti@gmail.com',
-			briefcase: fileurl
-		})
-	})
-	.then(response => console.log(response))
-	.catch(error => console.log(error))
+function addToBriefCase(fileurl) {
+    fetch('/virtual/briefcase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: 'a.pranasakti@gmail.com',
+                briefcase: fileurl
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                $('#alert-warning').addClass('active');
+            } else {
+                $('#alert-success').addClass('active');
+
+            }
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
-anModal.hide();
+sfvModal.hide();
+pdfModal.hide();
 </script>
