@@ -208,11 +208,14 @@ async function getBriefcase(email){
 
 async function addBriefcase(email, briefcase){
 	try {
-		let parseBriefcase = '["'+ briefcase +'"]';
+		let parseBriefcase = '['+ JSON.stringify({
+			file: briefcase.file,
+			name: briefcase.name
+		}) +']';
 
 		let { rows } = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
 
-		let findBriefcase = rows[0].briefcase.find(bc => bc == briefcase);
+		let findBriefcase = rows[0].briefcase.find(bc => bc.file == briefcase.file);
 		if(findBriefcase){
 			return ({error: true, message: 'Briefcase already exist!'})
 		} else {
@@ -225,6 +228,7 @@ async function addBriefcase(email, briefcase){
 	}
 }
 
+/*
 async function deleteBriefcase(email, briefcase){
 	try {
 		let { rows } = await db.query("UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') - $2) where email = $1", [email, briefcase])
@@ -232,6 +236,7 @@ async function deleteBriefcase(email, briefcase){
 		return ({error: true, message: err.toString()})
 	}
 }
+*/
 
 //
 //
@@ -256,6 +261,5 @@ module.exports = {
 	deleteAnnotation,
 	editAnnotation,
 	getBriefcase,
-	addBriefcase,
-	deleteBriefcase
+	addBriefcase
 }

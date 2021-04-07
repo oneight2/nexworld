@@ -451,7 +451,7 @@ li {
     object-fit: cover;
 }
 
-#singlefileModal .modal-header, #pdfModal .modal-header  {
+#singlefileVideoModal .modal-header, #pdfModal .modal-header, #singlefileImageModal .modal-header, #pdfModal .modal-header  {
     background-color: #081C49;
     color:#FAFAFA;
     padding-left:50px;
@@ -475,6 +475,10 @@ li {
 
 .virtual-alert.active{
     opacity: 1;
+}
+
+#sliderCarousel .carousel-control-next, #sliderCarousel .carousel-control-prev{
+    margin-top: 53px;
 }
 
 @media only screen and (min-width: 576px) {

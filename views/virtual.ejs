@@ -50,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="singlefileModal" tabindex="-1" aria-labelledby="singlefileModal" aria-hidden="true">
+<div class="modal fade" id="singlefileVideoModal" tabindex="-1" aria-labelledby="singlefileVideoModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,7 +58,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <button id="briefcase-button-sf" class="elips-button float-end mb-3">
+                <button id="briefcase-button-sfv" class="elips-button float-end mb-3">
                     Add to Briefcase
                     <span data-feather="briefcase"></span>
                 </button>
@@ -66,6 +66,23 @@
                     <source src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="singlefileImageModal" tabindex="-1" aria-labelledby="singlefileImageModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">VIDEOS</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-sfi" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <img id="an-img" src="" alt="">
             </div>
         </div>
     </div>
@@ -95,21 +112,8 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <button id="briefcase-button-pdf" class="elips-button float-end mb-3">
-                    Add to Briefcase
-                    <span data-feather="briefcase"></span>
-                </button>
-                <div id="sliderCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="sliderCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false"> 
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="" class="d-block w-100" alt="">
-                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#sliderCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -139,10 +143,12 @@ let fileAddr = '<% fileAddr %>';
 function alertClose(al) {
     switch (al) {
         case 'success':
-            $('#alert-success').removeClass('active');
+            $('#alert-success').css('opacity', '0');
+            $('#alert-success').css('display', 'none');
             break;
         case 'warning':
-            $('#alert-warning').removeClass('active');
+            $('#alert-warning').css('opacity', '0');
+            $('#alert-warning').css('display', 'none');
             break;
     }
 }
@@ -150,8 +156,25 @@ function alertClose(al) {
 function renderBriefcase(briefcase) {
     $('#briefcaseModal #briefcase-rows').html('')
     briefcase.forEach(bc => {
-        let addr = fileAddr + '/uploads/' + bc;
-        $('#briefcaseModal #briefcase-rows').append('<div class="col-lg-3"><div class="briefcase-card"><img src="/svg/briefcaseexample.svg" alt=""><div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>No Wire. No limit.</a></div><div class="briefcase-text"><a href="' + addr + '" download><span data-feather="download"></span>Download</a></div></div></div></div>')
+        let addr = fileAddr + '/uploads/' + bc.file;
+        const extensionRegex = /(?:\.([^.]+))?$/;
+        let getExt = extensionRegex.exec(bc.file)[1].toLowerCase();
+        let fileThumbnail = '';
+        switch(getExt){
+            case 'pdf':
+            fileThumbnail = `<img src="/img/pdfthumb.png" alt="">`;
+            break;
+            case 'mp4' || 'wav' || 'mov' || 'avi' || 'wmv' || 'webm' || 'mp2' || 'mpg' || 'mpeg' || 'mpv' || 'mpe' || 'm4p' || 'm4v':
+            fileThumbnail = `<img src="/img/videothumbnail.png" alt="">`;
+            break;
+            case 'png' || 'jpg' || 'jpeg' || 'gif' || 'tif' || 'tiff' || 'bmp' || 'eps' || 'jfif':
+            fileThumbnail = `<img src="${addr}" alt="">`;
+            break;
+            default:
+            fileThumbnail = `<img src="${addr}" alt="">`;
+            break;
+        }
+        $('#briefcaseModal #briefcase-rows').append(`<div class="col-lg-3"><div class="briefcase-card">${fileThumbnail}<div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>${bc.name}</a></div><div class="briefcase-text"><a href="${addr}" download><span data-feather="download"></span>Download</a></div></div></div></div>`)
         feather.replace()
     })
 }
@@ -174,8 +197,10 @@ function loadBriefcase() {
         .catch(err => console.log(err))
 }
 
-const sfvModal = new bootstrap.Modal(document.getElementById('singlefileModal'));
+const sfvModal = new bootstrap.Modal(document.getElementById('singlefileVideoModal'));
+const sfiModal = new bootstrap.Modal(document.getElementById('singlefileImageModal'));
 const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
 
 function getData(booth, annotation, cb) {
     fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
@@ -202,16 +227,36 @@ function showAnn(an) {
             case 'sfv':
                 sfvModal.toggle();
                 let dataFile = data[0].content.filename;
-                $('#singlefileModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
-                $('#singlefileModal #an-video')[0].load();
-                $('#singlefileModal #briefcase-button-sf').attr('onClick', "addToBriefCase('" + dataFile + "')");
+                let annVideoName = data[0].name;
+                $('#singlefileVideoModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#singlefileVideoModal #an-video')[0].load();
+                $('#singlefileVideoModal #briefcase-button-sfv').attr('onClick', `addToBriefCase('${dataFile}','${annVideoName}')`);
+                break;
+            case 'sfi':
+                sfiModal.toggle();
+                let dataImageFile = data[0].content.filename;
+                let annImageName = data[0].name;
+                $('#singlefileImageModal #an-img').attr('src', fileAddr + '/uploads/' + dataImageFile)
+                $('#singlefileImageModal #briefcase-button-sfi').attr('onClick', `addToBriefCase('${dataImageFile}', '${annImageName}')`);
                 break;
             case 'pdf':
                 pdfModal.toggle();
                 let dataPdf = data[0].content.filename;
+                let annPdfName = data[0].name;
                 $('#pdfModal #pdf-embed').attr('src', fileAddr + '/uploads/' + dataPdf)
-                $('#pdfModal #briefcase-button-pdf').attr('onClick', "addToBriefCase('" + dataPdf + "')");
+                $('#pdfModal #briefcase-button-pdf').attr('onClick', `addToBriefCase('${dataPdf}', '${annPdfName}')`);
                 break;
+            case 'sld':
+                sliderModal.toggle();
+                let dataSlider = data[0].content.filename;
+                let annSliderName = data[0].name;
+                $('#sliderModal #sliderCarousel .carousel-inner').html('');
+                dataSlider.forEach((content, index) => {
+                    $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annSliderName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
+                })
+
+                $('#sliderModal #sliderCarousel .carousel-inner .carousel-item:nth-child(1)').addClass('active');
+            break;
         }
     });
 }
@@ -220,7 +265,16 @@ window.addEventListener('message', (event) => {
     showAnn(event.data)
 });
 
-function addToBriefCase(fileurl) {
+function opacityFadeOut(elm) {
+    let intervalTimer = setInterval(() => {
+        $(elm).css('opacity', '0');
+        $(elm).css('display', 'none');
+        clearTimeout(intervalTimer);
+        console.log('timer cycling')
+    }, 4000);  
+}
+
+function addToBriefCase(fileurl, annName) {
     fetch('/virtual/briefcase', {
             method: 'POST',
             headers: {
@@ -228,16 +282,20 @@ function addToBriefCase(fileurl) {
             },
             body: JSON.stringify({
                 email: 'a.pranasakti@gmail.com',
-                briefcase: fileurl
+                briefcase: fileurl,
+                name: annName
             })
         })
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                $('#alert-warning').addClass('active');
+                $('#alert-warning').css('display', 'block');
+                $('#alert-warning').css('opacity', '1');
+                opacityFadeOut('#alert-warning');
             } else {
-                $('#alert-success').addClass('active');
-
+                $('#alert-success').css('display', 'block');
+                $('#alert-success').css('opacity', '1');
+                opacityFadeOut('#alert-success');
             }
             console.log(data)
         })
@@ -246,6 +304,10 @@ function addToBriefCase(fileurl) {
         })
 }
 
-sfvModal.hide();
-pdfModal.hide();
+var modalSlider = document.getElementById('sliderCarousel')
+modalSlider.addEventListener('slid.bs.carousel', function (event) {
+  let currentId = $('#sliderCarousel .carousel-inner > .active').attr('id');
+
+})
+
 </script>

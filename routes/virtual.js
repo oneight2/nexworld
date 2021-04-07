@@ -26,7 +26,7 @@ router.post('/getbriefcase', async(req, res) => {
 
 router.post('/briefcase', async(req, res) => {
 	try {
-		let response = await pgdb.addBriefcase(req.body.email, req.body.briefcase);
+		let response = await pgdb.addBriefcase(req.body.email, {file: req.body.briefcase, name: req.body.name});
 
 		res.send(response);
 	} catch(err){
