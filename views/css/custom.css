@@ -247,7 +247,8 @@ li {
 }
 
 #loginModal .modal-content,
-#registerModal .modal-content {
+#registerModal .modal-content,
+#feedbackFormModal .modal-content {
     background: rgb(51, 80, 143);
     background: linear-gradient(90deg, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 70%);
     color: #FAFAFA;
@@ -255,27 +256,34 @@ li {
 }
 
 #loginModal .modal-content input,
-#registerModal .modal-content input {
+#registerModal .modal-content input,
+#feedbackFormModal .modal-content input,
+#feedbackFormModal .modal-content textarea {
     background-color: transparent;
     color: #FAFAFA;
 }
 
-#registerModal .modal-content input::placeholder {
+#registerModal .modal-content input::placeholder,
+#feedbackFormModal .modal-content input::placeholder,
+#feedbackFormModal .modal-content textarea::placeholder {
     color: #C4C4C4;
 }
 
 #loginModal .modal-body,
-#registerModal .modal-body {
+#registerModal .modal-body,
+#feedbackFormModal .modal-body {
     padding: 50px;
 }
 
 #loginModal .modal-content .btn-close,
-#registerModal .modal-content .btn-close {
+#registerModal .modal-content .btn-close,
+#feedbackFormModal .modal-content .btn-close {
     float: right;
 }
 
 #loginModal .modal-content .thick-title,
-#registerModal .modal-content .thick-title {
+#registerModal .modal-content .thick-title,
+#feedbackFormModal .modal-content .thick-title {
     color: #FAFAFA;
 }
 
@@ -551,7 +559,8 @@ li {
     }
 
     #loginModal .modal-dialog,
-    #registerModal .modal-dialog {
+    #registerModal .modal-dialog,
+    #feedbackFormModal .modal-dialog {
         max-width: 800px;
     }
 
@@ -610,7 +619,7 @@ li {
 		width: 100vw;
     }
 
-    #loginModal, #registerModal {
+    #loginModal, #registerModal, #feedbackFormModal {
     	height:100vh;
     }
 

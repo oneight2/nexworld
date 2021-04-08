@@ -31,7 +31,7 @@ router.post('/default', async (req, res)=> {
 		        email: email,
 		        name: name
 		    }],
-		    templateId: 8,
+		    templateId: 1,
 		    params: {
 		        activationlink: process.env.FRONTEND_ADDRESS + '/activation/email/' + userjwt,
 		        token: token
@@ -42,8 +42,10 @@ router.post('/default', async (req, res)=> {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
+			console.log(email)
 		  return ('Registration Successful: ' + email)
 		}, function(error) {
+			console.log(error)
 		  return error
 		});
 	}
@@ -69,18 +71,22 @@ router.post('/default', async (req, res)=> {
 				phone: req.body.phone
 			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
 			let emailResponse = await sendLinkEmail(req.body.email, req.body.name, jwtToken, userToken);
-
+			/*
+			res.send('You need to activate your account, please check your email!')
+			*/
 		    res.send({
 		    	user: req.body.email,
-		    	userToken: userToken
+		    	userToken: userToken,
+		    	jwt: jwtToken
 		    });
+		    
 		}
 	} catch(err){
 		res.status(500).send(err.toString());
 	}
 })
 
-
+/*
 //REGISTER, SEND TOKEN LINK TO EMAIL
 
 function parseMeetingInfo(mi){
@@ -181,5 +187,5 @@ router.post('/autoGenerateByEmail', async (req,res) => {
 })
 
 //
-
+*/
 module.exports = router;

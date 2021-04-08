@@ -112,7 +112,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div id="sliderCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false"> 
+                <div id="sliderCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
                     <div class="carousel-inner">
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#sliderCarousel" data-bs-slide="prev">
@@ -128,6 +128,35 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="feedbackFormModal" tabindex="-1" aria-labelledby="feedbackFormModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <p class="thick-title">Feedback Form</p>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="occupation" class="form-control" id="feedbackCompany" aria-describedby="feedbackCompany" placeholder="* Company" required>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="city" class="form-control" id="feedbackCity" aria-describedby="feedbackCity" placeholder="* City" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <textarea rows="4" name="message" class="form-control" id="feedbackMessage" aria-describedby="feedbackMessage" placeholder="* Write your message here" required></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="d-flex justify-content-center mt-5">
+                    <button onClick="sendFeedback()" class="btn-white-medium" type="submit">SUBMIT</button>
+                </div>
+                <input type="hidden" name="boothid" id="boothid">
+            </div>
+        </div>
+    </div>
+</div>
 <div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
     <strong>Briefcase Added!</strong>
     <button type="button" class="btn-close" onClick="alertClose('success')"></button>
@@ -136,6 +165,7 @@
     <strong>This briefcase is added before.</strong>
     <button type="button" class="btn-close" onClick="alertClose('warning')"></button>
 </div>
+<script src="js/globalscript.js"></script>
 <script>
 let briefCaseArr = [];
 let fileAddr = '<% fileAddr %>';
@@ -160,19 +190,19 @@ function renderBriefcase(briefcase) {
         const extensionRegex = /(?:\.([^.]+))?$/;
         let getExt = extensionRegex.exec(bc.file)[1].toLowerCase();
         let fileThumbnail = '';
-        switch(getExt){
+        switch (getExt) {
             case 'pdf':
-            fileThumbnail = `<img src="/img/pdfthumb.png" alt="">`;
-            break;
+                fileThumbnail = `<img src="/img/pdfthumb.png" alt="">`;
+                break;
             case 'mp4' || 'wav' || 'mov' || 'avi' || 'wmv' || 'webm' || 'mp2' || 'mpg' || 'mpeg' || 'mpv' || 'mpe' || 'm4p' || 'm4v':
-            fileThumbnail = `<img src="/img/videothumbnail.png" alt="">`;
-            break;
+                fileThumbnail = `<img src="/img/videothumbnail.png" alt="">`;
+                break;
             case 'png' || 'jpg' || 'jpeg' || 'gif' || 'tif' || 'tiff' || 'bmp' || 'eps' || 'jfif':
-            fileThumbnail = `<img src="${addr}" alt="">`;
-            break;
+                fileThumbnail = `<img src="${addr}" alt="">`;
+                break;
             default:
-            fileThumbnail = `<img src="${addr}" alt="">`;
-            break;
+                fileThumbnail = `<img src="${addr}" alt="">`;
+                break;
         }
         $('#briefcaseModal #briefcase-rows').append(`<div class="col-lg-3"><div class="briefcase-card">${fileThumbnail}<div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>${bc.name}</a></div><div class="briefcase-text"><a href="${addr}" download><span data-feather="download"></span>Download</a></div></div></div></div>`)
         feather.replace()
@@ -183,10 +213,11 @@ function loadBriefcase() {
     fetch('/virtual/getbriefcase', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
             },
             body: JSON.stringify({
-                email: 'a.pranasakti@gmail.com',
+                email: localStorage.getItem('synnex-user'),
             })
         })
         .then(response => response.json())
@@ -201,12 +232,14 @@ const sfvModal = new bootstrap.Modal(document.getElementById('singlefileVideoMod
 const sfiModal = new bootstrap.Modal(document.getElementById('singlefileImageModal'));
 const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
 const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
+const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
 
 function getData(booth, annotation, cb) {
     fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
             }
         })
         .then(response => response.json())
@@ -218,45 +251,46 @@ function getData(booth, annotation, cb) {
 
 function showAnn(an) {
     let parsedArr = an.split('_');
-    let filetype = parsedArr[0];
-    let booth = parsedArr[1];
-    let annotation = parsedArr[2];
+    let booth = parsedArr[0];
+    let annotation = parsedArr[1];
 
     getData(booth, annotation, (data) => {
-        switch (filetype) {
-            case 'sfv':
+        let dataInfo = data[0].content.type;
+        let parsedData = dataInfo.split('/');
+        let dataType = parsedData[0];
+
+        let dataFile = data[0].content.filename;
+        let annName = data[0].name;
+        let dataBoothid = data[0].boothid;
+        switch (dataType) {
+            case 'video':
                 sfvModal.toggle();
-                let dataFile = data[0].content.filename;
-                let annVideoName = data[0].name;
                 $('#singlefileVideoModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
                 $('#singlefileVideoModal #an-video')[0].load();
-                $('#singlefileVideoModal #briefcase-button-sfv').attr('onClick', `addToBriefCase('${dataFile}','${annVideoName}')`);
+                $('#singlefileVideoModal #briefcase-button-sfv').attr('onClick', `addToBriefCase('${dataFile}','${annName}')`);
                 break;
-            case 'sfi':
+            case 'image':
                 sfiModal.toggle();
-                let dataImageFile = data[0].content.filename;
-                let annImageName = data[0].name;
-                $('#singlefileImageModal #an-img').attr('src', fileAddr + '/uploads/' + dataImageFile)
-                $('#singlefileImageModal #briefcase-button-sfi').attr('onClick', `addToBriefCase('${dataImageFile}', '${annImageName}')`);
+                $('#singlefileImageModal #an-img').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#singlefileImageModal #briefcase-button-sfi').attr('onClick', `addToBriefCase('${dataFile}', '${annName}')`);
                 break;
-            case 'pdf':
+            case 'application':
                 pdfModal.toggle();
-                let dataPdf = data[0].content.filename;
-                let annPdfName = data[0].name;
-                $('#pdfModal #pdf-embed').attr('src', fileAddr + '/uploads/' + dataPdf)
-                $('#pdfModal #briefcase-button-pdf').attr('onClick', `addToBriefCase('${dataPdf}', '${annPdfName}')`);
+                $('#pdfModal #pdf-embed').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#pdfModal #briefcase-button-pdf').attr('onClick', `addToBriefCase('${dataFile}', '${annName}')`);
                 break;
-            case 'sld':
+            case 'slider':
                 sliderModal.toggle();
-                let dataSlider = data[0].content.filename;
-                let annSliderName = data[0].name;
                 $('#sliderModal #sliderCarousel .carousel-inner').html('');
-                dataSlider.forEach((content, index) => {
-                    $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annSliderName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
+                dataFile.forEach((content, index) => {
+                    $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
                 })
-
                 $('#sliderModal #sliderCarousel .carousel-inner .carousel-item:nth-child(1)').addClass('active');
-            break;
+                break;
+            case 'feedbackform':
+                feedbackFormModal.toggle();
+                $('#feedbackFormModal #boothid').val(dataBoothid);
+                break;
         }
     });
 }
@@ -270,18 +304,18 @@ function opacityFadeOut(elm) {
         $(elm).css('opacity', '0');
         $(elm).css('display', 'none');
         clearTimeout(intervalTimer);
-        console.log('timer cycling')
-    }, 4000);  
+    }, 4000);
 }
 
 function addToBriefCase(fileurl, annName) {
     fetch('/virtual/briefcase', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
             },
             body: JSON.stringify({
-                email: 'a.pranasakti@gmail.com',
+                email: localStorage.getItem('synnex-user'),
                 briefcase: fileurl,
                 name: annName
             })
@@ -291,10 +325,12 @@ function addToBriefCase(fileurl, annName) {
             if (data.error) {
                 $('#alert-warning').css('display', 'block');
                 $('#alert-warning').css('opacity', '1');
+                $('#alert-warning strong').text(data.message)
                 opacityFadeOut('#alert-warning');
             } else {
                 $('#alert-success').css('display', 'block');
                 $('#alert-success').css('opacity', '1');
+                $('#alert-success strong').text('Briefcase Added.')
                 opacityFadeOut('#alert-success');
             }
             console.log(data)
@@ -304,10 +340,44 @@ function addToBriefCase(fileurl, annName) {
         })
 }
 
+function sendFeedback() {
+    fetch('/virtual/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
+            },
+            body: JSON.stringify({
+                email: localStorage.getItem('synnex-user'),
+                company: $('#feedbackCompany').val(),
+                city: $('#feedbackCity').val(),
+                message: $('#feedbackMessage').val()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                $('#alert-warning').css('display', 'block');
+                $('#alert-warning').css('opacity', '1');
+                $('#alert-warning strong').text(data.message)
+                opacityFadeOut('#alert-warning');
+            } else {
+                $('#alert-success').css('display', 'block');
+                $('#alert-success').css('opacity', '1');
+                $('#alert-success strong').text('Feedback Sent.')
+                opacityFadeOut('#alert-success');
+            }
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+}
+
 var modalSlider = document.getElementById('sliderCarousel')
-modalSlider.addEventListener('slid.bs.carousel', function (event) {
-  let currentId = $('#sliderCarousel .carousel-inner > .active').attr('id');
+modalSlider.addEventListener('slid.bs.carousel', function(event) {
+    let currentId = $('#sliderCarousel .carousel-inner > .active').attr('id');
 
 })
-
 </script>

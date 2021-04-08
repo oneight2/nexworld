@@ -68,6 +68,13 @@ router.post('/add', [authMw.authToken({permissions: ['admin']}), upload.array('c
 				type: 'external_url'
 			}
 			break;
+			case 'feedbackform':
+			content = {
+				number: req.body.number,
+				filename: 'Feedback Form',
+				type: 'feedbackform'
+			}
+			break;
 		}
 
 		let response = await pgdb.addAnnotation(uuidv4(), req.body.boothid, req.body.name, JSON.stringify(content));

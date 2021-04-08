@@ -27,11 +27,18 @@ router.post('/', async (req, res) => {
 
 			let match = await bcrypt.compare(req.body.password, dbpassword)
 			if (match){
-				const user = { email: req.body.email , devicetoken: uuidv4()}
+				const user = { email: req.body.email , devicetoken: uuidv4(), role: response[0].role}
 
 				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
 
-				res.send({ jwtToken })
+				res.render('loginform', {
+					userkey: 'synnex',
+					user: req.body.email,
+					jwt: jwtToken,
+					redirecturl: '/virtual',
+					layout: 'layouts/emptylayout'
+				})
+				//res.send({ jwtToken })
 			} else {
 				res.status(500).send({error: true, message: 'Wrong username or password'})
 			}
