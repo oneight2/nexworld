@@ -59,7 +59,7 @@ router.post('/sessions', authMw.authToken(), async (req, res) => {
     }
 })
 
-function sendFeedbackEmail(email, content) {
+function sendFeedbackEmail(content) {
     // Configure API key authorization: api-key
     var apiKey = defaultClient.authentications['api-key'];
     apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
@@ -74,13 +74,18 @@ function sendFeedbackEmail(email, content) {
 
     sendSmtpEmail = {
         to: [{
-            email: email,
-            name: name
+            email: 'nexworld@metrodata.co.id',
+            name: 'Nexworld Metrodata'
         }],
-        templateId: 1,
+        templateId: 2,
         params: {
-            activationlink: process.env.FRONTEND_ADDRESS + '/activation/email/' + userjwt,
-            token: token
+        	email: content.email,
+        	name: content.name,
+        	phone: content.phone,
+        	company: content.company,
+        	city: content.city,
+        	message: content.message,
+        	booth: content.booth
         },
         headers: {
             'X-Mailin-custom': 'custom_header_1:custom_value_1|custom_header_2:custom_value_2'
@@ -99,6 +104,7 @@ function sendFeedbackEmail(email, content) {
 router.post('/feedback', async (req, res) => {
     try {
     	let userData = await pgdb.getUser(req.body.email);
+    	let boothInfo = await pgdb.getBooth(req.body.boothid);
 
     	let email = userData[0].email;
     	let name = userData[0].props.name;
@@ -106,13 +112,16 @@ router.post('/feedback', async (req, res) => {
     	let company = req.body.company;
     	let city = req.body.city;
     	let message = req.body.message;
+    	let booth = boothInfo[0].name;
 
     	let dataContent = {
+    		email,
     		name,
     		phone,
     		company,
     		city,
-    		message
+    		message,
+    		booth
     	}
 
     	sendFeedbackEmail(email, dataContent);

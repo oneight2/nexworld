@@ -145,7 +145,7 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
-                        <textarea rows="4" name="message" class="form-control" id="feedbackMessage" aria-describedby="feedbackMessage" placeholder="* Write your message here" required></textarea>
+                        <textarea maxlength="1000" rows="4" name="message" class="form-control" id="feedbackMessage" aria-describedby="feedbackMessage" placeholder="* Write your message here" required></textarea>
                     </div>
                 </div>
                 <br>
@@ -291,6 +291,9 @@ function showAnn(an) {
                 feedbackFormModal.toggle();
                 $('#feedbackFormModal #boothid').val(dataBoothid);
                 break;
+            case 'external_url':
+                window.open(dataFile);
+                break;
         }
     });
 }
@@ -351,7 +354,8 @@ function sendFeedback() {
                 email: localStorage.getItem('synnex-user'),
                 company: $('#feedbackCompany').val(),
                 city: $('#feedbackCity').val(),
-                message: $('#feedbackMessage').val()
+                message: $('#feedbackMessage').val(),
+                boothid: $('#boothid').val()
             })
         })
         .then(response => response.json())
