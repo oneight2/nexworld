@@ -371,7 +371,8 @@ function sendFeedback() {
                 $('#alert-success strong').text('Feedback Sent.')
                 opacityFadeOut('#alert-success');
             }
-            console.log(data)
+            feedbackFormModal.hide();
+            console.log(data);
         })
         .catch(error => {
             console.log(error)
