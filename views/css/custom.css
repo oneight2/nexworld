@@ -1,6 +1,7 @@
 body {
     font-family: 'Montserrat';
     position: relative;
+    overflow-x:hidden;
 }
 
 #synnexbody {
@@ -212,8 +213,6 @@ li {
     color: #fff;
 }
 
-.contact-footer .col-lg-6 .row a {}
-
 .halls-card-text {
     padding-top: 5px !important;
 }
@@ -306,27 +305,34 @@ li {
     padding-top: 18vh;
 }
 
-.partners-images>.d-flex img {
-    width: 130px;
-    margin-left: 10px;
-    margin-right: 10px;
+.partners-images .partners-img {
+    width: 179px;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.partners-img > img {
+    width: 100%;
+    margin-right: auto;
+    margin-left:auto;
+}
+
+.partners-images > .flex-lg-row {
+    margin-bottom: 30px;
 }
 
 .copyright {
     background-color: #D53237;
     color: #fff;
     font-size: 14px;
-    padding-top: 14px;
     width: 100vw;
+    padding:14px;
 }
 
 .contact-footer {
     background-color: #2D276C;
     color: #FAFAFA;
     height: 300px;
-    position: absolute;
-    bottom: 0vh;
-    width: 99vw;
 }
 
 .contact-footer a.active {
@@ -500,7 +506,6 @@ li {
     }
 
     section#partners-section{
-        height: 100vh;
         background-color: #fff;
     }
 
@@ -666,16 +671,17 @@ li {
     	flex-wrap: wrap;
     }
 
+    .partners-images .partners-img{
+        margin-bottom:20px;
+        margin-left:auto;
+        margin-right:auto;
+    } 
+
     .contact-footer {
     	height:initial;
     	position:initial;
     	margin-top:30px;
     	width:100vw;
-    }
-
-    .copyright {
-    	padding:14px;
-    	width:100%;
     }
 
     #registerPhone {
