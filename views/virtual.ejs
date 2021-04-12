@@ -2,8 +2,8 @@
 <!-- Button trigger modal -->
 <div id="profileNav">
     <div id="profile-bar" class="d-flex flex-row">
-        <a href="#">
-            <img src="/svg/speakersvg.svg" width="50px">
+        <a href="#" onClick="muteSite()">
+            <img id="muteImg" src="/svg/speakersvg.svg">
         </a>
         <div class="separator"></div>
         <a href="#" data-bs-toggle="modal" data-bs-target="#briefcaseModal" onClick="loadBriefcase()">
@@ -15,6 +15,21 @@
     </div>
 </div>
 <!-- Modal -->
+<div class="modal fade" id="introModal" tabindex="-1" aria-labelledby="introModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button id="skipintro-button" class="elips-button mb-3" onClick="skipIntro()"> 
+                    SKIP INTRO
+                </button>
+                <video id="an-video" width="99%" height="99%" autoplay="autoplay" controls muted>
+                    <source src="/video/FINAL_RENDER_OPENING_MUSIC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="briefcaseModal" tabindex="-1" aria-labelledby="briefcaseModal" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -170,6 +185,30 @@
 let briefCaseArr = [];
 let fileAddr = '<% fileAddr %>';
 
+window.isMuted = false;
+
+function muteSite(){
+
+    document.querySelectorAll("video, audio").forEach((elem) => {
+
+        if (!isMuted ) {
+            elem.muted = true;
+            $('#muteImg').attr('src', '/svg/mutedsound.svg')
+
+        } else {
+
+            if( elem.muted ) {
+                elem.muted = false;
+                $('#muteImg').attr('src', '/svg/speakersvg.svg')
+            }
+
+        }
+    });
+
+    isMuted = !isMuted;
+
+};
+
 function alertClose(al) {
     switch (al) {
         case 'success':
@@ -228,11 +267,14 @@ function loadBriefcase() {
         .catch(err => console.log(err))
 }
 
+const introModal = new bootstrap.Modal(document.getElementById('introModal'));
 const sfvModal = new bootstrap.Modal(document.getElementById('singlefileVideoModal'));
 const sfiModal = new bootstrap.Modal(document.getElementById('singlefileImageModal'));
 const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
 const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
 const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
+
+introModal.show();
 
 function getData(booth, annotation, cb) {
     fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
@@ -380,9 +422,20 @@ function sendFeedback() {
 
 }
 
-var modalSlider = document.getElementById('sliderCarousel')
+function skipIntro(){
+    introModal.hide();
+    $('#introModal video').get(0).pause();
+}
+
+const modalSlider = document.getElementById('sliderCarousel')
 modalSlider.addEventListener('slid.bs.carousel', function(event) {
     let currentId = $('#sliderCarousel .carousel-inner > .active').attr('id');
 
 })
+
+const sfvModalEvent = $('#singlefileVideoModal').get(0);
+sfvModalEvent.addEventListener('hide.bs.modal', function(event){
+    $('#singlefileVideoModal video').get(0).pause();
+})
+
 </script>

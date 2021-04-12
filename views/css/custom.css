@@ -3,6 +3,11 @@ body {
     position: relative;
 }
 
+#synnexbody {
+    width:100vw;
+    height:100vh;
+}
+
 a,
 a:hover {
     text-decoration: none;
@@ -568,6 +573,23 @@ li {
     	background-size:348px 390px !important;
     }
 
+}
+
+#skipintro-button{
+    position:absolute;
+    bottom:14vh;
+    right:10vw;
+    z-index:1;
+    background-color:#33508F;
+    color:#fff;
+    font-size: 15px;
+    width: 210px;
+    border: none;
+    height: 41px;
+}
+
+#introModal .modal-body{
+    padding:0;
 }
 
 @media only screen and (max-width: 576px) {
