@@ -28,6 +28,8 @@
     <label class="btn btn-outline-dark" for="slider">Slider</label>
     <input type="radio" class="btn-check" name="contenttype" id="exurl" value="exurl" autocomplete="off">
     <label class="btn btn-outline-dark" for="exurl">External Url</label>
+    <input type="radio" class="btn-check" name="contenttype" id="feedbackform" value="feedbackform" autocomplete="off">
+    <label class="btn btn-outline-dark" for="feedbackform">Feedback Form</label>
 </div>
 <div id="contentrow" class="mb-3">
     <div id="singlefile-content">
@@ -45,6 +47,9 @@
     <div id="exurl-content" class="d-none">
         <label for="annExUrl" class="form-label">External Url Content</label>
         <input name="exurl-content" type="text" class="form-control" id="annExUrl" placeholder="External Url">
+    </div>
+    <div id="feedbackform-content" class="d-none">
+        
     </div>
 </div>
 <div class="mt-5">
@@ -103,18 +108,19 @@ $(document).ready(function() {
             switch (val) {
                 case 'singlefile':
                     $('#contentrow #singlefile-content').removeClass('d-none');
-                    $('#contentrow #slider-content').attr('class', 'd-none');
-                    $('#contentrow #exurl-content').attr('class', 'd-none');
+                    $('#contentrow #slider-content, #contentrow #exurl-content').attr('class', 'd-none');
                     break;
                 case 'slider':
-                    $('#contentrow #singlefile-content').attr('class', 'd-none');
+                    $('#contentrow #singlefile-content, #contentrow #exurl-content').attr('class', 'd-none');
                     $('#contentrow #slider-content').removeClass('d-none');
-                    $('#contentrow #exurl-content').attr('class', 'd-none');
                     break;
                 case 'exurl':
-                    $('#contentrow #singlefile-content').attr('class', 'd-none');
-                    $('#contentrow #slider-content').attr('class', 'd-none');
+                    $('#contentrow #singlefile-content, #contentrow #slider-content').attr('class', 'd-none');
                     $('#contentrow #exurl-content').removeClass('d-none');
+                    break;
+                case 'feedbackform':
+                    $('#contentrow #singlefile-content, #contentrow #slider-content, #contentrow #exurl-content').attr('class', 'd-none');
+                    $('#contentrow #feedbackform-content').removeClass('d-none');
                     break;
             }
         }

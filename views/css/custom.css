@@ -3,6 +3,11 @@ body {
     position: relative;
 }
 
+#synnexbody {
+    width:100vw;
+    height:100vh;
+}
+
 a,
 a:hover {
     text-decoration: none;
@@ -247,7 +252,8 @@ li {
 }
 
 #loginModal .modal-content,
-#registerModal .modal-content {
+#registerModal .modal-content,
+#feedbackFormModal .modal-content {
     background: rgb(51, 80, 143);
     background: linear-gradient(90deg, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 70%);
     color: #FAFAFA;
@@ -255,27 +261,34 @@ li {
 }
 
 #loginModal .modal-content input,
-#registerModal .modal-content input {
+#registerModal .modal-content input,
+#feedbackFormModal .modal-content input,
+#feedbackFormModal .modal-content textarea {
     background-color: transparent;
     color: #FAFAFA;
 }
 
-#registerModal .modal-content input::placeholder {
+#registerModal .modal-content input::placeholder,
+#feedbackFormModal .modal-content input::placeholder,
+#feedbackFormModal .modal-content textarea::placeholder {
     color: #C4C4C4;
 }
 
 #loginModal .modal-body,
-#registerModal .modal-body {
+#registerModal .modal-body,
+#feedbackFormModal .modal-body {
     padding: 50px;
 }
 
 #loginModal .modal-content .btn-close,
-#registerModal .modal-content .btn-close {
+#registerModal .modal-content .btn-close,
+#feedbackFormModal .modal-content .btn-close {
     float: right;
 }
 
 #loginModal .modal-content .thick-title,
-#registerModal .modal-content .thick-title {
+#registerModal .modal-content .thick-title,
+#feedbackFormModal .modal-content .thick-title {
     color: #FAFAFA;
 }
 
@@ -451,7 +464,7 @@ li {
     object-fit: cover;
 }
 
-#singlefileModal .modal-header, #pdfModal .modal-header  {
+#singlefileVideoModal .modal-header, #pdfModal .modal-header, #singlefileImageModal .modal-header, #pdfModal .modal-header  {
     background-color: #081C49;
     color:#FAFAFA;
     padding-left:50px;
@@ -475,6 +488,10 @@ li {
 
 .virtual-alert.active{
     opacity: 1;
+}
+
+#sliderCarousel .carousel-control-next, #sliderCarousel .carousel-control-prev{
+    margin-top: 53px;
 }
 
 @media only screen and (min-width: 576px) {
@@ -547,7 +564,8 @@ li {
     }
 
     #loginModal .modal-dialog,
-    #registerModal .modal-dialog {
+    #registerModal .modal-dialog,
+    #feedbackFormModal .modal-dialog {
         max-width: 800px;
     }
 
@@ -555,6 +573,23 @@ li {
     	background-size:348px 390px !important;
     }
 
+}
+
+#skipintro-button{
+    position:absolute;
+    bottom:14vh;
+    right:10vw;
+    z-index:1;
+    background-color:#33508F;
+    color:#fff;
+    font-size: 15px;
+    width: 210px;
+    border: none;
+    height: 41px;
+}
+
+#introModal .modal-body{
+    padding:0;
 }
 
 @media only screen and (max-width: 576px) {
@@ -606,7 +641,7 @@ li {
 		width: 100vw;
     }
 
-    #loginModal, #registerModal {
+    #loginModal, #registerModal, #feedbackFormModal {
     	height:100vh;
     }
 

@@ -68,6 +68,13 @@ router.post('/add', [authMw.authToken({permissions: ['admin']}), upload.array('c
 				type: 'external_url'
 			}
 			break;
+			case 'feedbackform':
+			content = {
+				number: req.body.number,
+				filename: 'Feedback Form',
+				type: 'feedbackform'
+			}
+			break;
 		}
 
 		let response = await pgdb.addAnnotation(uuidv4(), req.body.boothid, req.body.name, JSON.stringify(content));
@@ -84,12 +91,18 @@ router.delete('/delete', authMw.authToken({permissions: ['admin']}), async (req,
 		let annData = await pgdb.getAnnotation(req.body.uid);
 		let annContent = annData[0].content;
 		let files = annContent.filename;
-		if (annContent.type == 'slider'){
-			for(i=0;i<files.length;i++){
-				fs.unlinkSync(mediaPath + files[i]);
-			}
-		} else {
-			fs.unlinkSync(mediaPath + annContent.filename);
+		switch(annContent.type){
+			case 'slider':
+				for(i=0;i<files.length;i++){
+					fs.unlinkSync(mediaPath + files[i]);
+				}
+			break;
+			case 'external_url':
+			
+			break;
+			default:
+				fs.unlinkSync(mediaPath + annContent.filename);
+			break;
 		}
 
 		let response = await pgdb.deleteAnnotation(req.body.uid);

@@ -18,7 +18,7 @@ router.get('/email/:token', async (req, res) => {
 			res.send('Email already verified');
 		}
 
-		let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, occupation, phone});
+		let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, occupation, phone, briefcase: []});
 
 		res.send('Verification Successful!');
 	} catch(err){
