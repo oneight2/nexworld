@@ -101,13 +101,7 @@ router.delete('/delete', authMw.authToken({permissions: ['admin']}), async (req,
 			case 'feedbackform':
 			break;
 			default:
-				fs.unlinkSync(mediaPath + annContent.filename, (err)=> {
-					if(err){
-						console.log(err);
-						return;
-					}
-					console.log('success unlink')
-				});
+				fs.unlinkSync(mediaPath + annContent.filename);
 			break;
 		}
 
