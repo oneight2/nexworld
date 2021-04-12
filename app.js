@@ -1,6 +1,7 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
+const path = require('path')
 
 const pgdb = require('./db/pg');
 const dotenv = require('dotenv');
@@ -157,7 +158,7 @@ app.use('/virtual', virtual)
 
 
 app.get('/uploads/:file', (req, res)=> {
-  res.sendFile(process.env.DIR + '/uploads/' + req.params.file)
+  res.sendFile(path.join(__dirname, './uploads', req.params.file))
 })
  
 app.listen(port, hostname, () => {
