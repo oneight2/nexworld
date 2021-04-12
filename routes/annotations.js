@@ -91,7 +91,6 @@ router.delete('/delete', authMw.authToken({permissions: ['admin']}), async (req,
 		let annData = await pgdb.getAnnotation(req.body.uid);
 		let annContent = annData[0].content;
 		let files = annContent.filename;
-		console.log(annContent.type)
 		switch(annContent.type){
 			case 'slider':
 				for(i=0;i<files.length;i++){
@@ -102,7 +101,13 @@ router.delete('/delete', authMw.authToken({permissions: ['admin']}), async (req,
 			case 'feedbackform':
 			break;
 			default:
-				fs.unlinkSync(mediaPath + annContent.filename);
+				fs.unlinkSync(mediaPath + annContent.filename, (err)=> {
+					if(err){
+						console.log(err);
+						return;
+					}
+					console.log('success unlink')
+				});
 			break;
 		}
 
