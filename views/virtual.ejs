@@ -1,17 +1,43 @@
 <iframe src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;"></iframe>
 <!-- Button trigger modal -->
-<div id="profileNav">
-    <div id="profile-bar" class="d-flex flex-row">
-        <a href="#" onClick="muteSite()">
-            <img id="muteImg" src="/svg/speakersvg.svg">
-        </a>
-        <div class="separator"></div>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#briefcaseModal" onClick="loadBriefcase()">
-            <img src="/svg/briefcaseicon.svg" alt="">
-        </a>
-    </div>
-    <div class="profile-photo">
-        <img src="/svg/profileexample.svg" width="50px">
+<div id="virtualui">
+    <nav id="logolinkNav">
+        <div class="d-flex flex-column">
+            <a href="#">
+                <div id="receptionist-nav" class="nav-item">
+                    <img src="/svg/receptionisticon.svg" alt="">
+                    <div class="text-center">Receptionist</div>
+                </div>
+            </a>
+            <div class="horizontal-separator"></div>
+            <a data-bs-toggle="offcanvas" href="#sideNavOffCanvas" role="button" aria-controls="sideNavOffCanvas">
+                <div id="exhibitor-nav" class="nav-item">
+                    <img src="/svg/exhibitoricon.svg" alt="">
+                    <div class="text-center">Exhibition Booth</div>
+                </div>
+            </a>
+            <div class="horizontal-separator"></div>
+            <a href="#">
+                <div id="exhibitor-nav" class="nav-item">
+                    <img src="/svg/flooricon.svg" alt="">
+                    <div class="text-center">Floor Plan</div>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div id="profileNav">
+        <div id="profile-bar" class="d-flex flex-row">
+            <a href="#" onClick="muteSite()">
+                <img id="muteImg" src="/svg/speakersvg.svg">
+            </a>
+            <div class="separator"></div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#briefcaseModal" onClick="loadBriefcase()">
+                <img src="/svg/briefcaseicon.svg" alt="">
+            </a>
+        </div>
+        <div class="profile-photo">
+            <img src="/svg/profileexample.svg" width="50px">
+        </div>
     </div>
 </div>
 <!-- Modal -->
@@ -19,7 +45,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
         <div class="modal-content">
             <div class="modal-body">
-                <button id="skipintro-button" class="elips-button mb-3" onClick="skipIntro()"> 
+                <button id="skipintro-button" class="elips-button mb-3" onClick="skipIntro()">
                     SKIP INTRO
                 </button>
                 <video id="an-video" width="99%" height="99%" autoplay="autoplay" controls muted>
@@ -172,6 +198,33 @@
         </div>
     </div>
 </div>
+<!--Modal ENDS-->
+<!--Offcanvas-->
+<!--
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sideNavOffCanvas" aria-labelledby="sideNavOffCanvasLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sideNavOffCanvasLabel">Offcanvas</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    </div>
+    <div class="dropdown mt-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+-->
+<!--Offcanvas Ends-->
+<!--Alerts-->
 <div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
     <strong>Briefcase Added!</strong>
     <button type="button" class="btn-close" onClick="alertClose('success')"></button>
@@ -187,17 +240,17 @@ let fileAddr = '<% fileAddr %>';
 
 window.isMuted = false;
 
-function muteSite(){
+function muteSite() {
 
     document.querySelectorAll("video, audio").forEach((elem) => {
 
-        if (!isMuted ) {
+        if (!isMuted) {
             elem.muted = true;
             $('#muteImg').attr('src', '/svg/mutedsound.svg')
 
         } else {
 
-            if( elem.muted ) {
+            if (elem.muted) {
                 elem.muted = false;
                 $('#muteImg').attr('src', '/svg/speakersvg.svg')
             }
@@ -422,7 +475,7 @@ function sendFeedback() {
 
 }
 
-function skipIntro(){
+function skipIntro() {
     introModal.hide();
     $('#introModal video').get(0).pause();
 }
@@ -434,8 +487,7 @@ modalSlider.addEventListener('slid.bs.carousel', function(event) {
 })
 
 const sfvModalEvent = $('#singlefileVideoModal').get(0);
-sfvModalEvent.addEventListener('hide.bs.modal', function(event){
+sfvModalEvent.addEventListener('hide.bs.modal', function(event) {
     $('#singlefileVideoModal video').get(0).pause();
 })
-
 </script>

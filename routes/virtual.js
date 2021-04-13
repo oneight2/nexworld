@@ -73,10 +73,6 @@ function sendFeedbackEmail(content) {
     var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
 
     sendSmtpEmail = {
-        sender: {
-            email: 'nexworld360@gmail.com',
-            name: 'Nexworld',
-        },
         to: [{
             email: 'nexworld@metrodata.co.id',
             name: 'Nexworld Metrodata'
