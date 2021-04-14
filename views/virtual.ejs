@@ -327,7 +327,9 @@ const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
 const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
 const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
 
-introModal.show();
+if(!localStorage.getItem('synnex-watched-intro')){
+    introModal.show();
+}
 
 function getData(booth, annotation, cb) {
     fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
@@ -479,6 +481,11 @@ function skipIntro() {
     introModal.hide();
     $('#introModal video').get(0).pause();
 }
+
+const introModalEvent = $('#introModal').get(0);
+introModalEvent.addEventListener('hidden.bs.modal', function(event) {
+    localStorage.setItem('synnex-watched-intro', true);
+})
 
 const modalSlider = document.getElementById('sliderCarousel')
 modalSlider.addEventListener('slid.bs.carousel', function(event) {
