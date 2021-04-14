@@ -31,14 +31,15 @@ router.post('/', async (req, res) => {
 
 				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
 
-				res.render('loginform', {
-					userkey: 'synnex',
-					user: req.body.email,
-					jwt: jwtToken,
-					redirecturl: '/virtual',
-					layout: 'layouts/emptylayout'
+				res.send({
+					error: false,
+					content: {
+						userkey: 'synnex',
+						user: req.body.email,
+						jwt: jwtToken,
+						redirecturl: '/virtual',
+					}
 				})
-				//res.send({ jwtToken })
 			} else {
 				res.status(500).send({error: true, message: 'Wrong username or password'})
 			}

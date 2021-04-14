@@ -530,6 +530,13 @@ li {
     display:block;
 }
 
+.message-alerts .alert{
+    position:absolute;
+    top:30%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
 @media only screen and (min-width: 576px) {
     section#home-section {
         height: 100vh;
