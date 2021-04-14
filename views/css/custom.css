@@ -456,8 +456,20 @@ li {
     margin-top:10px;
 }
 
-#profileNav #profile-bar .separator {
+.separator {
     border-right:1px solid #FAFAFA;
+}
+
+#profileNav #profile-bar .separator{
+    margin-top:15px;
+    margin-bottom: 15px;
+}
+
+.horizontal-separator{
+    border-bottom:1px solid #FAFAFA;
+}
+
+#virtualui #logolinkNav .horizontal-separator{
     margin-top:15px;
     margin-bottom: 15px;
 }
@@ -498,6 +510,31 @@ li {
 
 #sliderCarousel .carousel-control-next, #sliderCarousel .carousel-control-prev{
     margin-top: 53px;
+}
+
+#logolinkNav {
+    position:fixed;
+    top:50%;
+    left:0;
+    transform: translate(0%,-50%);
+    background-color:#081C49;
+    padding:20px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius:15px;
+    color:#fff;
+}
+
+#logolinkNav img {
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+
+.message-alerts .alert{
+    position:absolute;
+    top:30%;
+    left:50%;
+    transform: translate(-50%, -50%);
 }
 
 @media only screen and (min-width: 576px) {

@@ -156,6 +156,16 @@ const virtual = require('./routes/virtual')
 app.use('/virtual', virtual)
 //
 
+//Message Page
+app.get('/message/:color/:message', (req, res) => {
+  res.render('message.ejs', {
+    color: req.params.color, 
+    message: req.params.message,
+    layout: 'layouts/bootstraplayout'
+  })
+})
+//
+
 
 app.get('/uploads/:file', (req, res)=> {
   res.sendFile(path.join(__dirname, './uploads', req.params.file))

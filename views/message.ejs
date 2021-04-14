@@ -1,0 +1,26 @@
+<div class="container message-alerts">
+	<div id="logo-home">
+        <img id="homesection-logo" src="/svg/homesection2.svg" alt="">
+        <ul id="homesection-desc">
+            <li>Welcome to</li>
+            <li style="color:#C7CDDC;font-size:50px;line-height: 0.6;">nexworld<sup>&#9675</sup></li>
+            <li style="font-size:16px;margin-left:89px;color:#C7CDDC">Virtual 360 event</li>
+            <li style="line-height: 1;">Synnex Metrodata Indonesia</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+            <div class="alert alert-success d-none" role="alert" id="alert-green">
+            </div>
+            <div class="alert alert-danger d-none" role="alert" id="alert-red">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function showAlert(color, message) {
+    $(`#alert-${color}`).removeClass('d-none');
+    $(`#alert-${color}`).text(message);
+}
+showAlert('<%= color %>', decodeURIComponent('<%= message %>'));
+</script>

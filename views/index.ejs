@@ -499,24 +499,26 @@
             <div class="modal-body">
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 <p class="thick-title">Login</p>
-                <form action="/login" method="POST">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label for="loginEmail" class="form-label">Email</label>
-                            <input name="email" type="email" class="form-control" id="loginEmail" aria-describedby="loginEmail" placeholder="email">
+                <div class="row">
+                    <div class="col-lg-12 d-none" id="login-alert">
+                        <div class="alert alert-danger" role="alert">
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input name="password" type="password" class="form-control" id="loginPassword" aria-describedby="loginPassword" placeholder="password">
-                        </div>
+                    <div class="col-lg-12">
+                        <label for="loginEmail" class="form-label">Email</label>
+                        <input name="email" type="email" class="form-control" id="loginEmail" aria-describedby="loginEmail" placeholder="email">
                     </div>
-                    <div class="d-flex justify-content-center mt-5">
-                        <button class="btn-white-medium" type="submit">LOGIN</button>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input name="password" type="password" class="form-control" id="loginPassword" aria-describedby="loginPassword" placeholder="password">
                     </div>
-                </form>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button class="btn-white-medium" onClick="loginSubmit()">LOGIN</button>
+                </div>
             </div>
         </div>
     </div>
@@ -527,31 +529,33 @@
             <div class="modal-body">
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 <p class="thick-title">Registration User</p>
-                <form action="/register/default" method="POST">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <input type="text" name="name" class="form-control" id="registerName" aria-describedby="registerName" placeholder="* Full Name" required>
+                <div class="row">
+                    <div class="col-lg-12 d-none" id="register-alert">
+                        <div class="alert alert-danger" role="alert">
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <input type="email" name="email" class="form-control" id="registerEmail" aria-describedby="registerEmail" placeholder="* Email" required>
-                        </div>
+                    <div class="col-lg-12">
+                        <input type="text" name="name" class="form-control" id="registerName" aria-describedby="registerName" placeholder="* Full Name" required>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-lg-6 col-12">
-                            <input type="text" name="occupation" class="form-control" id="registerOccupation" aria-describedby="registerOccupation" placeholder="* Occupation" required>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <input type="text" name="phone" class="form-control" id="registerPhone" aria-describedby="registerPhone" placeholder="* Phone Number" required>
-                        </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="email" name="email" class="form-control" id="registerEmail" aria-describedby="registerEmail" placeholder="* Email" required>
                     </div>
-                    <div class="d-flex justify-content-center mt-5">
-                        <button class="btn-white-medium" type="submit">SUBMIT</button>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="occupation" class="form-control" id="registerOccupation" aria-describedby="registerOccupation" placeholder="* Occupation" required>
                     </div>
-                </form>
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="phone" class="form-control" id="registerPhone" aria-describedby="registerPhone" placeholder="* Phone Number" required>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button class="btn-white-medium" onClick="registerSubmit()">SUBMIT</button>
+                </div>
             </div>
         </div>
     </div>
@@ -571,5 +575,69 @@ const hlTextAnimation = setInterval(() => {
             break;
     }
 }, 1000);
+
+function showRedAlert(elem, message) {
+    $(elem).removeClass('d-none');
+    $(elem + ' > .alert').text(message);
+}
+
+function loginSubmit() {
+    fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: $('#loginEmail').val(),
+                password: $('#loginPassword').val()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                showRedAlert('#login-alert', data.message);
+            } else {
+                let content = data.content;
+                let userkey = content.userkey;
+                let userEmail = content.user;
+                let jwt = content.jwt;
+                let redirecturl = content.redirecturl;
+                localStorage.setItem(userkey + "-user", userEmail);
+                localStorage.setItem(userkey + "-jwt", jwt);
+
+                window.location.replace(redirecturl);
+            }
+
+        })
+        .catch(error => {
+            showRedAlert('#login-alert', error.message)
+        })
+}
+
+function registerSubmit() {
+    fetch('/register/default', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: $('#registerName').val(),
+                email: $('#registerEmail').val(),
+                occupation: $('#registerOccupation').val(),
+                phone: $('#registerPhone').val()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                showRedAlert('#register-alert', data.message);
+            } else {
+                window.location.replace(`/message/green/Registration%20successful!%20Please%20check%20your%20email.`);
+            }
+        })
+        .catch(error => {
+            showRedAlert('#register-alert', error.message)
+        })
+}
 </script>
 <script src="//code.tidio.co/3qybz2lbj3jahojo1axp3nhi9rf7dqdo.js" async></script>

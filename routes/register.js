@@ -52,7 +52,7 @@ router.post('/default', async (req, res)=> {
 
 	try{
 		if (validator.isEmail(req.body.email) == false){
-			res.status(500).send('Email format is incorrect.')
+			res.status(500).send({error: true, message: 'Email format is incorrect.'})
 		}
 	    let userCheck = await pgdb.getUser(req.body.email);
 
@@ -71,18 +71,15 @@ router.post('/default', async (req, res)=> {
 				phone: req.body.phone
 			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
 			let emailResponse = await sendLinkEmail(req.body.email, req.body.name, jwtToken, userToken);
-			/*
-			res.send('You need to activate your account, please check your email!')
-			*/
 		    res.send({
+		    	error:false,
 		    	user: req.body.email,
 		    	userToken: userToken,
 		    	jwt: jwtToken
 		    });
-		    
 		}
 	} catch(err){
-		res.status(500).send(err.toString());
+		res.status(500).send({error: true, message: err.toString()});
 	}
 })
 
