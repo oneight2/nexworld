@@ -48,7 +48,7 @@
                 <button id="skipintro-button" class="elips-button mb-3" onClick="skipIntro()">
                     SKIP INTRO
                 </button>
-                <video id="an-video" width="99%" height="99%" autoplay="autoplay" controls muted>
+                <video width="99%" height="99%" autoplay="autoplay" controls muted>
                     <source src="/video/FINAL_RENDER_OPENING_MUSIC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -140,7 +140,9 @@
                     Add to Briefcase
                     <span data-feather="briefcase"></span>
                 </button>
-                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="500px">
+                <div id="pdf-embed-location">
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -347,6 +349,11 @@ function getData(booth, annotation, cb) {
 }
 
 function showAnn(an) {
+    $('#pdfModal #pdf-embed-location').html('');
+    $('#singlefileImageModal #an-img').attr('src', '');
+    $('#singlefileVideoModal #an-video source').attr('src', '');
+    $('#singlefileVideoModal #an-video')[0].load();
+    $('#sliderModal #sliderCarousel .carousel-inner').html('');
     let parsedArr = an.split('_');
     let booth = parsedArr[0];
     let annotation = parsedArr[1];
@@ -364,6 +371,7 @@ function showAnn(an) {
                 sfvModal.toggle();
                 $('#singlefileVideoModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
                 $('#singlefileVideoModal #an-video')[0].load();
+                $('#singlefileVideoModal #an-video')[0].play();
                 $('#singlefileVideoModal #briefcase-button-sfv').attr('onClick', `addToBriefCase('${dataFile}','${annName}')`);
                 break;
             case 'image':
@@ -373,7 +381,7 @@ function showAnn(an) {
                 break;
             case 'application':
                 pdfModal.toggle();
-                $('#pdfModal #pdf-embed').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#pdfModal #pdf-embed-location').html(`<embed id="pdf-embed" src="${fileAddr}/uploads/${dataFile}" type="application/pdf" width="100%" height="500px">`)
                 $('#pdfModal #briefcase-button-pdf').attr('onClick', `addToBriefCase('${dataFile}', '${annName}')`);
                 break;
             case 'slider':
