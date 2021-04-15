@@ -67,7 +67,8 @@ router.post('/default', async (req, res)=> {
 				email: req.body.email, 
 				password: hash, 
 				name: req.body.name,
-				occupation: req.body.occupation, 
+				company: req.body.company,
+				jobtitle: req.body.jobtitle, 
 				phone: req.body.phone
 			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
 			let emailResponse = await sendLinkEmail(req.body.email, req.body.name, jwtToken, userToken);
