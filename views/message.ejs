@@ -18,9 +18,21 @@
     </div>
 </div>
 <script>
+function parseMessage(code){
+    switch(code){
+        case '1':
+        return 'Registration successful! Please check your email.'
+        break;
+        case '2':
+        return 'Verification successful! Please login through the <a href="/">landing page</a>.'
+        return 
+        break;
+    }
+}
+
 function showAlert(color, message) {
     $(`#alert-${color}`).removeClass('d-none');
-    $(`#alert-${color}`).text(message);
+    $(`#alert-${color}`).html(message);
 }
-showAlert('<%= color %>', decodeURIComponent('<%= message %>'));
+showAlert('<%= color %>', parseMessage('<%= message %>'));
 </script>
