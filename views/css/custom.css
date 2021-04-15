@@ -537,6 +537,10 @@ li {
     transform: translate(-50%, -50%);
 }
 
+.message-alerts .alert a {
+    font-weight: bold;
+}
+
 @media only screen and (min-width: 576px) {
     section#home-section {
         height: 100vh;

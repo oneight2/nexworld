@@ -15,14 +15,15 @@ router.get('/email/:token', async (req, res) => {
 		let emailCheck = await pgdb.getUser(email);
 
 		if(emailCheck.length > 0) {
-			res.send('Email already verified');
+			res.send({error: true, message: 'Email already verified'});
 		}
 
 		let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, occupation, phone, briefcase: []});
 
-		res.send('Verification Successful!');
+		res.redirect(`/message/green/2`);
+		/*res.send({error: false, message: 'Verification Successful!'});*/
 	} catch(err){
-		res.status(403).send(err.toString());
+		res.status(403).send({error: true, message: err.toString()});
 	}
 })
 
