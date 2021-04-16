@@ -295,6 +295,18 @@ li {
     border: 1px solid #FAFAFA;
 }
 
+.btn-smaller-text{
+    font-size: 17px;
+    height: 40px;
+    padding-top: 2px;
+}
+
+.form-modal-header{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1;
+}
+
 #registerModal input[type=number]::-webkit-outer-spin-button,
 #registerModal input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
