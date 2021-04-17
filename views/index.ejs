@@ -618,7 +618,7 @@ function loginSubmit() {
                 localStorage.setItem(userkey + "-user", userEmail);
                 localStorage.setItem(userkey + "-jwt", jwt);
 
-                window.location.href(redirecturl);
+                window.location.href = redirecturl;
             }
 
         })
@@ -646,7 +646,7 @@ function registerSubmit() {
             if (data.error) {
                 showRedAlert('#register-alert', data.message);
             } else {
-                window.location.href(`/message/green/1`);
+                window.location.href = '/message/green/1';
             }
         })
         .catch(error => {
