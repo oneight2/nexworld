@@ -8,7 +8,7 @@
     src: url("../webfonts/run.woff2");
 }
 
-body {
+body, html {
     font-family: 'Montserrat';
     position: relative;
     overflow-x:hidden;
@@ -611,6 +611,16 @@ li {
     font-weight: bold;
 }
 
+.blue-title{
+    color:#081C49;
+}
+
+.pass-title{
+    max-width: 579px;
+    margin: auto;
+}
+
+
 @media only screen and (min-width: 576px) {
     section#home-section {
         height: 100vh;
@@ -674,9 +684,23 @@ li {
         list-style-type: none;
         font-size: 40px;
         position: relative;
-        top: -261px;
-        left: 600px;
+        top: -185px;
+        left: 648px;
         width: 605px;
+    }
+
+    #homesection-desc .hs-nexworld{
+        color:#C7CDDC;
+        font-size:87px;
+        line-height: 0.6;
+    }
+
+    #homesection-desc .hs-subdesc{
+        font-size:16px;
+        margin-left:283px;
+        margin-top:10px;
+        color:#C7CDDC;
+        font-family:run;
     }
 
     #loginModal .modal-dialog,
@@ -689,6 +713,18 @@ li {
     	background-size:348px 390px !important;
     }
 
+    .blur-background > .overlay{
+        background-color:rgba(255,255,255,0.5);
+        border-radius: 15px;
+        position:relative;
+        height:94px;
+        filter:blur(4px);
+    }
+
+    .blur-background > .content {
+        position: relative;
+        top: -133px;
+    }
 }
 
 #skipintro-button{
@@ -752,9 +788,23 @@ li {
         list-style-type: none;
         font-size: 21px;
 		position: relative;
-		top: -55px;
+		top: 125px;
 		left: 0px;
 		width: 100vw;
+    }
+
+    #homesection-desc .hs-nexworld{
+        color:#C7CDDC;
+        font-size:42px;
+        line-height: 0.6;
+    }
+
+    #homesection-desc .hs-subdesc{
+        font-size: 14px;
+        margin-left: 91px;
+        margin-top: 1px;
+        color:#C7CDDC;
+        font-family:run;
     }
 
     #loginModal, #registerModal, #feedbackFormModal {
@@ -789,6 +839,10 @@ li {
         margin-right:auto;
     } 
 
+    #partners-section .partners-title{
+        font-size:30px;
+    }
+
     .contact-footer {
     	height:initial;
     	position:initial;
@@ -803,4 +857,23 @@ li {
     .contact-content {
     	padding-top: 2vh;
 	}
+
+    .blur-background > .overlay{
+        background-color:rgba(255,255,255,0.5);
+        border-radius: 15px;
+        position:relative;
+        height:121px;
+        filter:blur(4px);
+    }
+
+    .blur-background > .content {
+        position: relative;
+        top: -165px;
+    }
 }
+
+@media only screen and (max-width: 400px){
+    .partners-images .partners-img{
+        width:150px;
+    }
+} 
