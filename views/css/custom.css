@@ -8,7 +8,7 @@
     src: url("../webfonts/run.woff2");
 }
 
-body, html {
+body {
     font-family: 'Montserrat';
     position: relative;
     overflow-x:hidden;
@@ -154,7 +154,7 @@ li {
     background-size:cover;
     background-position: center;
     padding-bottom:100px; 
-    padding-top:30px;
+    padding-top:90px;
 }
 
 .getpass-icon{
@@ -194,8 +194,8 @@ li {
 	padding-left: 0px;
     padding-right: 0px;
     background-repeat: no-repeat;
-    background-position: -20px -17px;
-    background-size: 326px 308px;
+    background-position: center;
+    background-size: cover;
     margin-bottom:30px;
 } 
 
@@ -620,6 +620,13 @@ li {
     margin: auto;
 }
 
+.v-centered{
+    position:relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
 
 @media only screen and (min-width: 576px) {
     section#home-section {
@@ -725,6 +732,10 @@ li {
         position: relative;
         top: -133px;
     }
+
+    .pass-title {
+        max-height: 110px
+    }
 }
 
 #skipintro-button{
@@ -745,6 +756,10 @@ li {
 }
 
 @media only screen and (max-width: 576px) {
+    html{
+        position: relative;
+        overflow-x: hidden;
+    }
 	#synnexsidenav {
 		display:none;
 	}
@@ -869,6 +884,10 @@ li {
     .blur-background > .content {
         position: relative;
         top: -165px;
+    }
+
+    .pass-title {
+        max-height: 140px
     }
 }
 
