@@ -42,10 +42,8 @@ router.post('/default', async (req, res)=> {
 		};
 
 		apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-			console.log(email)
 		  return ('Registration Successful: ' + email)
 		}, function(error) {
-			console.log(error)
 		  return error
 		});
 	}
