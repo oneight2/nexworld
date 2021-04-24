@@ -166,10 +166,18 @@ app.get('/message/:color/:message', (req, res) => {
 })
 //
 
+//Forgot Password Pages
+const forgotpassword = require('./routes/forgotpassword')
 
+app.use('/forgotpassword', forgotpassword)
+//
+
+
+//MEDIA FILES PATHS
 app.get('/uploads/:file', (req, res)=> {
   res.sendFile(path.join(__dirname, './uploads', req.params.file))
 })
+//
  
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

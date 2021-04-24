@@ -125,6 +125,16 @@ async function reRegisterUser(email, password, props){
 }
 //
 
+async function changePassword(email, password){
+	try{
+		let { rows } = await db.query('update users set password = $2 where email = $1',[email, password]);
+
+		return rows;
+	}catch(err){
+		return ({error:true, message: err.toString()})
+	}
+}
+
 //ANNOTATIONS
 async function getAnnotations(){
 	try {
@@ -253,6 +263,7 @@ module.exports = {
 	getAdmin,
 	updateUser,
 	reRegisterUser,
+	changePassword,
 	getAnnotations,
 	getAnnotation,
 	getAnnotationsByBooth,
