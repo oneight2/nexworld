@@ -5,22 +5,22 @@
         <div class="d-flex flex-column">
             <a href="#">
                 <div id="receptionist-nav" class="nav-item">
-                    <img src="/svg/receptionisticon.svg" alt="">
-                    <div class="text-center">Receptionist</div>
+                    <img src="/svg/synnexlogowhite.svg" alt="" height="40px">
+                    <!--<div class="text-center">Receptionist</div>-->
                 </div>
             </a>
             <div class="horizontal-separator"></div>
             <a data-bs-toggle="offcanvas" href="#sideNavOffCanvas" role="button" aria-controls="sideNavOffCanvas">
                 <div id="exhibitor-nav" class="nav-item">
-                    <img src="/svg/exhibitoricon.svg" alt="">
-                    <div class="text-center">Exhibition Booth</div>
+                    <img src="/svg/receptionisticon.svg" alt="">
+                    <div class="text-center">Receptionist</div>
                 </div>
             </a>
             <div class="horizontal-separator"></div>
             <a href="#">
                 <div id="exhibitor-nav" class="nav-item">
-                    <img src="/svg/flooricon.svg" alt="">
-                    <div class="text-center">Floor Plan</div>
+                    <img src="/svg/exhibitoricon.svg" alt="">
+                    <div class="text-center">Directory</div>
                 </div>
             </a>
         </div>
@@ -35,9 +35,12 @@
                 <img src="/svg/briefcaseicon.svg" alt="">
             </a>
         </div>
-        <div class="profile-photo">
-            <img src="/svg/profileexample.svg" width="50px">
-        </div>
+        <!--
+        <a href="#">
+            <div class="profile-photo">
+                <img src="/svg/settingicon.svg" width="50px">
+            </div>
+        </a>-->
     </div>
 </div>
 <!-- Modal -->
@@ -63,11 +66,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div id="briefcase-profile">
                     <div class="d-flex flex-row">
-                        <div class="profile-photo">
-                            <img src="/svg/profileexample.svg" alt="">
-                        </div>
+                        <!--
+                        <a href="#">
+                            <div class="profile-photo">
+                                <img src="/svg/settingicon.svg" alt="">
+                            </div>
+                        </a>
+                        -->
                         <div class="profile-text">
-                            <div class="profile-name big-title">Mufti Abdila</div>
+                            <div class="profile-name big-title" id="profile-name">Mufti Abdila</div>
                             <div class="profile-signout"><a href="#"><span data-feather="log-out"></span>Sign Out</a></div>
                         </div>
                     </div>
@@ -86,6 +93,11 @@
                         </div>
                     </div>
                     -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img class="margin-center" src="/svg/synnexlogo.svg" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,7 +153,6 @@
                     <span data-feather="briefcase"></span>
                 </button>
                 <div id="pdf-embed-location">
-                    
                 </div>
             </div>
         </div>
@@ -237,6 +248,10 @@
 </div>
 <script src="js/globalscript.js"></script>
 <script>
+/*INITIAL VALUE*/
+$('#profile-name').text(localStorage.getItem('synnex-user'))
+/**/
+
 let briefCaseArr = [];
 let fileAddr = '<% fileAddr %>';
 
@@ -329,7 +344,7 @@ const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
 const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
 const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
 
-if(!localStorage.getItem('synnex-watched-intro')){
+if (!localStorage.getItem('synnex-watched-intro')) {
     introModal.show();
 }
 
