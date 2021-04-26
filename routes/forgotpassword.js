@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const pgdb = require('../db/pg');
-const validator = require('validator');
-const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
