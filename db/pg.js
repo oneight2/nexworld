@@ -9,6 +9,7 @@ const db = new Pool({
   database: process.env.PG_DB,
   password: process.env.PG_PASS,
   port: process.env.PG_PORT,
+  ssl: process.env.DEV_STATUS == 'PRODUCTION' ? true : false
 })
 
 
