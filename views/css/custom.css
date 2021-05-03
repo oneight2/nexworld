@@ -74,7 +74,7 @@ li {
     position: fixed;
     left: 0px;
     width: 160px;
-    background-color: rgba(250, 250, 250, 0.9);
+    background-color: #FAFAFA;
     height: 100vh;
     padding-top: 5vh;
     z-index: 2;
@@ -738,6 +738,13 @@ li {
         width: 700px;
     }
 
+    #homesection-logo-png{
+        position: relative;
+        top: 140px;
+        left: 112px;
+        width: 800px;
+    }
+
     #homesection-desc {
         color: #ECFFFF;
         list-style-type: none;
@@ -838,15 +845,20 @@ li {
     }
 
     #homesection-logo {
-    	display:none;
-    }
-
-    #homesection-logo {
         position: relative;
         top: 280px;
         left: 50%;
         width:100vw;
   		transform: translate(-50%, -50%);
+        display:block;
+    }
+
+    #homesection-logo-png {
+        position: relative;
+        top: 280px;
+        left: 55%;
+        width:100vw;
+        transform: translate(-50%, -50%);
         display:block;
     }
 
