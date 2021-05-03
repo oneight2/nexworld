@@ -343,6 +343,7 @@ const sfiModal = new bootstrap.Modal(document.getElementById('singlefileImageMod
 const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
 const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
 const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
+const briefcaseModal = new bootstrap.Modal(document.getElementById('briefcaseModal'));
 
 if (!localStorage.getItem('synnex-watched-intro')) {
     introModal.show();
@@ -364,6 +365,12 @@ function getData(booth, annotation, cb) {
 }
 
 function showAnn(an) {
+    if(an == 'briefcase'){
+        loadBriefcase();
+        briefcaseModal.show();
+        return;
+    }
+
     $('#pdfModal #pdf-embed-location').html('');
     $('#singlefileImageModal #an-img').attr('src', '');
     $('#singlefileVideoModal #an-video source').attr('src', '');
