@@ -1,23 +1,23 @@
-<iframe src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;"></iframe>
+<iframe id="virtual3dFrame" src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;position:absolute;"></iframe>
 <!-- Button trigger modal -->
 <div id="virtualui">
     <nav id="logolinkNav">
         <div class="d-flex flex-column">
-            <a href="#">
+            <a href="#" onClick="navigateFrame(18)">
                 <div id="receptionist-nav" class="nav-item">
                     <img src="/svg/synnexlogowhite.svg" alt="" height="40px">
                     <!--<div class="text-center">Receptionist</div>-->
                 </div>
             </a>
             <div class="horizontal-separator"></div>
-            <a data-bs-toggle="offcanvas" href="#sideNavOffCanvas" role="button" aria-controls="sideNavOffCanvas">
+            <a href="#" onClick="navigateFrame(18)">
                 <div id="exhibitor-nav" class="nav-item">
                     <img src="/svg/receptionisticon.svg" alt="">
                     <div class="text-center">Receptionist</div>
                 </div>
             </a>
             <div class="horizontal-separator"></div>
-            <a href="#">
+            <a href="#" onClick="navigateFrame(18)">
                 <div id="exhibitor-nav" class="nav-item">
                     <img src="/svg/exhibitoricon.svg" alt="">
                     <div class="text-center">Directory</div>
@@ -212,31 +212,12 @@
     </div>
 </div>
 <!--Modal ENDS-->
-<!--Offcanvas-->
-<!--
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sideNavOffCanvas" aria-labelledby="sideNavOffCanvasLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="sideNavOffCanvasLabel">Offcanvas</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div class="dropdown mt-3">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
--->
-<!--Offcanvas Ends-->
+<!--Background Audio-->
+<audio id="bg-audio">
+  <source src="" type="audio/mpeg">
+</audio>
+<!--Background Audio End-->
+
 <!--Alerts-->
 <div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
     <strong>Briefcase Added!</strong>
@@ -249,35 +230,38 @@
 <script src="js/globalscript.js"></script>
 <script>
 /*INITIAL VALUE*/
+$('#bg-audio > source').attr('src', `/audio/bg_audio${Math.floor((Math.random() * 3) + 1)}.mpeg`)
+$('#bg-audio').get(0).load();
+
 $('#profile-name').text(localStorage.getItem('synnex-user'))
 /**/
 
 let briefCaseArr = [];
 let fileAddr = '<% fileAddr %>';
 
+function navigateFrame(media){
+    $('#virtual3dFrame').attr('src', `3d/index.html?media=${media}`)
+}
+
 window.isMuted = false;
 
 function muteSite() {
 
     document.querySelectorAll("video, audio").forEach((elem) => {
-
         if (!isMuted) {
             elem.muted = true;
             $('#muteImg').attr('src', '/svg/mutedsound.svg')
-
-        } else {
-
-            if (elem.muted) {
-                elem.muted = false;
-                $('#muteImg').attr('src', '/svg/speakersvg.svg')
-            }
-
+        } else if (elem.muted) {
+            elem.muted = false;
+            $('#muteImg').attr('src', '/svg/speakersvg.svg')
+            $('#bg-audio').get(0).play();
         }
     });
 
     isMuted = !isMuted;
 
 };
+muteSite();
 
 function alertClose(al) {
     switch (al) {
@@ -391,6 +375,7 @@ function showAnn(an) {
         switch (dataType) {
             case 'video':
                 sfvModal.toggle();
+                $('#bg-audio').get(0).pause();
                 $('#singlefileVideoModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
                 $('#singlefileVideoModal #an-video')[0].load();
                 $('#singlefileVideoModal #an-video')[0].play();
@@ -526,5 +511,6 @@ modalSlider.addEventListener('slid.bs.carousel', function(event) {
 const sfvModalEvent = $('#singlefileVideoModal').get(0);
 sfvModalEvent.addEventListener('hide.bs.modal', function(event) {
     $('#singlefileVideoModal video').get(0).pause();
+    $('#bg-audio').get(0).play();
 })
 </script>
