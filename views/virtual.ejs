@@ -3,14 +3,14 @@
 <div id="virtualui">
     <nav id="logolinkNav">
         <div class="d-flex flex-column">
-            <a href="#" onClick="navigateFrame(18)">
+            <a href="#" onClick="navigateFrame(19)">
                 <div id="receptionist-nav" class="nav-item">
                     <img src="/svg/synnexlogowhite.svg" alt="" height="40px">
                     <!--<div class="text-center">Receptionist</div>-->
                 </div>
             </a>
             <div class="horizontal-separator"></div>
-            <a href="#" onClick="navigateFrame(18)">
+            <a href="#" onClick="navigateFrame(3)">
                 <div id="exhibitor-nav" class="nav-item">
                     <img src="/svg/receptionisticon.svg" alt="">
                     <div class="text-center">Receptionist</div>
@@ -75,7 +75,7 @@
                         -->
                         <div class="profile-text">
                             <div class="profile-name big-title" id="profile-name">Mufti Abdila</div>
-                            <div class="profile-signout"><a href="#"><span data-feather="log-out"></span>Sign Out</a></div>
+                            <div class="profile-signout"><a href="#" onClick="logout()"><span data-feather="log-out"></span>Sign Out</a></div>
                         </div>
                     </div>
                 </div>
@@ -228,6 +228,11 @@
     <button type="button" class="btn-close" onClick="alertClose('warning')"></button>
 </div>
 <script src="js/globalscript.js"></script>
+<script>
+    /*OFFCANVAS*/
+        $(".sidenav-offcanvas").css('')
+    /**/
+</script>
 <script>
 /*INITIAL VALUE*/
 $('#bg-audio > source').attr('src', `/audio/bg_audio${Math.floor((Math.random() * 3) + 1)}.mpeg`)
