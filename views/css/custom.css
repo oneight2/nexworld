@@ -74,7 +74,7 @@ li {
     position: fixed;
     left: 0px;
     width: 160px;
-    background-color: #FAFAFA;
+    background-color: #fff;
     height: 100vh;
     padding-top: 5vh;
     z-index: 2;
@@ -100,7 +100,7 @@ li {
 .highlight-maintext {
     width: 272px;
     margin: auto;
-    padding-bottom: 47px;
+    padding-bottom: 15px;
     border-bottom: 4px solid #EE4040;
 }
 
@@ -126,7 +126,7 @@ li {
 }
 
 .highlights-content>div {
-    margin-top: 30vh;
+    margin-top: 10vh;
 }
 
 .pass-content>div {
@@ -370,7 +370,7 @@ li {
 
 .highlights2-content,
 .partners-content {
-    padding-top: 18vh;
+    padding-top: 6vh;
 }
 
 .partners-images .partners-img {
@@ -642,6 +642,12 @@ li {
     margin: auto;
 }
 
+.centered {
+    margin-right: auto;
+    margin-left:auto;
+    display: block;
+}
+
 .v-centered{
     position:relative;
     top:50%;
@@ -680,6 +686,18 @@ li {
     min-height: 100vh;
 }
 
+#message-desc  {
+    color:#fff;
+}
+
+#message-logo{
+    position: relative;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+}
+
 @media only screen and (min-width: 576px) {
     section#home-section {
         height: 100vh;
@@ -713,7 +731,7 @@ li {
     }
 
     #logo-home {
-        width: 1100px;
+        width:100%;
         margin: auto;
     }
 
@@ -740,9 +758,10 @@ li {
 
     #homesection-logo-png{
         position: relative;
-        top: 140px;
-        left: 112px;
-        width: 800px;
+        top: 120px;
+        left: calc(50% + 160px);
+        width: 650px;
+        transform:translateX(calc(-50% - 80px));
     }
 
     #homesection-desc {
@@ -783,17 +802,21 @@ li {
         background-color:rgba(255,255,255,0.5);
         border-radius: 15px;
         position:relative;
-        height:94px;
+        height:180px;
         filter:blur(4px);
     }
 
     .blur-background > .content {
         position: relative;
-        top: -133px;
+        top: -214px;
     }
 
     .pass-title {
-        max-height: 110px
+        max-height: 204px;
+    }
+
+    #highlights-section {
+        padding-bottom: 80px;
     }
 }
 
@@ -941,17 +964,42 @@ li {
         background-color:rgba(255,255,255,0.5);
         border-radius: 15px;
         position:relative;
-        height:121px;
+        height:271px;
         filter:blur(4px);
     }
 
     .blur-background > .content {
         position: relative;
-        top: -165px;
+        top: -314px;
     }
 
     .pass-title {
-        max-height: 140px
+        max-height: 278px;
+    }
+
+    #highlights-section {
+        padding-bottom: 30px;
+    }
+
+    #pass-section .pass-content{
+        padding-bottom:30px;
+    }
+
+    #join-section{
+        margin-top: 200px;
+    }
+
+    .getpass-icon{
+       display: block;
+       margin-left:auto;
+       margin-right:auto; 
+       margin-bottom: 10px;
+       margin-top:20px;
+       height:50px;
+    }
+
+    #join-section{
+        margin-bottom:-110px;
     }
 }
 
