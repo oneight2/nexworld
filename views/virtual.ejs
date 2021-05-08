@@ -1,7 +1,10 @@
 <iframe id="virtual3dFrame" src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;position:absolute;"></iframe>
 <!-- Button trigger modal -->
 <div id="virtualui">
-    <nav id="logolinkNav">
+    <nav id="logolinkNav" class="sidenav-offcanvas sidenav-offcanvas-small">
+        <a href="#" onClick="sidenavOffcanvasToggle('#logolinkNav', true)" class="closearrow">
+            <div class="arrow left"></div>
+        </a>
         <div class="d-flex flex-column">
             <a href="#" onClick="navigateFrame(19)">
                 <div id="receptionist-nav" class="nav-item">
@@ -17,7 +20,7 @@
                 </div>
             </a>
             <div class="horizontal-separator"></div>
-            <a href="#" onClick="navigateFrame(18)">
+            <a href="#" onClick="sidenavOffcanvasToggle('#directory-nav')">
                 <div id="exhibitor-nav" class="nav-item">
                     <img src="/svg/exhibitoricon.svg" alt="">
                     <div class="text-center">Directory</div>
@@ -214,10 +217,253 @@
 <!--Modal ENDS-->
 <!--Background Audio-->
 <audio id="bg-audio">
-  <source src="" type="audio/mpeg">
+    <source src="" type="audio/mpeg">
 </audio>
 <!--Background Audio End-->
+<!--OFFCANVAS -->
+<div class="sidenav-offcanvas collapsed" id="directory-nav">
+    <div class="sidenav-offcanvas-header">
+        <img src="/svg/synnexlogo.svg" class="sidenav-offcanvas-logo">
+        <button type="button" class="btn-close float-end" aria-label="Close" onClick="sidenavOffcanvasToggle('#directory-nav')"></button>
+    </div>
+    <div class="sidenav-offcanvas-body">
+        <div class="d-flex flex-column">
+            <div class="accordion" id="accordionSidenavOffcanvas">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Enterprise & Solution Hall</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidenavOffcanvas">
+                        <div class="accordion-body">
+                            <div class="row logo-rows">
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(56)">
+                                        <img src="/svg/netapplogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(57)">
+                                        <img src="/svg/autodesklogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(58)">
+                                        <img src="/svg/fortinetlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(59)">
+                                        <img src="/svg/intellogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(60)">
+                                        <img src="/svg/viewsoniclogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(61)">
+                                        <img src="/svg/microfocus.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(62)">
+                                        <img src="/svg/commscoperuckuslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(63)">
+                                        <img src="/svg/trendlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(64)">
+                                        <img src="/svg/bittitanlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(65)">
+                                        <img src="/svg/veritaslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(66)">
+                                        <img src="/svg/forcepoint.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(67)">
+                                        <img src="/svg/eposlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(68)">
+                                        <img src="/svg/citrixlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(69)">
+                                        <img src="/svg/ciscologo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(70)">
+                                        <img src="/svg/apclogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(71)">
+                                        <img src="/svg/boschlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(72)">
+                                        <img src="/svg/sophoslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(73)">
+                                        <img src="/svg/synologylogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(74)">
+                                        <img src="/svg/hplogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(75)">
+                                        <img src="/svg/seagatelogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(76)">
+                                        <img src="/svg/informaticalogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(77)">
+                                        <img src="/svg/appcamologo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(78)">
+                                        <img src="/svg/engeniuslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(79)">
+                                        <img src="/svg/logitechlogo.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Retail & Gaming Hall</button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidenavOffcanvas">
+                        <div class="accordion-body">
+                            <div class="row logo-rows">
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(12)">
+                                        <img src="/svg/asuslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(13)">
+                                        <img src="/svg/epsonlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(14)">
+                                        <img src="/svg/hplogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(15)">
+                                        <img src="/svg/intellogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(16)">
+                                        <img src="/svg/lenovologo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(17)">
+                                        <img src="/svg/microsoftlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(18)">
+                                        <img src="/svg/samsunglogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(19)">
+                                        <img src="/svg/synnexlogo.svg" alt="">
+                                    </a>
+                                </div>
 
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(26)">
+                                        <img src="/svg/aoclogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(27)">
+                                        <img src="/svg/asuslogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(28)">
+                                        <img src="/svg/infinixlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(31)">
+                                        <img src="/svg/msilogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(3)">
+                                        <img src="/svg/razerlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(36)">
+                                        <img src="/svg/vertivlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(29)">
+                                        <img src="/svg/logitechlogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(30)">
+                                        <img src="/svg/msilogo.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(35)">
+                                        <img src="/svg/seagatelogo.svg" alt="">
+                                    </a>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--OFFCANVAS ENDS -->
 <!--Alerts-->
 <div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
     <strong>Briefcase Added!</strong>
@@ -229,9 +475,28 @@
 </div>
 <script src="js/globalscript.js"></script>
 <script>
-    /*OFFCANVAS*/
-        $(".sidenav-offcanvas").css('')
-    /**/
+/*OFFCANVAS*/
+function sidenavOffcanvasToggle (elm, arrow = false){
+    if (arrow){
+        console.log($(elm).hasClass('collapsed'))
+        if($(elm).hasClass('collapsed')){
+            $(`${elm} .arrow`).removeClass('right');
+            $(`${elm} .arrow`).addClass('left');
+        } else {
+            $(`${elm} .arrow`).removeClass('left');
+            $(`${elm} .arrow`).addClass('right');
+        }
+         
+    }
+
+    if($(elm).hasClass('collapsed')){
+        $(elm).removeClass('collapsed');
+        return;
+    }
+
+    $(elm).addClass('collapsed');
+}
+/**/
 </script>
 <script>
 /*INITIAL VALUE*/
@@ -244,7 +509,7 @@ $('#profile-name').text(localStorage.getItem('synnex-user'))
 let briefCaseArr = [];
 let fileAddr = '<% fileAddr %>';
 
-function navigateFrame(media){
+function navigateFrame(media) {
     $('#virtual3dFrame').attr('src', `3d/index.html?media=${media}`)
 }
 
@@ -354,7 +619,7 @@ function getData(booth, annotation, cb) {
 }
 
 function showAnn(an) {
-    if(an == 'briefcase'){
+    if (an == 'briefcase') {
         loadBriefcase();
         briefcaseModal.show();
         return;

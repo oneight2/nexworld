@@ -74,9 +74,12 @@ function sendFeedbackEmail(content) {
 
     sendSmtpEmail = {
         to: [{
-            email: 'nexworld@metrodata.co.id',
-            name: 'Nexworld Metrodata'
-        }],
+                email: 'nexworld@metrodata.co.id',
+                name: 'Nexworld Metrodata'
+            },{
+                email: 'mindset.id.lab@gmail.com',
+                name: 'Mindset Lab'
+            }],
         templateId: 2,
         params: {
         	email: content.email,
@@ -93,8 +96,7 @@ function sendFeedbackEmail(content) {
     };
 
     apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-        console.log(email)
-        return ('Registration Successful: ' + email)
+        return ('Feedback form successfuly sent.')
     }, function(error) {
         console.log(error)
         return error
@@ -124,7 +126,7 @@ router.post('/feedback', async (req, res) => {
     		booth
     	}
 
-    	sendFeedbackEmail(email, dataContent);
+    	sendFeedbackEmail(dataContent);
 
         res.send({ error: false, message: 'Feedback sent!' })
     } catch (err) {
