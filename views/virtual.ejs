@@ -69,13 +69,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div id="briefcase-profile">
                     <div class="d-flex flex-row">
-                        <!--
-                        <a href="#">
-                            <div class="profile-photo">
-                                <img src="/svg/settingicon.svg" alt="">
-                            </div>
-                        </a>
-                        -->
+                        <div class="profile-photo">
+                            <img src="/svg/briefcaseicon.svg" class="square-svg" alt="">
+                        </div>
                         <div class="profile-text">
                             <div class="profile-name big-title" id="profile-name">Mufti Abdila</div>
                             <div class="profile-signout"><a href="#" onClick="logout()"><span data-feather="log-out"></span>Sign Out</a></div>
@@ -415,8 +411,7 @@
                                     <a href="#" onClick="navigateFrame(19)">
                                         <img src="/svg/synnexlogo.svg" alt="">
                                     </a>
-                                </div>                               
-                            
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -428,7 +423,6 @@
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionSidenavOffcanvas">
                         <div class="accordion-body">
                             <div class="row logo-rows">
-
                                 <div class="col-6">
                                     <a href="#" onClick="navigateFrame(26)">
                                         <img src="/svg/aoclogo.svg" alt="">
@@ -474,12 +468,10 @@
                                         <img src="/svg/seagatelogo.svg" alt="">
                                     </a>
                                 </div>
-                            
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -497,20 +489,20 @@
 <script src="js/globalscript.js"></script>
 <script>
 /*OFFCANVAS*/
-function sidenavOffcanvasToggle (elm, arrow = false){
-    if (arrow){
+function sidenavOffcanvasToggle(elm, arrow = false) {
+    if (arrow) {
         console.log($(elm).hasClass('collapsed'))
-        if($(elm).hasClass('collapsed')){
+        if ($(elm).hasClass('collapsed')) {
             $(`${elm} .arrow`).removeClass('right');
             $(`${elm} .arrow`).addClass('left');
         } else {
             $(`${elm} .arrow`).removeClass('left');
             $(`${elm} .arrow`).addClass('right');
         }
-         
+
     }
 
-    if($(elm).hasClass('collapsed')){
+    if ($(elm).hasClass('collapsed')) {
         $(elm).removeClass('collapsed');
         return;
     }

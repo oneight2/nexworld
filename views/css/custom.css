@@ -499,6 +499,10 @@ li {
     transform: translate(-50%, -50%);
 }
 
+#briefcaseModal .modal-body .profile-photo>img.square-svg{
+    border-radius:0;
+}
+
 #briefcaseModal .modal-body #briefcase-profile .profile-text {
     margin-top: 25px;
     margin-left: 10px;
