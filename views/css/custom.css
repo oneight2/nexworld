@@ -432,6 +432,11 @@ li {
     width: 28px;
 }
 
+#sliderModal #sliderCarousel .carousel-control-prev,
+#sliderModal #sliderCarousel .carousel-control-next {
+    height: 361px;
+}
+
 #briefcaseModal #briefcase-title {
     border-bottom: 3px solid #C4C4C4;
     padding-bottom: 10px;
