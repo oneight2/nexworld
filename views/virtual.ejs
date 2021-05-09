@@ -631,6 +631,22 @@ function getData(booth, annotation, cb) {
         .catch(err => console.log(err))
 }
 
+function getDataType(file) {
+    const extensionRegex = /(?:\.([^.]+))?$/;
+    let getExt = extensionRegex.exec(file)[1].toLowerCase();
+    switch (getExt) {
+        case 'mp4' || 'wav' || 'mov' || 'avi' || 'wmv' || 'webm' || 'mp2' || 'mpg' || 'mpeg' || 'mpv' || 'mpe' || 'm4p' || 'm4v':
+            return 'video';
+            break;
+        case 'png' || 'jpg' || 'jpeg' || 'gif' || 'tif' || 'tiff' || 'bmp' || 'eps' || 'jfif':
+            return 'image';
+            break;
+        default:
+            return 'image';
+            break;
+    }
+}
+
 function showAnn(an) {
     if (an == 'briefcase') {
         loadBriefcase();
@@ -676,9 +692,19 @@ function showAnn(an) {
                 break;
             case 'slider':
                 sliderModal.toggle();
+                $('#bg-audio').get(0).pause();
                 $('#sliderModal #sliderCarousel .carousel-inner').html('');
                 dataFile.forEach((content, index) => {
-                    $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
+                    let contentType = getDataType(content);
+                    switch(contentType){
+                        case 'video':
+                        $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><video class="d-block w-100" controls><source src="${fileAddr + '/uploads/' + content}" type="video/mp4"></video></div>`);
+                        break;
+                        case 'image':
+                        $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
+                        break
+                    }
+                    
                 })
                 $('#sliderModal #sliderCarousel .carousel-inner .carousel-item:nth-child(1)').addClass('active');
                 break;
@@ -795,5 +821,12 @@ const sfvModalEvent = $('#singlefileVideoModal').get(0);
 sfvModalEvent.addEventListener('hide.bs.modal', function(event) {
     $('#singlefileVideoModal video').get(0).pause();
     $('#bg-audio').get(0).play();
+})
+
+const sliderModalCarouselEvent = $('#sliderModal #sliderCarousel').get(0);
+sliderModalCarouselEvent.addEventListener('slide.bs.carousel', function () {
+    $('#sliderModal #sliderCarousel video').each((elem) => {
+        $('#sliderModal #sliderCarousel video').get(elem).pause();
+    })
 })
 </script>
