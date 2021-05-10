@@ -1134,6 +1134,14 @@ li {
     #join-section {
         margin-bottom: -110px;
     }
+
+    #message-desc {
+        display:none;
+    }
+
+    #message-logo {
+        z-index: -1;
+    }
 }
 
 @media only screen and (max-width: 400px) {
