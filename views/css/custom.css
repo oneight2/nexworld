@@ -702,6 +702,9 @@ li {
 
 #message-desc {
     color: #fff;
+    width: 485px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #message-logo {
@@ -822,6 +825,10 @@ li {
 
 .sidenav-offcanvas .logo-rows>div {
     margin-bottom: 10px;
+}
+
+#message-logo {
+    z-index: -1;
 }
 
 /* sidenav offcanvas ends*/
@@ -945,6 +952,10 @@ li {
 
     #highlights-section {
         padding-bottom: 80px;
+    }
+
+    #backtohome {
+        margin-top:100px;
     }
 }
 
@@ -1135,13 +1146,15 @@ li {
         margin-bottom: -110px;
     }
 
-    #message-desc {
-        display:none;
-    }
-
     #message-logo {
         z-index: -1;
+        max-width:400px;
     }
+
+    #backtohome {
+        margin-top:110px;
+    }
+
 }
 
 @media only screen and (max-width: 400px) {
