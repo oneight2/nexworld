@@ -493,9 +493,8 @@ li {
 }
 
 #briefcaseModal .modal-body .profile-photo>img {
-    width: 90px;
-    height: 90px;
-    border: 8px solid #081C49;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
     position: relative;
@@ -1154,6 +1153,47 @@ li {
         text-align: center;
     }
 
+    #profileNav {
+        right:20px;
+    }
+
+    #profileNav #profile-bar {
+        width: 193px;
+        height: 56px;
+    }
+
+    #profileNav #profile-bar img{
+        width:35px;
+    }
+
+    .virtual-alert {
+        top:145px;
+    }
+
+    #briefcaseModal .modal-body #briefcase-profile .profile-text {
+        width: 205px;
+        overflow-wrap: break-word;
+    }
+
+    #briefcaseModal .modal-body .profile-photo {
+        width:60px;
+        height:60px;
+        margin-top:32px;
+    }
+
+    .profile-text #profile-name{
+        margin-top:10px;
+        font-size:16px;
+    }
+
+    #briefcaseModal .modal-body .profile-photo>img {
+        width:30px;
+        height:30px;
+    }
+
+    #briefcase-profile{
+        clear:both;
+    }
 }
 
 @media only screen and (max-width: 400px) {
