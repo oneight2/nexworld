@@ -638,6 +638,8 @@ li {
 
 .message-alerts .alert {
     margin-top:50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .message-alerts .alert a {
@@ -949,6 +951,10 @@ li {
         padding-bottom: 80px;
     }
 
+    .message-alerts .alert {
+        width:max-content;
+    }
+
 }
 
 #skipintro-button {
@@ -1141,6 +1147,11 @@ li {
     #message-logo {
         z-index: -1;
         max-width:400px;
+    }
+
+    .message-alerts .alert {
+        max-width: 100%;
+        text-align: center;
     }
 
 }
