@@ -637,10 +637,7 @@ li {
 }
 
 .message-alerts .alert {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top:50px;
 }
 
 .message-alerts .alert a {
@@ -708,10 +705,8 @@ li {
 }
 
 #message-logo {
-    position: relative;
-    top: 140px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin:auto;
+    display:block;
     width: 700px;
 }
 
@@ -954,9 +949,6 @@ li {
         padding-bottom: 80px;
     }
 
-    #backtohome {
-        margin-top:100px;
-    }
 }
 
 #skipintro-button {
@@ -1149,10 +1141,6 @@ li {
     #message-logo {
         z-index: -1;
         max-width:400px;
-    }
-
-    #backtohome {
-        margin-top:110px;
     }
 
 }
