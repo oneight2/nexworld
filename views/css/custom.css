@@ -841,10 +841,6 @@ li {
         height: 100vh;
     }
 
-    section#partners-section {
-        background-color: #fff;
-    }
-
     section#events-section,
     section#pass-section {
         padding-top: 40px;
