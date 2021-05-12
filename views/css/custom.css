@@ -30,6 +30,13 @@ li {
     list-style-type: none;
 }
 
+#fixedbackground{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    z-index: -1;
+}
+
 .dark-background {
     background: rgb(2, 0, 36);
     background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 100%);
