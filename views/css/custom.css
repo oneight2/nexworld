@@ -688,13 +688,27 @@ li {
     margin-right: auto
 }
 
+/* .blue-card {
+    background: linear-gradient(90deg, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 70%);
+    max-width: 95vw;
+    width: 700px;
+    min-height: 200px;
+    padding: 50px;
+    color: #FAFAFA;
+} */
+
 .blue-card {
     background: linear-gradient(90deg, rgba(51, 80, 143, 1) 0%, rgba(8, 28, 73, 1) 70%);
     max-width: 95vw;
     width: 700px;
-    min-height: 400px;
+    /* min-height: 400px; */
+    min-height: 200px;
     padding: 50px;
     color: #FAFAFA;
+}
+
+.blue-card #error-alert{
+    margin-top: -20px;
 }
 
 .full-container {
@@ -890,11 +904,22 @@ li {
         width: 700px;
     }
 
-    #homesection-logo-png {
+    /* #homesection-logo-png {
         position: relative;
         top: 120px;
         left: calc(50% + 160px);
         width: 650px;
+        transform: translateX(calc(-50% - 80px));
+    } */
+
+
+    #homesection-logo-png {
+        position: relative;
+        /* top: 120px; */
+        top: 160px;
+        left: calc(50% + 160px);
+        /* width: 650px; */
+        width: 500px;
         transform: translateX(calc(-50% - 80px));
     }
 
@@ -1203,4 +1228,14 @@ li {
     .partners-images .partners-img {
         width: 150px;
     }
+}
+
+
+#modalContent{
+    background-color: rgb(25, 25, 25);
+    padding: 0 !important;
+}
+
+#modalContent .modal-body{
+    padding: 0 !important;
 }
