@@ -19,10 +19,10 @@ router.get('/email/:token', async (req, res) => {
 		} else {
 			if(usertype == 'partner'){
 				let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, company, jobtitle, phone, briefcase: [], usertype: 'partner'});
-				return;
+				
+			} else {
+				let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, company, jobtitle, phone, briefcase: []});
 			}
-
-			let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, company, jobtitle, phone, briefcase: []});
 
 			res.redirect(`/message/green/2`);
 		}
