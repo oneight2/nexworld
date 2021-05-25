@@ -10,13 +10,18 @@ router.get('/email/:token', async (req, res) => {
 		let token = req.params.token;
 		let decodedToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-		let {email, password, name, company, jobtitle, phone} = decodedToken;
+		let {email, password, name, company, jobtitle, phone, usertype} = decodedToken;
 
 		let emailCheck = await pgdb.getUser(email);
 
 		if(emailCheck.length > 0) {
 			res.redirect(`/message/red/4`);
 		} else {
+			if(usertype == 'partner'){
+				let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, company, jobtitle, phone, briefcase: [], usertype: 'partner'});
+				return;
+			}
+
 			let response = await pgdb.registerUser(uuidv4(), email, password, 'user', {name, company, jobtitle, phone, briefcase: []});
 
 			res.redirect(`/message/green/2`);
