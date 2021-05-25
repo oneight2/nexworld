@@ -200,7 +200,7 @@ app.get('/sendDataBulk', (req, res) => {
                 email: email,
                 name: name
             }],
-            templateId: 1,
+            templateId: 7,
             params: {
                 activationlink: process.env.FRONTEND_ADDRESS + '/activation/email/' + userjwt,
                 token
@@ -230,7 +230,8 @@ app.get('/sendDataBulk', (req, res) => {
                     name: row.NAME,
                     company: row.COMPANY,
                     jobtitle: row.JOBTITLE,
-                    phone: row.PHONE
+                    phone: row.PHONE,
+                    usertype: 'partner'
                 }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' });
                 let emailResponse = await sendTokenEmail(row.EMAIL, row.NAME, jwtToken, userToken);
                 console.log({
