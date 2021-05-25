@@ -57,7 +57,7 @@ router.post('/default', async (req, res)=> {
 		if(userCheck.length > 0){
 			res.send({error: true, message: 'The email you are using has already registered.'})
 		} else {
-			let userToken = uuidv4();
+			let userToken = uuidv4().slice(0,6);
 			let salt = await bcrypt.genSalt(saltRounds);
 			let hash = await bcrypt.hash(userToken, salt);
 
