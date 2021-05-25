@@ -227,7 +227,7 @@ app.get('/sendDataBulk', (req, res) => {
                 let hash = await bcrypt.hash(userToken, salt);
                 let jwtToken = await jwt.sign({
                     email: row.EMAIL,
-                    password: row.PASSWORD,
+                    password: hash,
                     name: row.NAME,
                     company: row.COMPANY,
                     jobtitle: row.JOBTITLE,
