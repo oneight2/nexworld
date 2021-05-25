@@ -202,6 +202,7 @@ app.get('/sendDataBulk', (req, res) => {
             }],
             templateId: 7,
             params: {
+                email:email,
                 activationlink: process.env.FRONTEND_ADDRESS + '/activation/email/' + userjwt,
                 token
             },
