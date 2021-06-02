@@ -780,7 +780,8 @@ li {
     left: 0;
     transition: left 0.5s;
     transform: translateY(-50%);
-    width: 200px;
+    width: 360px;
+    height: 500px;
     background-color: #fff;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -793,7 +794,7 @@ li {
 }
 
 .sidenav-offcanvas.collapsed {
-    left: -200px !important;
+    left: -360px !important;
     transition: left 0.5s
 }
 
