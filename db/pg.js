@@ -77,7 +77,7 @@ async function registerUser(uid, email, password, role, props = {}){
 
 async function getUser(email){
 	try{
-		let { rows } = await db.query("select * from users where email = $1 AND role = 'user'", [email]);
+		let { rows } = await db.query("select * from users where email ILIKE $1 AND role = 'user'", [email]);
 
 		return rows;
 	} catch (err){
