@@ -1,0 +1,864 @@
+<iframe id="virtual3dFrame" src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;position:absolute;"></iframe>
+<!-- Button trigger modal -->
+<div id="virtualui">
+    <nav id="logolinkNav" class="sidenav-offcanvas">
+        <a href="#" onClick="sidenavOffcanvasToggle('#logolinkNav', true)" class="closearrow">
+            <div class="arrow left"></div>
+        </a>
+        <div class="d-flex flex-column">
+            <a href="#" onClick="navigateFrame(19)">
+                <div id="receptionist-nav" class="nav-item">
+                    <img src="/svg/synnexlogowhite.svg" alt="" height="40px">
+                    <!--<div class="text-center">Receptionist</div>-->
+                </div>
+            </a>
+            <div class="horizontal-separator"></div>
+            <a href="#" onClick="navigateFrame(3)">
+                <div id="exhibitor-nav" class="nav-item">
+                    <img src="/svg/receptionisticon.svg" alt="">
+                    <div class="text-center">Receptionist</div>
+                </div>
+            </a>
+            <div class="horizontal-separator"></div>
+            <a href="#" onClick="sidenavOffcanvasToggle('#directory-nav')">
+                <div id="exhibitor-nav" class="nav-item">
+                    <img src="/svg/exhibitoricon.svg" alt="">
+                    <div class="text-center">Directory</div>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div id="profileNav">
+        <div id="profile-bar" class="d-flex flex-row">
+            <a href="#" onClick="muteSite()">
+                <img id="muteImg" src="/svg/speakersvg.svg">
+            </a>
+            <div class="separator"></div>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#briefcaseModal" onClick="loadBriefcase()">
+                <img src="/svg/briefcaseicon.svg" alt="">
+            </a>
+        </div>
+        <!--
+        <a href="#">
+            <div class="profile-photo">
+                <img src="/svg/settingicon.svg" width="50px">
+            </div>
+        </a>-->
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="introModal" tabindex="-1" aria-labelledby="introModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button id="skipintro-button" class="elips-button mb-3" onClick="skipIntro()">
+                    SKIP INTRO
+                </button>
+                <video width="99%" height="99%" autoplay="autoplay" controls muted id="intro-video">
+                    <source src="/video/FINAL_RENDER_OPENING_MUSIC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal next -->
+
+<div class="modal fade" id="introNextModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content p-0" id="modalContent">
+        <div class="modal-header">
+            <button type="button" class="btn-close btn-light bg-light rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body px-5">
+            <div class="row" id="row-modal">
+                <img src="/img/whatsupimage.jpeg" alt="" id="img-whatsup" class="img-fluid">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="modal fade" id="briefcaseModal" tabindex="-1" aria-labelledby="briefcaseModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div id="briefcase-profile">
+                    <div class="d-flex flex-row">
+                        <div class="profile-photo">
+                            <img src="/svg/briefcaseicon.svg" class="square-svg" alt="">
+                        </div>
+                        <div class="profile-text">
+                            <div class="profile-name big-title" id="profile-name">Mufti Abdila</div>
+                            <div class="profile-signout"><a href="#" onClick="logout()"><span data-feather="log-out"></span>Sign Out</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="briefcase-title" class="big-title">My Briefcase</div>
+                <br>
+                <div class="row" id="briefcase-rows">
+                    <!--
+                    <div class="col-lg-3">
+                        <div class="briefcase-card">
+                            <img src="/svg/briefcaseexample.svg" alt="">
+                            <div class="briefcase-desc">
+                                <div class="briefcase-text"><a href="#"><span data-feather="image"></span>No Wire. No limit.</a></div>
+                                <div class="briefcase-text"><a href="#" download><span data-feather="download"></span>Download</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img class="margin-center" src="/svg/synnexlogo.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="singlefileVideoModal" tabindex="-1" aria-labelledby="singlefileVideoModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">VIDEOS</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-sfv" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <video id="an-video" width="100%" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="singlefileImageModal" tabindex="-1" aria-labelledby="singlefileImageModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">VIDEOS</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-sfi" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <img id="an-img" src="" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">PDF</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button id="briefcase-button-pdf" class="elips-button float-end mb-3">
+                    Add to Briefcase
+                    <span data-feather="briefcase"></span>
+                </button>
+                <div id="pdf-embed-location">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="sliderModal" tabindex="-1" aria-labelledby="sliderModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="big-title">SLIDER</div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="sliderCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                    <div class="carousel-inner">
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#sliderCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#sliderCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="feedbackFormModal" tabindex="-1" aria-labelledby="feedbackFormModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <p class="thick-title">Guest Form</p>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="occupation" class="form-control" id="feedbackCompany" aria-describedby="feedbackCompany" placeholder="* Company" required>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <input type="text" name="city" class="form-control" id="feedbackCity" aria-describedby="feedbackCity" placeholder="* City" required>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <textarea maxlength="1000" rows="4" name="message" class="form-control" id="feedbackMessage" aria-describedby="feedbackMessage" placeholder="* Write your message here" required></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="d-flex justify-content-center mt-5">
+                    <button onClick="sendFeedback()" class="btn-white-medium" type="submit">SUBMIT</button>
+                </div>
+                <input type="hidden" name="boothid" id="boothid">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal ENDS-->
+<!--Background Audio-->
+<audio id="bg-audio">
+    <source src="" type="audio/mpeg">
+</audio>
+<!--Background Audio End-->
+<!--OFFCANVAS -->
+<div class="sidenav-offcanvas collapsed" id="directory-nav">
+    <div class="sidenav-offcanvas-header">
+        <img src="/svg/synnexlogo.svg" class="sidenav-offcanvas-logo">
+        <button type="button" class="btn-close float-end" aria-label="Close" onClick="sidenavOffcanvasToggle('#directory-nav')"></button>
+    </div>
+    <div class="sidenav-offcanvas-body">
+        <div class="d-flex flex-column">
+            <div class="accordion-header arrowless">
+                <a href="/" class="accordion-button collapsed">Back to Home</a>
+            </div>
+            <div class="accordion-header arrowless">
+                <button onClick="navigateFrame(81)" class="accordion-button collapsed">Conference Hall</button>
+            </div>
+            <div class="accordion-header arrowless">
+                <button onClick="navigateFrame(25)" class="accordion-button collapsed">World Stage</button>
+            </div>
+            <div class="accordion-header arrowless">
+                <button onClick="navigateFrame(53)" class="accordion-button collapsed">Nex Stage</button>
+            </div>
+            <div class="accordion" id="accordionSidenavOffcanvas">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Enterprise & Solution Hall</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidenavOffcanvas">
+                        <div class="accordion-body">
+                            <div class="row logo-rows">
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(56)">
+                                        <img src="/svg/netapplogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(57)">
+                                        <img src="/svg/autodesklogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(58)">
+                                        <img src="/svg/fortinetlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(59)">
+                                        <img src="/svg/intellogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(60)">
+                                        <img src="/svg/viewsoniclogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(61)">
+                                        <img src="/svg/microfocuslarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(62)">
+                                        <img src="/svg/commscoperuckuslogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(63)">
+                                        <img src="/svg/trendlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(64)">
+                                        <img src="/svg/bittitanlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(65)">
+                                        <img src="/svg/veritaslogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(66)">
+                                        <img src="/svg/forcepointlarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(67)">
+                                        <img src="/svg/eposlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(68)">
+                                        <img src="/svg/citrixlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(69)">
+                                        <img src="/svg/ciscologolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(70)">
+                                        <img src="/svg/apclogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(71)">
+                                        <img src="/svg/boschlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(72)">
+                                        <img src="/svg/sophoslogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(73)">
+                                        <img src="/svg/synologylogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(74)">
+                                        <img src="/svg/hewlettlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(75)">
+                                        <img src="/svg/seagatelogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(76)">
+                                        <img src="/svg/informaticalogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(77)">
+                                        <img src="/svg/appcamologolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(78)">
+                                        <img src="/svg/engeniuslogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(79)">
+                                        <img src="/svg/logitech2logolarge.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Retail Hall</button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSidenavOffcanvas">
+                        <div class="accordion-body">
+                            <div class="row logo-rows">
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(12)">
+                                        <img src="/svg/asuslogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(13)">
+                                        <img src="/svg/epsonlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(14)">
+                                        <img src="/svg/hplogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(15)">
+                                        <img src="/svg/intellogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(16)">
+                                        <img src="/svg/lenovologolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(17)">
+                                        <img src="/svg/microsoftlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(18)">
+                                        <img src="/svg/samsunglogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(19)">
+                                        <img src="/svg/synnexlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Gaming Hall</button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionSidenavOffcanvas">
+                        <div class="accordion-body">
+                            <div class="row logo-rows">
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(26)">
+                                        <img src="/svg/aoclogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(27)">
+                                        <img src="/svg/asusroglogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(28)">
+                                        <img src="/svg/infinixlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(30)">
+                                        <img src="/svg/msilogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(33)">
+                                        <img src="/svg/razerlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(36)">
+                                        <img src="/svg/vertivlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(29)">
+                                        <img src="/svg/logitechlogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(31)">
+                                        <img src="/svg/msi2logolarge.svg" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" onClick="navigateFrame(35)">
+                                        <img src="/svg/seagatelogolarge.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--OFFCANVAS ENDS -->
+<!--Alerts-->
+<div id="alert-success" class="virtual-alert alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Briefcase Added!</strong>
+    <button type="button" class="btn-close" onClick="alertClose('success')"></button>
+</div>
+<div id="alert-warning" class="virtual-alert alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>This briefcase is added before.</strong>
+    <button type="button" class="btn-close" onClick="alertClose('warning')"></button>
+</div>
+<script src="js/globalscript.js"></script>
+<script>
+/*OFFCANVAS*/
+function sidenavOffcanvasToggle(elm, arrow = false) {
+    if (arrow) {
+        console.log($(elm).hasClass('collapsed'))
+        if ($(elm).hasClass('collapsed')) {
+            $(`${elm} .arrow`).removeClass('right');
+            $(`${elm} .arrow`).addClass('left');
+        } else {
+            $(`${elm} .arrow`).removeClass('left');
+            $(`${elm} .arrow`).addClass('right');
+        }
+
+    }
+
+    if ($(elm).hasClass('collapsed')) {
+        $(elm).removeClass('collapsed');
+        return;
+    }
+
+    $(elm).addClass('collapsed');
+}
+/**/
+</script>
+<script>
+/*INITIAL VALUE*/
+$('#bg-audio > source').attr('src', `/audio/bg_audio${Math.floor((Math.random() * 3) + 1)}.mpeg`)
+$('#bg-audio').get(0).load();
+
+$('#profile-name').text(localStorage.getItem('synnex-user'))
+/**/
+
+let briefCaseArr = [];
+let fileAddr = '<% fileAddr %>';
+
+function navigateFrame(media) {
+    $('#virtual3dFrame').attr('src', `3d/index.html?media=${media}`)
+}
+
+window.isMuted = false;
+
+function muteSite() {
+
+    document.querySelectorAll("video, audio").forEach((elem) => {
+        if (!isMuted) {
+            elem.muted = true;
+            $('#muteImg').attr('src', '/svg/mutedsound.svg')
+        } else if (elem.muted) {
+            elem.muted = false;
+            $('#muteImg').attr('src', '/svg/speakersvg.svg')
+            $('#bg-audio').get(0).play();
+        }
+    });
+
+    isMuted = !isMuted;
+
+};
+muteSite();
+
+function alertClose(al) {
+    switch (al) {
+        case 'success':
+            $('#alert-success').css('opacity', '0');
+            $('#alert-success').css('display', 'none');
+            break;
+        case 'warning':
+            $('#alert-warning').css('opacity', '0');
+            $('#alert-warning').css('display', 'none');
+            break;
+    }
+}
+
+function renderBriefcase(briefcase) {
+    $('#briefcaseModal #briefcase-rows').html('')
+    briefcase.forEach(bc => {
+        let addr = fileAddr + '/uploads/' + bc.file;
+        const extensionRegex = /(?:\.([^.]+))?$/;
+        let getExt = extensionRegex.exec(bc.file)[1].toLowerCase();
+        let fileThumbnail = '';
+        switch (getExt) {
+            case 'pdf':
+                fileThumbnail = `<img src="/img/pdfthumb.png" alt="">`;
+                break;
+            case 'mp4' || 'wav' || 'mov' || 'avi' || 'wmv' || 'webm' || 'mp2' || 'mpg' || 'mpeg' || 'mpv' || 'mpe' || 'm4p' || 'm4v':
+                fileThumbnail = `<img src="/img/videothumbnail.png" alt="">`;
+                break;
+            case 'png' || 'jpg' || 'jpeg' || 'gif' || 'tif' || 'tiff' || 'bmp' || 'eps' || 'jfif':
+                fileThumbnail = `<img src="${addr}" alt="">`;
+                break;
+            default:
+                fileThumbnail = `<img src="${addr}" alt="">`;
+                break;
+        }
+        $('#briefcaseModal #briefcase-rows').append(`<div class="col-lg-3"><div class="briefcase-card">${fileThumbnail}<div class="briefcase-desc"><div class="briefcase-text"><a href="#"><span data-feather="image"></span>${bc.name}</a></div><div class="briefcase-text"><a href="${addr}" download><span data-feather="download"></span>Download</a></div></div></div></div>`)
+        feather.replace()
+    })
+}
+
+function loadBriefcase() {
+    fetch('/virtual/getbriefcase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
+            },
+            body: JSON.stringify({
+                email: localStorage.getItem('synnex-user'),
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            briefCaseArr = data[0].briefcase;
+            renderBriefcase(briefCaseArr)
+        })
+        .catch(err => console.log(err))
+}
+
+const introModal = new bootstrap.Modal(document.getElementById('introModal'));
+const sfvModal = new bootstrap.Modal(document.getElementById('singlefileVideoModal'));
+const sfiModal = new bootstrap.Modal(document.getElementById('singlefileImageModal'));
+const pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+const sliderModal = new bootstrap.Modal(document.getElementById('sliderModal'));
+const feedbackFormModal = new bootstrap.Modal(document.getElementById('feedbackFormModal'));
+const briefcaseModal = new bootstrap.Modal(document.getElementById('briefcaseModal'));
+const introNextModal = new bootstrap.Modal(document.getElementById('introNextModal'));
+
+introModal.show();
+
+// if (!localStorage.getItem('synnex-watched-intro')) {
+//     introModal.show();
+// }
+
+function getData(booth, annotation, cb) {
+    fetch('/virtual/getAnnotation/' + booth + '/' + annotation, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            cb(data)
+        })
+        .catch(err => console.log(err))
+}
+
+function getDataType(file) {
+    const extensionRegex = /(?:\.([^.]+))?$/;
+    let getExt = extensionRegex.exec(file)[1].toLowerCase();
+    switch (getExt) {
+        case 'mp4' || 'wav' || 'mov' || 'avi' || 'wmv' || 'webm' || 'mp2' || 'mpg' || 'mpeg' || 'mpv' || 'mpe' || 'm4p' || 'm4v':
+            return 'video';
+            break;
+        case 'png' || 'jpg' || 'jpeg' || 'gif' || 'tif' || 'tiff' || 'bmp' || 'eps' || 'jfif':
+            return 'image';
+            break;
+        default:
+            return 'image';
+            break;
+    }
+}
+
+function showAnn(an) {
+    if (an == 'briefcase') {
+        loadBriefcase();
+        briefcaseModal.show();
+        return;
+    }
+
+    $('#pdfModal #pdf-embed-location').html('');
+    $('#singlefileImageModal #an-img').attr('src', '');
+    $('#singlefileVideoModal #an-video source').attr('src', '');
+    $('#singlefileVideoModal #an-video')[0].load();
+    $('#sliderModal #sliderCarousel .carousel-inner').html('');
+    let parsedArr = an.split('_');
+    let booth = parsedArr[0];
+    let annotation = parsedArr[1];
+
+    getData(booth, annotation, (data) => {
+        let dataInfo = data[0].content.type;
+        let parsedData = dataInfo.split('/');
+        let dataType = parsedData[0];
+
+        let dataFile = data[0].content.filename;
+        let annName = data[0].name;
+        let dataBoothid = data[0].boothid;
+        switch (dataType) {
+            case 'video':
+                sfvModal.toggle();
+                $('#bg-audio').get(0).pause();
+                $('#singlefileVideoModal #an-video source').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#singlefileVideoModal #an-video')[0].load();
+                $('#singlefileVideoModal #an-video')[0].play();
+                $('#singlefileVideoModal #briefcase-button-sfv').attr('onClick', `addToBriefCase('${dataFile}','${annName}')`);
+                break;
+            case 'image':
+                sfiModal.toggle();
+                $('#singlefileImageModal #an-img').attr('src', fileAddr + '/uploads/' + dataFile)
+                $('#singlefileImageModal #briefcase-button-sfi').attr('onClick', `addToBriefCase('${dataFile}', '${annName}')`);
+                break;
+            case 'application':
+                pdfModal.toggle();
+                $('#pdfModal #pdf-embed-location').html(`<embed id="pdf-embed" src="${fileAddr}/uploads/${dataFile}" type="application/pdf" width="100%" height="500px">`)
+                $('#pdfModal #briefcase-button-pdf').attr('onClick', `addToBriefCase('${dataFile}', '${annName}')`);
+                break;
+            case 'slider':
+                sliderModal.toggle();
+                $('#bg-audio').get(0).pause();
+                $('#sliderModal #sliderCarousel .carousel-inner').html('');
+                dataFile.forEach((content, index) => {
+                    let contentType = getDataType(content);
+                    switch(contentType){
+                        case 'video':
+                        $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><video class="d-block w-100" controls><source src="${fileAddr + '/uploads/' + content}" type="video/mp4"></video></div>`);
+                        break;
+                        case 'image':
+                        $('#sliderModal #sliderCarousel .carousel-inner').append(`<div id="carousel-item-${index + 1}" class="carousel-item"><button onClick="addToBriefCase('${content}', '${annName}')" class="briefcase-button-slider elips-button float-end mb-3">Add to Briefcase<span data-feather="briefcase"></span></button><img src="${fileAddr + '/uploads/' + content}" class="d-block w-100" alt=""></div>`);
+                        break
+                    }
+                    
+                })
+                $('#sliderModal #sliderCarousel .carousel-inner .carousel-item:nth-child(1)').addClass('active');
+                break;
+            case 'feedbackform':
+                feedbackFormModal.toggle();
+                $('#feedbackFormModal #boothid').val(dataBoothid);
+                break;
+            case 'external_url':
+                window.open(dataFile);
+                break;
+        }
+    });
+}
+
+window.addEventListener('message', (event) => {
+    showAnn(event.data)
+});
+
+function opacityFadeOut(elm) {
+    let intervalTimer = setInterval(() => {
+        $(elm).css('opacity', '0');
+        $(elm).css('display', 'none');
+        clearTimeout(intervalTimer);
+    }, 4000);
+}
+
+function addToBriefCase(fileurl, annName) {
+    fetch('/virtual/briefcase', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
+            },
+            body: JSON.stringify({
+                email: localStorage.getItem('synnex-user'),
+                briefcase: fileurl,
+                name: annName
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                $('#alert-warning').css('display', 'block');
+                $('#alert-warning').css('opacity', '1');
+                $('#alert-warning strong').text(data.message)
+                opacityFadeOut('#alert-warning');
+            } else {
+                $('#alert-success').css('display', 'block');
+                $('#alert-success').css('opacity', '1');
+                $('#alert-success strong').text('Briefcase Added.')
+                opacityFadeOut('#alert-success');
+            }
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+function sendFeedback() {
+    fetch('/virtual/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-jwt')
+            },
+            body: JSON.stringify({
+                email: localStorage.getItem('synnex-user'),
+                company: $('#feedbackCompany').val(),
+                city: $('#feedbackCity').val(),
+                message: $('#feedbackMessage').val(),
+                boothid: $('#boothid').val()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                $('#alert-warning').css('display', 'block');
+                $('#alert-warning').css('opacity', '1');
+                $('#alert-warning strong').text(data.message)
+                opacityFadeOut('#alert-warning');
+            } else {
+                $('#alert-success').css('display', 'block');
+                $('#alert-success').css('opacity', '1');
+                $('#alert-success strong').text('Feedback Sent.')
+                opacityFadeOut('#alert-success');
+            }
+            feedbackFormModal.hide();
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+}
+
+function skipIntro() {
+    introModal.hide();
+    $('#introModal video').get(0).pause();
+}
+
+const introModalEvent = $('#introModal').get(0);
+introModalEvent.addEventListener('hidden.bs.modal', function(event) {
+    localStorage.setItem('synnex-watched-intro', true);
+    introNextModal.show() 
+})
+
+const modalSlider = document.getElementById('sliderCarousel')
+modalSlider.addEventListener('slid.bs.carousel', function(event) {
+    let currentId = $('#sliderCarousel .carousel-inner > .active').attr('id');
+
+})
+
+const sfvModalEvent = $('#singlefileVideoModal').get(0);
+sfvModalEvent.addEventListener('hide.bs.modal', function(event) {
+    $('#singlefileVideoModal video').get(0).pause();
+    $('#bg-audio').get(0).play();
+})
+
+const sliderModalCarouselEvent = $('#sliderModal #sliderCarousel').get(0);
+sliderModalCarouselEvent.addEventListener('slide.bs.carousel', function () {
+    $('#sliderModal #sliderCarousel video').each((elem) => {
+        $('#sliderModal #sliderCarousel video').get(elem).pause();
+    })
+})
+
+document.getElementById('intro-video').addEventListener('ended',myHandler,false);
+    function myHandler(e) {
+        // What you want to do after the event
+        introModal.hide()
+        introNextModal.show()
+    }
+
+</script>

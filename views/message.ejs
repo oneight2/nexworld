@@ -1,0 +1,42 @@
+<div class="container message-alerts">
+    <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+            <div class="alert alert-success d-none" role="alert" id="alert-green">
+            </div>
+            <div class="alert alert-danger d-none" role="alert" id="alert-red">
+            </div>
+        </div>
+    </div>
+	<div id="logo-home">
+        <img id="message-logo" src="/svg/messagelogo.svg" alt="">
+    </div>
+    <div class="row" id="backtohome">
+        <div class="col-lg-12">
+            <a href="/" class="btn btn-light centered" style="width:200px;border-radius:24px;font-weight:700;margin-top:50px;">BACK TO HOME</a>
+        </div>
+    </div>
+</div>
+<script>
+function parseMessage(code){
+    switch(code){
+        case '1':
+        return 'Registration successful! Please check your email.';
+        break;
+        case '2':
+        return 'Verification successful! Please login through the <a href="/">landing page</a>.';
+        break;
+        case '3':
+        return 'Your new token has been sent to your email. Please check your email.'
+        break;
+        case '4':
+        return 'Email already verified.'
+        break;
+    }
+}
+
+function showAlert(color, message) {
+    $(`#alert-${color}`).removeClass('d-none');
+    $(`#alert-${color}`).html(message);
+}
+showAlert('<%= color %>', parseMessage('<%= message %>'));
+</script>

@@ -1,0 +1,58 @@
+<h1>Booths List</h1>
+<div id="alert-card" class="alert alert-success" role="alert">
+    <%= locals.message ? message : null %>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% locals.booths ? booths.forEach(function(booth){  %>
+        <tr>
+            <th scope="row">
+                <%= booth.number %>
+            </th>
+            <td>
+                <%= booth.name %>
+            </td>
+            <td><button type="button" class="btn btn-danger" onClick="deleteBooth('<%= booth.uid %>')">Delete</button></td>
+        </tr>
+        <% }) : '' %>
+    </tbody>
+</table>
+<script>
+function deleteBooth(uid) {
+    fetch('/booths/delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('synnex-admin-jwt')
+            },
+            body: JSON.stringify({
+                uid
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            window.location.replace("/admin/booths" + '?message=1');
+        })
+        .catch(error => {
+            localStorage.removeItem("synnex-admin-user");
+            localStorage.removeItem("synnex-admin-jwt");
+            window.location.replace('/adminlogin?message=2')
+        })
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const message = urlParams.get('message');
+
+if (message) {
+    $('#alert-card').show()
+} else {
+    $('#alert-card').hide()
+}
+</script>
