@@ -2,19 +2,24 @@
 <html lang="en">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165134129-4"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-165134129-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'UA-165134129-4');
-  </script>
+      gtag("config", "UA-165134129-4");
+    </script>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <!-- favicon start -->
     <link
       rel="icon"
@@ -217,21 +222,21 @@
     -->
     <script>
       if (
-        localStorage.getItem('synnex-user') &&
-        localStorage.getItem('synnex-jwt')
+        localStorage.getItem("synnex-user") &&
+        localStorage.getItem("synnex-jwt")
       ) {
-        $('#login-nav').remove();
-        $('#getyoupass').remove();
+        $("#login-nav").remove();
+        $("#getyoupass").remove();
       } else {
-        $('#virtual-nav').remove();
-        $('#logout-nav').remove();
+        $("#virtual-nav").remove();
+        $("#logout-nav").remove();
       }
 
       function logout() {
-        localStorage.removeItem('synnex-user');
-        localStorage.removeItem('synnex-jwt');
+        localStorage.removeItem("synnex-user");
+        localStorage.removeItem("synnex-jwt");
 
-        window.location.href = '/';
+        window.location.href = "/";
       }
     </script>
     <%- script %>

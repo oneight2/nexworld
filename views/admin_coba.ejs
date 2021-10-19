@@ -1,4 +1,95 @@
 <div id="aws">
-  <h1>HAI</h1>
+  <h1 id="main-cnt">HAI</h1>
   <p class="p-coba"><%= locals.msg %></p>
+  <div id="coba-cw">AAAA</div>
+  <button class="btn btn-danger" onclick="tglBtn()">TOOGLE</button>
 </div>
+<script>
+  var waitForEl = function (selector, callback) {
+    if (jQuery(selector).length) {
+      callback();
+    } else {
+      setTimeout(function () {
+        waitForEl(selector, callback);
+      }, 100);
+    }
+  };
+
+  function tglBtn() {
+    console.log("ganti");
+    const anotScr = `
+    <script>
+      (function(d,t) {
+        var BASE_URL="https://app.chatwoot.com";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: '622wWSmgCGdYWVJ3eyoz4aMS',
+            baseUrl: BASE_URL
+          })
+        }
+      })(document,"script");
+    <\/script>
+    `;
+    $(".woot--bubble-holder").remove();
+    $(".woot-widget-holder").remove();
+    $("#coba-cw").append(anotScr);
+    waitForEl(".woot-widget-holder", function () {
+      $(".woot-widget-holder").css("position", "relative");
+      $(".woot-widget-holder").append(`
+      <div class="position-absolute top-100 start-50 translate-middle" style="height: 60px; width: 200px; background-color:#f4f6fb;">
+      </div>
+      `);
+    });
+  }
+
+  const plusScript = `
+        <script>
+          (function (d, t) {
+            var BASE_URL = "https://app.chatwoot.com";
+            var g = d.createElement(t),
+              s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+            g.onload = function () {
+              window.chatwootSDK.run({
+                websiteToken: "ykiRghgvMyUHLg3bAVPrqWZg",
+                baseUrl: BASE_URL,
+              });
+            };
+          })(document, "script");
+        <\/script>
+      `;
+  $(document).ready(() => {
+    console.log("HAI!");
+    $(".p-coba").hide();
+    $("#coba-cw").append(plusScript);
+
+    waitForEl(".woot-widget-holder", function () {
+      $(".woot-widget-holder").css("position", "relative");
+      $(".woot-widget-holder").append(`
+      <div class="position-absolute top-100 start-50 translate-middle" style="height: 60px; width: 200px; background-color:#f4f6fb;">
+      </div>
+      `);
+    });
+
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) =>
+        data.map((e, i) => {
+          $("#aws").append(`
+          <div class="alert alert-warning" role="alert">
+            ${e.name}
+          </div>
+          `);
+          return true;
+        })
+      );
+  });
+</script>
