@@ -139,6 +139,7 @@ router.get("/admincoba", async (req, res) => {
       title: "Synnex Admin - COBA",
       layout: "layouts/adminsidenav",
       msg: "msg_test",
+      anot: [{ name: "a" }, { name: "b" }, { name: "c" }, { name: "d" }],
     });
   } catch (err) {
     res.send(err.toString());

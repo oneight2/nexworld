@@ -1,6 +1,9 @@
 <div id="aws">
   <h1 id="main-cnt">HAI</h1>
-  <p class="p-coba"><%= locals.msg %></p>
+  <p class="p-coba"><%= msg %></p>
+  <% anot.map((item)=>{ %>
+  <p><%= item.name %></p>
+  <% }) %>
   <div id="coba-cw">AAAA</div>
   <button class="btn btn-danger" onclick="tglBtn()">TOOGLE</button>
 </div>
@@ -68,7 +71,7 @@
       `;
   $(document).ready(() => {
     console.log("HAI!");
-    $(".p-coba").hide();
+    // $(".p-coba").hide();
     $("#coba-cw").append(plusScript);
 
     waitForEl(".woot-widget-holder", function () {
