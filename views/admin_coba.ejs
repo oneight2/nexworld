@@ -6,7 +6,10 @@
   <p><%= item.name %></p>
   <% }) %>
 
-  <div><%- include('admin_coba_part.ejs', {variant:'default'}); %></div>
+  <div>
+    <%- include('admin_coba_part.ejs', {variant:'default', msg: 'HAIIII...'});
+    %>
+  </div>
 
   <div id="coba-cw">AAAA</div>
   <button class="btn btn-danger" onclick="tglBtn()">TOOGLE</button>
