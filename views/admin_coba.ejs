@@ -15,6 +15,13 @@
   <button class="btn btn-danger" onclick="tglBtn()">TOOGLE</button>
 </div>
 <script>
+  window.chatwootSettings = {
+    hideMessageBubble: false,
+    position: "right",
+    type: "expanded_bubble",
+    launcherTitle: "Feel free to talk !",
+  };
+
   var waitForEl = function (selector, callback) {
     if (jQuery(selector).length) {
       callback();
