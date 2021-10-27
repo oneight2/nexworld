@@ -42,7 +42,7 @@
                 <p class="thick-title">Highlights nexworld<sup style="font-size:.55em;top:-0.9em;">&#9675</sup></p>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="highlights-card custom-bg-size-1" style="background-image:url('svg/highlight-image1.svg');">
+                        <div class="highlights-card custom-bg-size-1" style="background-image:url('svg/highlight-image1.png');">
                             <p class="highlights-card-text">Open 365 Days<span class="card-plus">+</span></p>
                             <div class="highlight-overlay">
                                 <p class="big-title">Open 365 Days</p>
@@ -630,9 +630,11 @@ function loginSubmit() {
                 let userkey = content.userkey;
                 let userEmail = content.user;
                 let jwt = content.jwt;
+                let userid = content.userid;
                 let redirecturl = content.redirecturl;
                 localStorage.setItem(userkey + "-user", userEmail);
                 localStorage.setItem(userkey + "-jwt", jwt);
+                localStorage.setItem(userkey + "-userid", userid);
 
                 window.location.href = redirecturl;
             }

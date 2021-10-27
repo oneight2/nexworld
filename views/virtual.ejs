@@ -459,7 +459,7 @@
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" onClick="navigateFrame(30)">
+                                    <a href="#" onClick="navigateFrame(31)">
                                         <img src="/svg/msilogolarge.svg" alt="">
                                     </a>
                                 </div>
@@ -479,7 +479,7 @@
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" onClick="navigateFrame(31)">
+                                    <a href="#" onClick="navigateFrame(30)">
                                         <img src="/svg/msi2logolarge.svg" alt="">
                                     </a>
                                 </div>
@@ -742,10 +742,17 @@ function showAnn(an) {
     });
 }
 
+$(document).ready(function() { 
+    $('#virtual3dFrame').on('load', function() { 
+        $('#virtual3dFrame').get(0).contentWindow.showAnn = showAnn;
+    });
+}); 
+
+/* 
 window.addEventListener('message', (event) => {
     showAnn(event.data)
 });
-
+*/  
 function opacityFadeOut(elm) {
     let intervalTimer = setInterval(() => {
         $(elm).css('opacity', '0');

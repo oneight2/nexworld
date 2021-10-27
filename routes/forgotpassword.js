@@ -59,6 +59,11 @@ router.post('/resend', async (req, res) => {
   try {
     let userInfo = await pgdb.getUser(req.body.email);
 
+    if(userInfo[0].props.usertype == 'partner'){
+        res.send({ error: true, message: 'A partner account cannot resend password.' })
+        return;
+    }
+
     // if (userInfo[0].name == req.body.name && userInfo[0].phone === req.body.phone) {
     //     res.send({ error: true, message: 'The information you filled are incorrect.' })
     // }

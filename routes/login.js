@@ -24,10 +24,11 @@ router.post('/', async (req, res) => {
   			}
 
 			let dbpassword = response[0].password;
+			let userid = response[0].uid;
 
 			let match = await bcrypt.compare(req.body.password, dbpassword)
 			if (match){
-				const user = { email: req.body.email , devicetoken: uuidv4(), role: response[0].role}
+				const user = { userid, email: req.body.email , devicetoken: uuidv4(), role: response[0].role}
 
 				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
 
@@ -36,6 +37,7 @@ router.post('/', async (req, res) => {
 					content: {
 						userkey: 'synnex',
 						user: req.body.email,
+						userid,
 						jwt: jwtToken,
 						redirecturl: '/virtual',
 					}

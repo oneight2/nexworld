@@ -77,8 +77,8 @@ function sendFeedbackEmail(content) {
                 email: 'nexworld@metrodata.co.id',
                 name: 'Nexworld Metrodata'
             },{
-                email: 'mindset.id.lab@gmail.com',
-                name: 'Mindset Lab'
+                email: 'nexworld360@gmail.com',
+                name: 'nexworld360'
             }],
         templateId: 2,
         params: {

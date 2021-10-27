@@ -124,6 +124,7 @@ app.post('/adminlogin', async (req, res) => {
                 userkey: 'synnex-admin',
                 user: adminData.email,
                 jwt: jwtToken,
+		userid: 'admin',
                 redirecturl: '/admin/dashboard',
                 layout: 'layouts/emptylayout'
             })
@@ -212,9 +213,11 @@ app.get('/sendDataBulk', (req, res) => {
         };
 
         apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-            return ('Registration Successful: ' + email)
+            console.log(data);
+            return ('Registration Successful: ' + email);
         }, function(error) {
-            return error
+            console.log('error :'+ error);
+            return error;
         });
     }
 

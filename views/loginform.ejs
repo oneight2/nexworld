@@ -17,8 +17,11 @@
 		function manualRedirect() {
 			let userEmail = '<%= user %>';
 			let jwt = '<%= jwt %>';
+			let userid = '<%= userid %>';
 			localStorage.setItem(userkey+"-user", userEmail);
 			localStorage.setItem(userkey+"-jwt", jwt);
+			localStorage.setItem(userkey + "-userid", userid);
+
 			
 			window.location.replace(redirecturl); 
 		}

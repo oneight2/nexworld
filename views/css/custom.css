@@ -157,7 +157,7 @@ li {
 }
 
 #getpass-background {
-    background-image: url(../svg/getpassbg.svg);
+    background-image:none;
     background-size: cover;
     background-position: center;
     padding-bottom: 100px;
@@ -657,7 +657,7 @@ li {
 }
 
 .pass-title {
-    max-width: 579px;
+    max-width: 830px;
     margin: auto;
 }
 
