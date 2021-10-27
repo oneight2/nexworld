@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     title: "Synnex Virtual",
     layout: "layouts/virtuallayout",
     fileAddr: "3d/index.html",
-  });
+  }); 
 });
 
 router.post("/getbriefcase", authMw.authToken(), async (req, res) => {
