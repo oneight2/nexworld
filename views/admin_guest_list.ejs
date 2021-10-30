@@ -1,4 +1,5 @@
-<h3 style="font-weight: 600">Partner List</h3>
+<h3 style="font-weight: 600">Guest List</h3>
+
 <div
   class="modal fade"
   id="exampleModal"
@@ -21,40 +22,16 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="brand" class="form-label" style="font-weight: 700"
-            >Nama Brand</label
+          <label for="name" class="form-label" style="font-weight: 700"
+            >Nama</label
           >
-          <input type="text" class="form-control" id="brand" />
-        </div>
-        <div class="mb-3">
-          <label for="pt" class="form-label" style="font-weight: 700"
-            >Nama PT</label
-          >
-          <input type="text" class="form-control" id="pt" />
-        </div>
-        <div class="mb-3">
-          <label for="divisi" class="form-label" style="font-weight: 700"
-            >Divisi</label
-          >
-          <input type="text" class="form-control" id="divisi" />
-        </div>
-        <div class="mb-3">
-          <label for="pic" class="form-label" style="font-weight: 700"
-            >Nama PIC</label
-          >
-          <input type="text" class="form-control" id="pic" />
+          <input type="text" class="form-control" id="name" />
         </div>
         <div class="mb-3">
           <label for="email" class="form-label" style="font-weight: 700"
-            >Alamat Email</label
+            >Email</label
           >
           <input type="text" class="form-control" id="email" />
-        </div>
-        <div class="mb-3">
-          <label for="hp" class="form-label" style="font-weight: 700"
-            >No.HP</label
-          >
-          <input type="text" class="form-control" id="hp" />
         </div>
       </div>
       <div class="modal-footer">
@@ -69,6 +46,7 @@
           type="button"
           class="btn btn-primary px-4"
           style="background-color: #0b2559"
+          onclick="postNewGuest()"
         >
           Save
         </button>
@@ -121,7 +99,7 @@
       style="background-color: #0b2559; width: 200px; font-size: 12px"
     >
       <span data-feather="plus"></span>
-      Add partner
+      Add guest
     </button>
   </div>
 </div>
@@ -130,8 +108,8 @@
     <thead>
       <tr>
         <th scope="col">NO</th>
-        <th scope="col">Nama PT</th>
-        <th scope="col">Brand</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Email</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -198,5 +176,10 @@
   });
   const goSch = () => {
     console.log($("#sch").val());
+  };
+  const postNewGuest = () => {
+    const name = $("#name").val();
+    const email = $("#email").val();
+    console.log("NAME", name, email);
   };
 </script>

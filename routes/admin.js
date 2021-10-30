@@ -167,4 +167,28 @@ router.get("/partnerlist", async (req, res) => {
   }
 });
 
+router.get("/editpartner", async (req, res) => {
+  try {
+    res.render("admin_editpartner", {
+      title: "Synnex Admin - Edit Partner",
+      layout: "layouts/adminsidenav",
+      sch: req.query.sch ? req.query.sch : "",
+    });
+  } catch (err) {
+    res.send(err.toString());
+  }
+});
+
+router.get("/guestlist", async (req, res) => {
+  try {
+    res.render("admin_guest_list", {
+      title: "Synnex Admin - Guest List",
+      layout: "layouts/adminsidenav",
+      sch: req.query.sch ? req.query.sch : "",
+    });
+  } catch (err) {
+    res.send(err.toString());
+  }
+});
+
 module.exports = router;
