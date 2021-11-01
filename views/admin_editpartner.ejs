@@ -312,6 +312,10 @@
     $("#uppassword").val(password);
   };
   const updatePIC = () => {
-    console.log("update PIC");
+    const name = $("#upname").val();
+    const email = $("#upemail").val();
+    const hp = $("#uphp").val();
+    const password = $("#uppassword").val();
+    console.log("update PIC", name, email, hp, password);
   };
 </script>
