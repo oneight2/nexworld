@@ -168,6 +168,8 @@ router.get("/partnerlist", async (req, res) => {
 });
 
 router.get("/editpartner", async (req, res) => {
+  const id = req.query.id ? req.query.id : "";
+  // console.log(id);
   try {
     res.render("admin_editpartner", {
       title: "Synnex Admin - Edit Partner",

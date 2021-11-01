@@ -146,6 +146,14 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              onclick="goEdit(2)"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
             >
               Delete
             </button>
@@ -158,6 +166,14 @@
         <td>Ottodwda</td>
         <td>
           <div>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+              onclick="goEdit(2)"
+            >
+              Edit
+            </button>
             <button
               type="button"
               class="btn btn-light px-3 border border-dark"
@@ -198,5 +214,9 @@
   });
   const goSch = () => {
     console.log($("#sch").val());
+  };
+  const goEdit = (id) => {
+    console.log(id, "nya");
+    window.location.replace(`/admin/editpartner?id=${id}`);
   };
 </script>
