@@ -193,4 +193,28 @@ router.get("/guestlist", async (req, res) => {
   }
 });
 
+router.get("/storelist", async (req, res) => {
+  try {
+    res.render("admin_store_list", {
+      title: "Synnex Admin - Store List",
+      layout: "layouts/adminsidenav",
+      sch: req.query.sch ? req.query.sch : "",
+    });
+  } catch (err) {
+    res.send(err.toString());
+  }
+});
+
+router.get("/bannerlist", async (req, res) => {
+  try {
+    res.render("admin_banner_list", {
+      title: "Synnex Admin - Banner List",
+      layout: "layouts/adminsidenav",
+      sch: req.query.sch ? req.query.sch : "",
+    });
+  } catch (err) {
+    res.send(err.toString());
+  }
+});
+
 module.exports = router;
