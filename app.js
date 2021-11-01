@@ -25,6 +25,12 @@ app.use(
   })
 );
 
+// ROUTES API
+const getBooths = require("./app/booth/router");
+
+// URL API
+const api = `/api/v1`;
+
 /*
 const cors = require('cors')
 app.use(cors())
@@ -285,6 +291,9 @@ app.get("/uploads/:file", (req, res) => {
   res.sendFile(path.join(__dirname, "./uploads", req.params.file));
 });
 //
+
+// API
+app.use(`${URL}/booths`, getBooths);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
