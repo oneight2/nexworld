@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
@@ -30,41 +30,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // API
 app.use(`${URL}/booths`, booth);
 app.use(`${URL}/pics`, pic);
-=======
-const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
-const app = express();
-const path = require('path')
 
-const pgdb = require('./db/pg');
-const dotenv = require('dotenv');
-dotenv.config();
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
-const hostname = '0.0.0.0';
-const port = process.env.APP_PORT;
-
-const pg = require('pg'),
-    session = require('express-session'),
-    pgSession = require('connect-pg-simple')(session);
-
-const bodyParser = require('body-parser');
-app.use(bodyParser.json())
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-)
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
 /*
 const cors = require('cors')
 app.use(cors())
 */
 
-<<<<<<< HEAD
 const { v4: uuidv4 } = require("uuid");
 
 app.use("/", express.static(__dirname + "/views"));
@@ -112,7 +84,6 @@ app.post("/logout", async (req, res) => {
 const register = require("./routes/register");
 
 app.use("/register", register);
-=======
 const { v4: uuidv4 } = require('uuid');
 
 app.use("/", express.static(__dirname + '/views'));
@@ -160,12 +131,10 @@ app.post('/logout', async (req, res) => {
 const register = require('./routes/register')
 
 app.use('/register', register);
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
 //
 
 //BOOTHS
-<<<<<<< HEAD
 const booths = require("./routes/booths");
 
 app.use("/booths", booths);
@@ -175,22 +144,11 @@ app.use("/booths", booths);
 const annotations = require("./routes/annotations");
 
 app.use("/annotations", annotations);
-=======
-const booths = require('./routes/booths')
 
-app.use('/booths', booths);
-//
-
-//Annotations
-const annotations = require('./routes/annotations')
-
-app.use('/annotations', annotations);
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 //
 
 //Admin
 function adminparsemessage(code) {
-<<<<<<< HEAD
   switch (code) {
     case "1":
       return "Wrong account or password";
@@ -374,7 +332,6 @@ app.get("/sendDataBulk", (req, res) => {
     });
   res.send({ error: false, message: "CSV file successfully processed" });
 });
-=======
     switch (code) {
         case '1':
             return 'Wrong account or password'
@@ -383,7 +340,7 @@ app.get("/sendDataBulk", (req, res) => {
             return 'Your session has expired, please re-login.'
             break;
     }
-}
+
 
 const admin = require('./routes/admin')
 app.get('/adminlogin', (req, res) => {
@@ -536,12 +493,10 @@ app.get('/sendDataBulk', (req, res) => {
         });
     res.send({ error: false, message: 'CSV file successfully processed' })
 })
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
 //
 
 //MEDIA FILES PATHS
-<<<<<<< HEAD
 app.get("/uploads/:file", (req, res) => {
   res.sendFile(path.join(__dirname, "./uploads", req.params.file));
 });
@@ -549,13 +504,5 @@ app.get("/uploads/:file", (req, res) => {
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-=======
-app.get('/uploads/:file', (req, res) => {
-    res.sendFile(path.join(__dirname, './uploads', req.params.file))
-})
-//
 
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 });

@@ -52,11 +52,8 @@ router.post('/default', async (req, res)=> {
 		if (validator.isEmail(req.body.email) == false){
 			res.status(500).send({error: true, message: 'Email format is incorrect.'})
 		}
-<<<<<<< HEAD
 	    let userCheck = await pgdb.getUser(req.body.email);
-=======
-	    let userCheck = await pgdb.getUser(req.body.email.toLowerCase());
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
+
 
 		if(userCheck.length > 0){
 			res.send({error: true, message: 'The email you are using has already registered.'})
@@ -66,28 +63,18 @@ router.post('/default', async (req, res)=> {
 			let hash = await bcrypt.hash(userToken, salt);
 
 			let jwtToken =  await jwt.sign({
-<<<<<<< HEAD
-				email: req.body.email, 
-=======
 				email: req.body.email.toLowerCase(), 
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 				password: hash, 
 				name: req.body.name,
 				company: req.body.company,
 				jobtitle: req.body.jobtitle, 
 				phone: req.body.phone
 			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
-<<<<<<< HEAD
-			let emailResponse = await sendLinkEmail(req.body.email, req.body.name, jwtToken, userToken);
-		    res.send({
-		    	error:false,
-		    	user: req.body.email,
-=======
+
 			let emailResponse = await sendLinkEmail(req.body.email.toLowerCase(), req.body.name, jwtToken, userToken);
 		    res.send({
 		    	error:false,
 		    	user: req.body.email.toLowerCase(),
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 		    	userToken: userToken,
 		    	jwt: jwtToken
 		    });
