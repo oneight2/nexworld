@@ -16,20 +16,19 @@ const port = process.env.APP_PORT;
 const pg = require("pg"),
   session = require("express-session"),
   pgSession = require("connect-pg-simple")(session);
+// ROUTES API
+const booth = require("./app/booth/router");
+const pic = require("./app/pic/router");
+
+// URL API
+const URL = `/api`;
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-// ROUTES API
-const getBooths = require("./app/booth/router");
-
-// URL API
-const api = `/api/v1`;
+app.use(bodyParser.urlencoded({ extended: true }));
+// API
+app.use(`${URL}/booths`, booth);
+app.use(`${URL}/pics`, pic);
 
 /*
 const cors = require('cors')
@@ -291,9 +290,6 @@ app.get("/uploads/:file", (req, res) => {
   res.sendFile(path.join(__dirname, "./uploads", req.params.file));
 });
 //
-
-// API
-app.use(`${URL}/booths`, getBooths);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
