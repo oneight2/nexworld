@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const {
   getPics,
+  getPicsByPartner,
   getPic,
   addPic,
   updatePic,
@@ -9,6 +10,7 @@ const {
 } = require("./controller");
 
 router.get("/getPics", getPics);
+router.get("/getPics/:partnerid", getPicsByPartner);
 router.get("/getPic/:id", getPic);
 router.post("/addPic", addPic);
 router.put("/updatePic/:id", updatePic);

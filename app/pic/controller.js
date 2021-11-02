@@ -15,6 +15,22 @@ module.exports = {
         .json({ message: err.message || `Terjadi kesalahan pada server` });
     }
   },
+  getPicsByPartner: async (req, res) => {
+    try {
+      const { partnerid } = req.params;
+      const pics = await db.query("SELECT * FROM pics WHERE partnerid = $1", [
+        partnerid,
+      ]);
+      if (pics === null || undefined || "") {
+        res.status(404).json({ message: "Data tidak ditemukan" });
+      }
+      res.status(200).json({ data: pics.rows });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: err.message || `Terjadi kesalahan pada server` });
+    }
+  },
   getPic: async (req, res) => {
     try {
       const { id } = req.params;

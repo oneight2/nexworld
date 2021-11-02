@@ -26,20 +26,22 @@ app.use(
 );
 
 // ROUTES API
-const getBooths = require("./app/booth/router");
-const getPics = require("./app/pic/router");
-const getPartners = require("./app/partner/router");
-const getStores = require("./app/store/router");
-const getBanners = require("./app/banner/router");
+const booth = require("./app/booth/router");
+const pic = require("./app/pic/router");
+const partner = require("./app/partner/router");
+const store = require("./app/store/router");
+const banner = require("./app/banner/router");
+const annotation = require("./app/annotation/router");
 
 // URL API
 const URL = `/api`;
 // API
-app.use(`${URL}/booths`, getBooths);
-app.use(`${URL}/pics`, getPics);
-app.use(`${URL}/partners`, getPartners);
-app.use(`${URL}/stores`, getStores);
-app.use(`${URL}/banners`, getBanners);
+app.use(`${URL}/booths`, booth);
+app.use(`${URL}/pics`, pic);
+app.use(`${URL}/partners`, partner);
+app.use(`${URL}/stores`, store);
+app.use(`${URL}/banners`, banner);
+app.use(`${URL}/annotations`, annotation);
 
 /*
 const cors = require('cors')
