@@ -157,7 +157,11 @@ li {
 }
 
 #getpass-background {
+<<<<<<< HEAD
+    background-image: none;
+=======
     background-image:none;
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
     background-size: cover;
     background-position: center;
     padding-bottom: 100px;
@@ -962,7 +966,11 @@ li {
         border-radius: 15px;
         position: relative;
         height: 180px;
+<<<<<<< HEAD
+        filter: blur(0px);
+=======
         filter: blur(4px);
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
     }
 
     .blur-background>.content {
@@ -1134,7 +1142,11 @@ li {
         border-radius: 15px;
         position: relative;
         height: 271px;
+<<<<<<< HEAD
+        filter: blur(1px);
+=======
         filter: blur(4px);
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
     }
 
     .blur-background>.content {

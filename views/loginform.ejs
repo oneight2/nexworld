@@ -1,30 +1,32 @@
 <html>
-<head></head>
-<body>
-	<div>You'll get automatically redirected, if that doesn't happen in the next 1 minute, please click this <a onClick="manualRedirect()" href="#">link</a></div>
-	<script>
-		const userkey = '<%= userkey %>';
-		const userEmail = '<%= user %>';
-		const jwt = '<%= jwt %>';
-		const redirecturl = '<%= redirecturl %>';
-		localStorage.setItem(userkey+"-user", userEmail);
-		localStorage.setItem(userkey+"-jwt", jwt);
+  <head></head>
+  <body>
+    <div>
+      You'll get automatically redirected, if that doesn't happen in the next 1
+      minute, please click this <a onClick="manualRedirect()" href="#">link</a>
+    </div>
+    <script>
+      const userkey = "<%= userkey %>";
+      const userEmail = "<%= user %>";
+      const jwt = "<%= jwt %>";
+      const redirecturl = "<%= redirecturl %>";
+      localStorage.setItem(userkey + "-user", userEmail);
+      localStorage.setItem(userkey + "-jwt", jwt);
 
-		setInterval(function(){ 
-			window.location.replace(redirecturl); 
-		}, 1000);
-		
-		function manualRedirect() {
-			let userEmail = '<%= user %>';
-			let jwt = '<%= jwt %>';
-			let userid = '<%= userid %>';
-			localStorage.setItem(userkey+"-user", userEmail);
-			localStorage.setItem(userkey+"-jwt", jwt);
-			localStorage.setItem(userkey + "-userid", userid);
+      setInterval(function () {
+        window.location.replace(redirecturl);
+      }, 1000);
 
-			
-			window.location.replace(redirecturl); 
-		}
-	</script>	
-</body>
+      function manualRedirect() {
+        let userEmail = "<%= user %>";
+        let jwt = "<%= jwt %>";
+        let userid = "<%= userid %>";
+        localStorage.setItem(userkey + "-user", userEmail);
+        localStorage.setItem(userkey + "-jwt", jwt);
+        localStorage.setItem(userkey + "-userid", userid);
+
+        window.location.replace(redirecturl);
+      }
+    </script>
+  </body>
 </html>
