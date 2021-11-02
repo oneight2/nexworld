@@ -630,17 +630,12 @@ function loginSubmit() {
                 let userkey = content.userkey;
                 let userEmail = content.user;
                 let jwt = content.jwt;
-<<<<<<< HEAD
-                let redirecturl = content.redirecturl;
-                localStorage.setItem(userkey + "-user", userEmail);
-                localStorage.setItem(userkey + "-jwt", jwt);
-=======
+
                 let userid = content.userid;
                 let redirecturl = content.redirecturl;
                 localStorage.setItem(userkey + "-user", userEmail);
                 localStorage.setItem(userkey + "-jwt", jwt);
                 localStorage.setItem(userkey + "-userid", userid);
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
                 window.location.href = redirecturl;
             }

@@ -2,39 +2,49 @@
 <html lang="en">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165134129-4"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-165134129-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'UA-165134129-4');
-  </script>
-<<<<<<< HEAD
-=======
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KPXJF4F');</script>
-  <!-- End Google Tag Manager -->
+      gtag("config", "UA-165134129-4");
+    </script>
 
-  <!-- UserID - Login) - Google Analytics -->
-  <script>
- window.dataLayer = window.dataLayer || [];
- window.dataLayer.push({
-	'event' : 'login',
-	'authenticationMethod' : 'email',
-	'userId' : 'synnex-user'
- });
-  </script>
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KPXJF4F");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- UserID - Login) - Google Analytics -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "login",
+        authenticationMethod: "email",
+        userId: "synnex-user",
+      });
+    </script>
 
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
     <!-- favicon start -->
     <link
       rel="icon"
@@ -131,16 +141,18 @@
     <link rel="stylesheet" type="text/css" href="css/custom.css" />
   </head>
 
-<<<<<<< HEAD
   <body id="synnexbody" data-bs-target="#synnexsidenav" data-bs-spy="scroll">
-=======
-  <body id="synnexbody" data-bs-target="#synnexsidenav" data-bs-spy="scroll">  
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPXJF4F"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KPXJF4F"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
->>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
     <nav id="synnexnav" class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
@@ -246,21 +258,21 @@
     -->
     <script>
       if (
-        localStorage.getItem('synnex-user') &&
-        localStorage.getItem('synnex-jwt')
+        localStorage.getItem("synnex-user") &&
+        localStorage.getItem("synnex-jwt")
       ) {
-        $('#login-nav').remove();
-        $('#getyoupass').remove();
+        $("#login-nav").remove();
+        $("#getyoupass").remove();
       } else {
-        $('#virtual-nav').remove();
-        $('#logout-nav').remove();
+        $("#virtual-nav").remove();
+        $("#logout-nav").remove();
       }
 
       function logout() {
-        localStorage.removeItem('synnex-user');
-        localStorage.removeItem('synnex-jwt');
+        localStorage.removeItem("synnex-user");
+        localStorage.removeItem("synnex-jwt");
 
-        window.location.href = '/';
+        window.location.href = "/";
       }
     </script>
     <%- script %>
