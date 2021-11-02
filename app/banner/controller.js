@@ -6,20 +6,22 @@ const fs = require("fs");
 const config = require("../../config/config");
 
 module.exports = {
-  getStores: async (req, res) => {
+  getBanners: async (req, res) => {
     try {
-      const stores = await db.query("SELECT * FROM stores");
-      res.status(200).json({ data: stores.rows });
+      const banners = await db.query("SELECT * FROM banners");
+      res.status(200).json({ data: banners.rows });
     } catch (err) {
       res
         .status(500)
         .json({ message: err.message || `Terjadi kesalahan pada server` });
     }
   },
-  getStore: async (req, res) => {
+  getBanner: async (req, res) => {
     try {
       const { id } = req.params;
-      const store = await db.query(`SELECT * FROM stores WHERE uid = $1`, [id]);
+      const store = await db.query(`SELECT * FROM banners WHERE uid = $1`, [
+        id,
+      ]);
       if (store === null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
@@ -30,7 +32,7 @@ module.exports = {
         .json({ message: err.message || `Terjadi kesalahan pada server` });
     }
   },
-  addStore: async (req, res) => {
+  addBanner: async (req, res) => {
     try {
       const { name, url } = req.body;
       const uid = uuidv4();
@@ -45,7 +47,7 @@ module.exports = {
         let filename = req.file.filename + "." + originaExt;
         let target_path = path.resolve(
           config.rootPath,
-          `public/store/${filename}`
+          `public/banner/${filename}`
         );
 
         const src = fs.createReadStream(tmp_path);
@@ -57,13 +59,13 @@ module.exports = {
           try {
             const image = filename;
             await db.query(
-              `INSERT into stores (uid, name, url, image, created_at) values ($1, $2, $3, $4, $5)`,
+              `INSERT into banners (uid, name, url, image, created_at) values ($1, $2, $3, $4, $5)`,
               [uid, name, url, image, created_at]
             );
 
             res
               .status(200)
-              .json({ status: "Success", message: "Add Store Success!" });
+              .json({ status: "Success", message: "Add Banner Success!" });
           } catch (err) {
             res.status(500).json({
               message: err.message || `Terjadi kesalahan pada server`,
@@ -77,7 +79,7 @@ module.exports = {
         .json({ message: err.message || `Terjadi kesalahan pada server` });
     }
   },
-  updateStore: async (req, res) => {
+  updateBanner: async (req, res) => {
     try {
       const { id } = req.params;
       const { name, url } = req.body;
@@ -91,7 +93,7 @@ module.exports = {
         let filename = req.file.filename + "." + originaExt;
         let target_path = path.resolve(
           config.rootPath,
-          `public/store/${filename}`
+          `public/banner/${filename}`
         );
 
         const src = fs.createReadStream(tmp_path);
@@ -101,14 +103,14 @@ module.exports = {
 
         src.on("end", async () => {
           const image = filename;
-          const imageStore = await db.query(
-            `SELECT * FROM stores WHERE uid = $1`,
+          const imageBanner = await db.query(
+            `SELECT * FROM banners WHERE uid = $1`,
             [id]
           );
-          let currentImage = `${config.rootPath}/public/store/${imageStore.rows[0].image}`;
+          let currentImage = `${config.rootPath}/public/banner/${imageBanner.rows[0].image}`;
           try {
             await db.query(
-              `UPDATE Stores SET (name,url,image) = ($2, $3, $4) where uid = $1`,
+              `UPDATE banners SET (name,url,image) = ($2, $3, $4) where uid = $1`,
               [id, name, url, image]
             );
             if (fs.existsSync(currentImage)) {
@@ -116,7 +118,7 @@ module.exports = {
             }
             res
               .status(200)
-              .json({ status: "Success", message: "Update Store Success!" });
+              .json({ status: "Success", message: "Update Banner Success!" });
           } catch (err) {
             res.status(500).json({
               message: err.message || `Terjadi kesalahan pada server`,
@@ -125,12 +127,12 @@ module.exports = {
         });
       } else {
         await db.query(
-          `UPDATE Stores SET (name,url) = ($2, $3) where uid = $1`,
+          `UPDATE banners SET (name,url) = ($2, $3) where uid = $1`,
           [id, name, url]
         );
         res
           .status(200)
-          .json({ status: "Success", message: "Update Store Success!" });
+          .json({ status: "Success", message: "Update Banner Success!" });
       }
     } catch (err) {
       res
@@ -138,20 +140,21 @@ module.exports = {
         .json({ message: err.message || `Terjadi kesalahan pada server` });
     }
   },
-  deleteStore: async (req, res) => {
+  deleteBanner: async (req, res) => {
     try {
       const { id } = req.params;
-      const imageStore = await db.query(`SELECT * FROM stores WHERE uid = $1`, [
-        id,
-      ]);
+      const imageBanner = await db.query(
+        `SELECT * FROM banners WHERE uid = $1`,
+        [id]
+      );
       await db.query(`DELETE from Stores WHERE uid = $1`, [id]);
-      let currentImage = `${config.rootPath}/public/store/${imageStore.rows[0].image}`;
+      let currentImage = `${config.rootPath}/public/banner/${imageBanner.rows[0].image}`;
       if (fs.existsSync(currentImage)) {
         fs.unlinkSync(currentImage);
       }
       res
         .status(200)
-        .json({ status: "Success", message: "Delete Store Success!" });
+        .json({ status: "Success", message: "Delete Banner Success!" });
     } catch (err) {
       res
         .status(500)

@@ -30,6 +30,7 @@ const getBooths = require("./app/booth/router");
 const getPics = require("./app/pic/router");
 const getPartners = require("./app/partner/router");
 const getStores = require("./app/store/router");
+const getBanners = require("./app/banner/router");
 
 // URL API
 const URL = `/api`;
@@ -38,6 +39,7 @@ app.use(`${URL}/booths`, getBooths);
 app.use(`${URL}/pics`, getPics);
 app.use(`${URL}/partners`, getPartners);
 app.use(`${URL}/stores`, getStores);
+app.use(`${URL}/banners`, getBanners);
 
 /*
 const cors = require('cors')
