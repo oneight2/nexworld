@@ -147,7 +147,7 @@ module.exports = {
         `SELECT * FROM banners WHERE uid = $1`,
         [id]
       );
-      await db.query(`DELETE from Stores WHERE uid = $1`, [id]);
+      await db.query(`DELETE from banners WHERE uid = $1`, [id]);
       let currentImage = `${config.rootPath}/public/banner/${imageBanner.rows[0].image}`;
       if (fs.existsSync(currentImage)) {
         fs.unlinkSync(currentImage);
