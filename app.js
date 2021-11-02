@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-const hostname = "0.0.0.0";
+const hostname = "localhost";
 const port = process.env.APP_PORT;
 
 const pg = require("pg"),
@@ -24,6 +24,16 @@ app.use(
     extended: true,
   })
 );
+
+// ROUTES API
+const getBooths = require("./app/booth/router");
+const getPics = require("./app/pic/router");
+
+// URL API
+const api = `/api/v1`;
+// API
+app.use(`${URL}/booths`, getBooths);
+app.use(`${URL}/pics`, getPics);
 
 /*
 const cors = require('cors')
@@ -133,7 +143,6 @@ app.post("/adminlogin", async (req, res) => {
         userkey: "synnex-admin",
         user: adminData.email,
         jwt: jwtToken,
-        userid: "admin",
         redirecturl: "/admin/dashboard",
         layout: "layouts/emptylayout",
       });

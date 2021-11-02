@@ -52,7 +52,8 @@ router.post('/default', async (req, res)=> {
 		if (validator.isEmail(req.body.email) == false){
 			res.status(500).send({error: true, message: 'Email format is incorrect.'})
 		}
-	    let userCheck = await pgdb.getUser(req.body.email.toLowerCase());
+	    let userCheck = await pgdb.getUser(req.body.email);
+
 
 		if(userCheck.length > 0){
 			res.send({error: true, message: 'The email you are using has already registered.'})
@@ -69,6 +70,7 @@ router.post('/default', async (req, res)=> {
 				jobtitle: req.body.jobtitle, 
 				phone: req.body.phone
 			}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
+
 			let emailResponse = await sendLinkEmail(req.body.email.toLowerCase(), req.body.name, jwtToken, userToken);
 		    res.send({
 		    	error:false,

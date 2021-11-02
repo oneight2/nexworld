@@ -109,6 +109,7 @@ router.get("/annotations", async (req, res) => {
       annotations: annotations,
       boothId: boothId,
       boothName: boothName,
+
       message: req.query.message ? parsemessage(req.query.message) : null,
     });
   } catch (err) {
