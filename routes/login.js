@@ -17,17 +17,29 @@ router.post('/', async (req, res) => {
 
   		if (validator.isEmail(req.body.email)){//EMAIL VALIDATION
 
+<<<<<<< HEAD
   			let response = await pgdb.getUser(req.body.email);
+=======
+  			let response = await pgdb.getUser(req.body.email.toLowerCase());
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
   			if(response.length == 0) {
 				res.status(500).send({error: true, message: 'Your account does not exist or it has not verified yet.'})  				
   			}
 
 			let dbpassword = response[0].password;
+<<<<<<< HEAD
 
 			let match = await bcrypt.compare(req.body.password, dbpassword)
 			if (match){
 				const user = { email: req.body.email , devicetoken: uuidv4(), role: response[0].role}
+=======
+			let userid = response[0].uid;
+
+			let match = await bcrypt.compare(req.body.password, dbpassword)
+			if (match){
+				const user = { userid, email: req.body.email , devicetoken: uuidv4(), role: response[0].role}
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 
 				const jwtToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30d' })
 
@@ -36,6 +48,10 @@ router.post('/', async (req, res) => {
 					content: {
 						userkey: 'synnex',
 						user: req.body.email,
+<<<<<<< HEAD
+=======
+						userid,
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 						jwt: jwtToken,
 						redirecturl: '/virtual',
 					}

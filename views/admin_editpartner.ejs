@@ -1,0 +1,321 @@
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 600">
+          Update PIC
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="upname" class="form-label" style="font-weight: 700"
+            >Nama Lengkap</label
+          >
+          <input type="text" class="form-control" id="upname" />
+        </div>
+        <div class="mb-3">
+          <label for="upemail" class="form-label" style="font-weight: 700"
+            >Alamat Email</label
+          >
+          <input type="text" class="form-control" id="upemail" />
+        </div>
+        <div class="mb-3">
+          <label for="uphp" class="form-label" style="font-weight: 700"
+            >NO. HP</label
+          >
+          <input type="text" class="form-control" id="uphp" />
+        </div>
+        <div class="mb-3">
+          <label for="uppassword" class="form-label" style="font-weight: 700"
+            >Password</label
+          >
+          <input type="text" class="form-control" id="uppassword" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="updatePIC()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 600">
+          Add New PIC
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="name" class="form-label" style="font-weight: 700"
+            >Nama Lengkap</label
+          >
+          <input type="text" class="form-control" id="name" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label" style="font-weight: 700"
+            >Alamat Email</label
+          >
+          <input type="text" class="form-control" id="email" />
+        </div>
+        <div class="mb-3">
+          <label for="hp" class="form-label" style="font-weight: 700"
+            >NO. HP</label
+          >
+          <input type="text" class="form-control" id="hp" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label" style="font-weight: 700"
+            >Password</label
+          >
+          <input type="text" class="form-control" id="password" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="postNewPIC()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mb-2">
+  <div>
+    <h3 style="font-weight: 600">Edit Partner</h3>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-light px-4 border border-primary border-2"
+      onclick="goBack()"
+    >
+      Back
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary px-4"
+      style="background-color: #0b2559"
+    >
+      Save
+    </button>
+  </div>
+</div>
+<div class="rounded shadow p-4 container">
+  <div class="row">
+    <div class="col">
+      <label for="FormControlInput1" class="form-label" style="font-weight: 700"
+        >Nama Brand</label
+      >
+      <input type="text" class="form-control" id="FormControlInput1" />
+    </div>
+    <div class="col">
+      <label for="FormControlInput2" class="form-label" style="font-weight: 700"
+        >Nama PT</label
+      >
+      <input type="text" class="form-control" id="FormControlInput2" />
+    </div>
+    <div class="col">
+      <label for="FormControlInput3" class="form-label" style="font-weight: 700"
+        >Divisi</label
+      >
+      <input type="text" class="form-control" id="FormControlInput3" />
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-4" style="font-weight: 600">PIC</h4>
+<hr />
+<div class="mt-3 mb-3 p-1 d-flex justify-content-between">
+  <div class="d-flex">
+    <div class="my-2">Show</div>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-light dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        10
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">10</a></li>
+        <li><a class="dropdown-item" href="#">50</a></li>
+        <li><a class="dropdown-item" href="#">100</a></li>
+      </ul>
+    </div>
+    <div class="my-2">Entires</div>
+  </div>
+  <div class="d-flex">
+    <input
+      id="sch"
+      type="text"
+      class="form-control"
+      placeholder="Search here"
+      value="<%= sch %>"
+    />
+    <button
+      type="button"
+      class="btn btn-primary mx-1"
+      style="background-color: #0b2559"
+      onclick="goSch()"
+    >
+      <span data-feather="search"></span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="background-color: #0b2559; width: 200px; font-size: 12px"
+    >
+      <span data-feather="plus"></span>
+      Add PIC
+    </button>
+  </div>
+</div>
+
+<div class="shadow p-3 rounded">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nama Lengkap</th>
+        <th scope="col">Alamat Email</th>
+        <th scope="col">No.HP</th>
+        <th scope="col">Password</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Saya sendiri</td>
+        <td>saya@agsl.d</td>
+        <td>08-xxx-xxx</td>
+        <td>SSSSttt</td>
+        <td>
+          <div>
+            <button
+              type="button"
+              class="btn btn-light border border-dark"
+              style="font-size: 10px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              onclick="editPIC('<%= sch %>', '<%= sch %>', '<%= sch %>', '<%= sch %>')"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light mx-1 border border-dark"
+              style="font-size: 10px"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Saya sendiri</td>
+        <td>saya@agsl.d</td>
+        <td>08-xxx-xxx</td>
+        <td>SSSSttt</td>
+        <td>
+          <div>
+            <button
+              type="button"
+              class="btn btn-light border border-dark"
+              style="font-size: 10px"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light mx-1 border border-dark"
+              style="font-size: 10px"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+  });
+  const goSch = () => {
+    console.log($("#sch").val());
+  };
+  const goBack = () => {
+    window.location.replace("/admin/partnerlist");
+  };
+  const editPIC = (nama, email, hp, password) => {
+    $("#upname").val(nama);
+    $("#upemail").val(email);
+    $("#uphp").val(hp);
+    $("#uppassword").val(password);
+  };
+  const updatePIC = () => {
+    const name = $("#upname").val();
+    const email = $("#upemail").val();
+    const hp = $("#uphp").val();
+    const password = $("#uppassword").val();
+    console.log("update PIC", name, email, hp, password);
+  };
+</script>

@@ -1,7 +1,11 @@
 <iframe id="virtual3dFrame" src="3d/index.html" frameborder="0" style="width:100vw;height:100vh;position:absolute;"></iframe>
 <!-- Button trigger modal -->
 <div id="virtualui">
+<<<<<<< HEAD
     <nav id="logolinkNav" class="sidenav-offcanvas">
+=======
+    <nav id="logolinkNav" class="sidenav-offcanvas sidenav-offcanvas-small">
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
         <a href="#" onClick="sidenavOffcanvasToggle('#logolinkNav', true)" class="closearrow">
             <div class="arrow left"></div>
         </a>
@@ -459,7 +463,11 @@
                                     </a>
                                 </div>
                                 <div class="col-6">
+<<<<<<< HEAD
                                     <a href="#" onClick="navigateFrame(30)">
+=======
+                                    <a href="#" onClick="navigateFrame(31)">
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
                                         <img src="/svg/msilogolarge.svg" alt="">
                                     </a>
                                 </div>
@@ -479,7 +487,11 @@
                                     </a>
                                 </div>
                                 <div class="col-6">
+<<<<<<< HEAD
                                     <a href="#" onClick="navigateFrame(31)">
+=======
+                                    <a href="#" onClick="navigateFrame(30)">
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
                                         <img src="/svg/msi2logolarge.svg" alt="">
                                     </a>
                                 </div>
@@ -742,10 +754,24 @@ function showAnn(an) {
     });
 }
 
+<<<<<<< HEAD
 window.addEventListener('message', (event) => {
     showAnn(event.data)
 });
 
+=======
+$(document).ready(function() { 
+    $('#virtual3dFrame').on('load', function() { 
+        $('#virtual3dFrame').get(0).contentWindow.showAnn = showAnn;
+    });
+}); 
+
+/* 
+window.addEventListener('message', (event) => {
+    showAnn(event.data)
+});
+*/  
+>>>>>>> 6a80a6f8e4022272414fc0b24eff259f5b315ec2
 function opacityFadeOut(elm) {
     let intervalTimer = setInterval(() => {
         $(elm).css('opacity', '0');
