@@ -7,8 +7,8 @@ const validator = require("validator");
 module.exports = {
   getPics: async (req, res) => {
     try {
-      const booths = await db.query("SELECT * FROM pics");
-      res.status(200).json({ data: booths.rows });
+      const pics = await db.query("SELECT * FROM pics");
+      res.status(200).json({ data: pics.rows });
     } catch (err) {
       res
         .status(500)
@@ -18,11 +18,11 @@ module.exports = {
   getPic: async (req, res) => {
     try {
       const { id } = req.params;
-      const booth = await db.query(`SELECT * FROM pics WHERE uid = $1`, [id]);
-      if (booth === null || undefined || "") {
+      const pic = await db.query(`SELECT * FROM pics WHERE uid = $1`, [id]);
+      if (pic === null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
-      res.status(200).json({ data: booth.rows[0] });
+      res.status(200).json({ data: pic.rows[0] });
     } catch (err) {
       res
         .status(500)

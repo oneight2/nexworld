@@ -7,8 +7,8 @@ const validator = require("validator");
 module.exports = {
   getPartners: async (req, res) => {
     try {
-      const booths = await db.query("SELECT * FROM pics");
-      res.status(200).json({ data: booths.rows });
+      const partners = await db.query("SELECT * FROM partners");
+      res.status(200).json({ data: partners.rows });
     } catch (err) {
       res
         .status(500)
@@ -18,13 +18,13 @@ module.exports = {
   getPartner: async (req, res) => {
     try {
       const { id } = req.params;
-      const booth = await db.query(`SELECT * FROM Partners WHERE uid = $1`, [
+      const partner = await db.query(`SELECT * FROM Partners WHERE uid = $1`, [
         id,
       ]);
-      if (booth === null || undefined || "") {
+      if (partner === null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
-      res.status(200).json({ data: booth.rows[0] });
+      res.status(200).json({ data: partner.rows[0] });
     } catch (err) {
       res
         .status(500)
@@ -54,23 +54,15 @@ module.exports = {
   updatePartner: async (req, res) => {
     try {
       const { id } = req.params;
-      const { email, password, name, phone } = req.body;
-      let salt = await bcrypt.genSalt(saltRounds);
-      const hash = await bcrypt.hash(password, salt);
+      const { name, brand, divisi } = req.body;
 
-      if (email) {
-        if (!validator.isEmail(email)) {
-          res.status(500).json({ message: `Format email tidak sesuai` });
-        } else {
-          await db.query(
-            `UPDATE Partners SET (email, password, name, phone) = ($2, $3, $4, $5) where uid = $1`,
-            [id, email, hash, name, phone]
-          );
-          res
-            .status(200)
-            .json({ status: "Success", message: "Update Partner Success!" });
-        }
-      }
+      await db.query(
+        `UPDATE Partners SET (name, brand, divisi) = ($2, $3, $4) where uid = $1`,
+        [id, name, brand, divisi]
+      );
+      res
+        .status(200)
+        .json({ status: "Success", message: "Update Partner Success!" });
     } catch (err) {
       res
         .status(500)
