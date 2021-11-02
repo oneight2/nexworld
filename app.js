@@ -28,12 +28,14 @@ app.use(
 // ROUTES API
 const getBooths = require("./app/booth/router");
 const getPics = require("./app/pic/router");
+const getPartners = require("./app/partner/router");
 
 // URL API
-const api = `/api/v1`;
+const URL = `/api`;
 // API
 app.use(`${URL}/booths`, getBooths);
 app.use(`${URL}/pics`, getPics);
+app.use(`${URL}/partners`, getPartners);
 
 /*
 const cors = require('cors')
