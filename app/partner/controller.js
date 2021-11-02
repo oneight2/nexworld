@@ -1,7 +1,5 @@
 const db = require("../../db/db");
 const { v4: uuidv4 } = require("uuid");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
 const validator = require("validator");
 
 module.exports = {
