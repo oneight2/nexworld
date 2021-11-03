@@ -24,6 +24,8 @@ app.use(
     extended: true,
   })
 );
+//Serving Static File
+app.use("/public", express.static(path.resolve("./public")));
 
 // ROUTES API
 const booth = require("./app/booth/router");
