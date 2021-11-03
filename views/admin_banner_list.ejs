@@ -294,13 +294,58 @@
     console.log($("#sch").val());
   };
   const postNewBanner = () => {
-    const image = $("#image")[0].files[0];
-    const desc = $("#desc").val();
-    const url = $("#url").val();
-    let formData = new FormData();
-    console.log("NAME", image, url, desc);
+    if (!$("#image")[0].files[0]) {
+      alert("Please add image");
+    } else {
+      console.log("uploading...");
+      let formData = new FormData();
+      formData.append("name", $("#desc").val());
+      formData.append("url", $("#url").val());
+      formData.append("image", $("#image")[0].files[0]);
+
+      let requestHeaders = new Headers();
+      requestHeaders.delete("Content-Type");
+
+      fetch("/api/banners/addBanner", {
+        method: "POST",
+        headers: requestHeaders,
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert(`${error}`);
+        });
+    }
   };
   const updateBanner = () => {
-    console.log("update");
+    console.log("uploading...");
+    let formData = new FormData();
+    formData.append("name", $("#updesc").val());
+    formData.append("url", $("#upurl").val());
+
+    if ($("#image")[0].files[0]) {
+      formData.append("image", $("#upimage")[0].files[0]);
+    }
+
+    let requestHeaders = new Headers();
+    requestHeaders.delete("Content-Type");
+
+    fetch("/api/banners/updateBanner/4f07b268-1983-49ac-9f46-10d3abd2c837", {
+      method: "PUT",
+      headers: requestHeaders,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(`${error}`);
+      });
   };
 </script>
