@@ -71,6 +71,14 @@ module.exports = {
             });
           }
         });
+      } else {
+        await db.query(
+          `INSERT into stores (uid, name, url,  created_at) values ($1, $2, $3, $4)`,
+          [uid, name, url, created_at]
+        );
+        res
+          .status(200)
+          .json({ status: "Success", message: "Add Store Success!" });
       }
     } catch (err) {
       res
