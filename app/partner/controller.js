@@ -16,7 +16,7 @@ module.exports = {
   getPartner: async (req, res) => {
     try {
       const { id } = req.params;
-      const partner = await db.query(`SELECT * FROM Partners WHERE uid = $1`, [
+      const partner = await db.query(`SELECT * FROM partners WHERE uid = $1`, [
         id,
       ]);
       if (partner === null || undefined || "") {

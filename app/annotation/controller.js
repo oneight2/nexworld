@@ -33,16 +33,32 @@ module.exports = {
     }
   },
   getAnnotationByBooth: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
       const { boothid } = req.params;
       const store = await db.query(
-        `SELECT * FROM annotations  ations WHERE boothid = $1`,
+        "SELECT * FROM annotations WHERE boothid = $1",
         [boothid]
       );
-      if (store === null || undefined || "") {
+      totalData = store.rowCount;
+
+      const annotation = await db.query(
+        `SELECT * FROM annotations WHERE boothid = $1 LIMIT $2 OFFSET $3`,
+        [boothid, perPage, page]
+      );
+      if (annotation.rows == null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        res.status(200).json({
+          totalData,
+          page: parseInt(currentPage),
+          perPage,
+          data: annotation.rows,
+        });
       }
-      res.status(200).json({ data: store.rows });
     } catch (err) {
       res
         .status(500)
