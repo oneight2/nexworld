@@ -7,6 +7,9 @@ const db = new Pool({
   password: process.env.PG_PASS,
   port: process.env.PG_PORT,
   ssl: process.env.DEV_STATUS == "PRODUCTION" ? true : false,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 module.exports = db;

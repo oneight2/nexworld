@@ -6,9 +6,24 @@ const validator = require("validator");
 
 module.exports = {
   getPics: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
-      const pics = await db.query("SELECT * FROM pics");
-      res.status(200).json({ data: pics.rows });
+      const store = await db.query("SELECT * FROM pics");
+      totalData = store.rowCount;
+
+      const pics = await db.query("SELECT * FROM pics LIMIT $1 OFFSET $2", [
+        perPage,
+        page,
+      ]);
+      res.status(200).json({
+        totalData,
+        page: parseInt(currentPage),
+        perPage,
+        data: pics.rows,
+      });
     } catch (err) {
       res
         .status(500)
@@ -16,15 +31,29 @@ module.exports = {
     }
   },
   getPicsByPartner: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
       const { partnerid } = req.params;
-      const pics = await db.query("SELECT * FROM pics WHERE partnerid = $1", [
+      const store = await db.query("SELECT * FROM pics WHERE partnerid = $1", [
         partnerid,
       ]);
+      totalData = store.rowCount;
+      const pics = await db.query(
+        "SELECT * FROM pics WHERE partnerid = $1 LIMIT $2 OFFSET $3",
+        [partnerid, perPage, page]
+      );
       if (pics === null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
-      res.status(200).json({ data: pics.rows });
+      res.status(200).json({
+        totalData,
+        page: parseInt(currentPage),
+        perPage,
+        data: pics.rows,
+      });
     } catch (err) {
       res
         .status(500)

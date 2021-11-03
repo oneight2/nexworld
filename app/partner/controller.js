@@ -4,9 +4,24 @@ const validator = require("validator");
 
 module.exports = {
   getPartners: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
-      const partners = await db.query("SELECT * FROM partners");
-      res.status(200).json({ data: partners.rows });
+      const store = await db.query("SELECT * FROM partners");
+      totalData = store.rowCount;
+
+      const partners = await db.query(`SELECT * FROM LIMIT $1 OFFSET $2`, [
+        perPage,
+        page,
+      ]);
+      res.status(200).json({
+        totalData,
+        page: parseInt(currentPage),
+        perPage,
+        data: partners.rows,
+      });
     } catch (err) {
       res
         .status(500)
