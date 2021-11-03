@@ -159,19 +159,34 @@
       <label for="FormControlInput1" class="form-label" style="font-weight: 700"
         >Nama Brand</label
       >
-      <input type="text" class="form-control" id="FormControlInput1" />
+      <input
+        type="text"
+        class="form-control"
+        id="FormControlInput1"
+        value="<%= brand %>"
+      />
     </div>
     <div class="col">
       <label for="FormControlInput2" class="form-label" style="font-weight: 700"
         >Nama PT</label
       >
-      <input type="text" class="form-control" id="FormControlInput2" />
+      <input
+        type="text"
+        class="form-control"
+        id="FormControlInput2"
+        value="<%= name %>"
+      />
     </div>
     <div class="col">
       <label for="FormControlInput3" class="form-label" style="font-weight: 700"
         >Divisi</label
       >
-      <input type="text" class="form-control" id="FormControlInput3" />
+      <input
+        type="text"
+        class="form-control"
+        id="FormControlInput3"
+        value="<%= divisi %>"
+      />
     </div>
   </div>
 </div>
@@ -204,7 +219,7 @@
       type="text"
       class="form-control"
       placeholder="Search here"
-      value="<%= sch %>"
+      value=""
     />
     <button
       type="button"
@@ -239,11 +254,12 @@
       </tr>
     </thead>
     <tbody>
+      <% pics.forEach(function(pic){ %>
       <tr>
-        <td>Saya sendiri</td>
-        <td>saya@agsl.d</td>
-        <td>08-xxx-xxx</td>
-        <td>SSSSttt</td>
+        <td><%= pic.name %></td>
+        <td><%= pic.email %></td>
+        <td><%= pic.phone %></td>
+        <td><div class="cut-text"><%= pic.password %></div></td>
         <td>
           <div>
             <button
@@ -252,7 +268,7 @@
               style="font-size: 10px"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal2"
-              onclick="editPIC('<%= sch %>', '<%= sch %>', '<%= sch %>', '<%= sch %>')"
+              onclick="editPIC('<%= pic.name %>', '<%= pic.email %>', '<%= pic.phone %>', '<%= pic.password %>')"
             >
               Edit
             </button>
@@ -266,30 +282,7 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td>Saya sendiri</td>
-        <td>saya@agsl.d</td>
-        <td>08-xxx-xxx</td>
-        <td>SSSSttt</td>
-        <td>
-          <div>
-            <button
-              type="button"
-              class="btn btn-light border border-dark"
-              style="font-size: 10px"
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              class="btn btn-light mx-1 border border-dark"
-              style="font-size: 10px"
-            >
-              Delete
-            </button>
-          </div>
-        </td>
-      </tr>
+      <% }) %>
     </tbody>
   </table>
 </div>

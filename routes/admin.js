@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const pgdb = require("../db/pg");
+const fetch = require("cross-fetch");
 
 const bcrypt = require("bcrypt");
 
@@ -172,10 +173,20 @@ router.get("/editpartner", async (req, res) => {
   const id = req.query.id ? req.query.id : "";
   // console.log(id);
   try {
+    const data = await fetch(
+      process.env.FRONTEND_ADDRESS +
+        "/api/partners/getPartner/c246e1ec-95b3-4837-bd6a-de08528b7d03"
+    );
+    const dataPartner = await data.json();
+    const { name, brand, divisi, pics } = dataPartner.data;
+
     res.render("admin_editpartner", {
       title: "Synnex Admin - Edit Partner",
       layout: "layouts/adminsidenav",
-      sch: req.query.sch ? req.query.sch : "",
+      name: name ? name : "",
+      brand: brand ? brand : "",
+      divisi: divisi ? divisi : "",
+      pics: pics ? pics : [],
     });
   } catch (err) {
     res.send(err.toString());
