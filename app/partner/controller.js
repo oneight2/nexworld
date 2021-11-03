@@ -4,9 +4,24 @@ const validator = require("validator");
 
 module.exports = {
   getPartners: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
-      const partners = await db.query("SELECT * FROM partners");
-      res.status(200).json({ data: partners.rows });
+      const store = await db.query("SELECT * FROM partners");
+      totalData = store.rowCount;
+
+      const partners = await db.query(
+        `SELECT * FROM partners LIMIT $1 OFFSET $2`,
+        [perPage, page]
+      );
+      res.status(200).json({
+        totalData,
+        page: parseInt(currentPage),
+        perPage,
+        data: partners.rows,
+      });
     } catch (err) {
       res
         .status(500)
@@ -16,13 +31,19 @@ module.exports = {
   getPartner: async (req, res) => {
     try {
       const { id } = req.params;
-      const partner = await db.query(`SELECT * FROM Partners WHERE uid = $1`, [
+      const partner = await db.query(`SELECT * FROM partners WHERE uid = $1`, [
         id,
       ]);
+      const pics = await db.query(`SELECT * FROM pics WHERE partnerid = $1`, [
+        id,
+      ]);
+      const obj1 = partner.rows[0];
+      const obj2 = { pics: pics.rows };
+      const data = Object.assign(obj1, obj2);
       if (partner === null || undefined || "") {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
-      res.status(200).json({ data: partner.rows[0] });
+      res.status(200).json({ data });
     } catch (err) {
       res
         .status(500)

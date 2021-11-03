@@ -1,11 +1,26 @@
 const db = require("../../db/db");
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4, stringify } = require("uuid");
 
 module.exports = {
   getBooths: async (req, res) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let page = (currentPage - 1) * perPage;
+    let totalData;
     try {
       const booths = await db.query("SELECT * FROM booths");
-      res.status(200).json({ data: booths.rows });
+      totalData = booths.rowCount;
+
+      const booth = await db.query(
+        "SELECT * FROM booths  LIMIT $1 OFFSET $2 ",
+        [perPage, page]
+      );
+      res.status(200).json({
+        totalData,
+        page: parseInt(currentPage),
+        perPage,
+        data: booth.rows,
+      });
     } catch (err) {
       res
         .status(500)
