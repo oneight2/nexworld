@@ -291,13 +291,57 @@
     console.log($("#sch").val());
   };
   const postNewStore = () => {
-    const image = $("#image")[0].files[0];
-    const store = $("#store-name").val();
-    const url = $("#url").val();
-    let formData = new FormData();
-    console.log("NAME", image, url, store);
+    if (!$("#image")[0].files[0]) {
+      alert("Please add image");
+    } else {
+      console.log("uploading...");
+      let formData = new FormData();
+      formData.append("name", $("#store-name").val());
+      formData.append("url", $("#url").val());
+      formData.append("image", $("#image")[0].files[0]);
+
+      let requestHeaders = new Headers();
+      requestHeaders.delete("Content-Type");
+
+      fetch("/api/stores/addStore", {
+        method: "POST",
+        headers: requestHeaders,
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert(`${error}`);
+        });
+    }
   };
   const updateStore = () => {
-    console.log("update");
+    console.log("uploading...");
+    let formData = new FormData();
+    formData.append("name", $("#upstore-name").val());
+    formData.append("url", $("#upurl").val());
+    if ($("#image")[0].files[0]) {
+      formData.append("image", $("#upimage")[0].files[0]);
+    }
+
+    let requestHeaders = new Headers();
+    requestHeaders.delete("Content-Type");
+
+    fetch("/api/stores/updateStore/7f7d4bcb-5179-4859-b50c-2fdcdba1a9ba", {
+      method: "PUT",
+      headers: requestHeaders,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(`${error}`);
+      });
   };
 </script>
