@@ -263,7 +263,7 @@
         <th scope="col">Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="t-body">
       <% pics.forEach(function(pic){ %>
       <tr>
         <td><%= pic.name %></td>
@@ -306,6 +306,37 @@
   });
   const goSch = () => {
     console.log($("#sch").val());
+    $("#t-body").empty();
+    $("#t-body").append(`
+      <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><div class="cut-text"></div></td>
+          <td>
+            <div>
+              <button
+                type="button"
+                class="btn btn-light border border-dark"
+                style="font-size: 10px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal2"
+                onclick="editPIC('', '', '', '', '')"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-light mx-1 border border-dark"
+                style="font-size: 10px"
+                onclick="deletePIC('')"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+    `);
   };
   const goBack = () => {
     window.location.replace("/admin/partnerlist");
