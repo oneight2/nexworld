@@ -2,6 +2,76 @@
 
 <div
   class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="exampleModalLabel2"
+          style="font-weight: 600"
+        >
+          Update Store
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="upimage" class="form-label" style="font-weight: 700"
+            >Image</label
+          >
+          <input class="form-control" type="file" id="upimage" />
+        </div>
+        <div class="mb-3">
+          <label for="upstore-name" class="form-label" style="font-weight: 700"
+            >Store Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="upstore-name"
+            value="<%= sch %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="upurl" class="form-label" style="font-weight: 700"
+            >Url</label
+          >
+          <input type="text" class="form-control" id="upurl" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="updateStore()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
   id="exampleModal"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
@@ -141,6 +211,15 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
             >
               Delete
             </button>
@@ -163,6 +242,13 @@
         </td>
         <td>
           <div>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+            >
+              Edit
+            </button>
             <button
               type="button"
               class="btn btn-light px-3 border border-dark"
@@ -210,5 +296,8 @@
     const url = $("#url").val();
     let formData = new FormData();
     console.log("NAME", image, url, store);
+  };
+  const updateStore = () => {
+    console.log("update");
   };
 </script>
