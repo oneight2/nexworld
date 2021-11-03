@@ -87,7 +87,7 @@ module.exports = {
           res.status(500).json({ message: `Format email tidak sesuai` });
         } else {
           await db.query(
-            `INSERT into pics (uid, email, password, name, phone, created_at) values ($1, $2, $3, $4, $5, $6, $7)`,
+            `INSERT into pics (uid, email, password, name, phone, created_at, partnerid) values ($1, $2, $3, $4, $5, $6, $7)`,
             [uid, email, hash, name, phone, created_at, partnerid]
           );
         }
