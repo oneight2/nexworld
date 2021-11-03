@@ -76,7 +76,7 @@ module.exports = {
   },
   addPic: async (req, res) => {
     try {
-      const { email, password, name, phone } = req.body;
+      const { email, password, name, phone, partnerid } = req.body;
 
       let salt = await bcrypt.genSalt(saltRounds);
       const hash = await bcrypt.hash(password, salt);
@@ -87,8 +87,8 @@ module.exports = {
           res.status(500).json({ message: `Format email tidak sesuai` });
         } else {
           await db.query(
-            `INSERT into pics (uid, email, password, name, phone, created_at) values ($1, $2, $3, $4, $5, $6)`,
-            [uid, email, hash, name, phone, created_at]
+            `INSERT into pics (uid, email, password, name, phone, created_at) values ($1, $2, $3, $4, $5, $6, $7)`,
+            [uid, email, hash, name, phone, created_at, partnerid]
           );
         }
       }
