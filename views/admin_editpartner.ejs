@@ -41,7 +41,16 @@
           <label for="uppassword" class="form-label" style="font-weight: 700"
             >Password</label
           >
-          <input type="text" class="form-control" id="uppassword" />
+          <input
+            type="text"
+            class="form-control"
+            id="uppassword"
+            placeholder="set new password here"
+          />
+          <i style="font-size: 9px; color: blue"
+            >leave the password input blank if you don't want to change the
+            password</i
+          >
         </div>
       </div>
       <div class="modal-footer">
@@ -123,7 +132,7 @@
           type="button"
           class="btn btn-primary px-4"
           style="background-color: #0b2559"
-          onclick="postNewPIC()"
+          onclick="addPIC()"
         >
           Save
         </button>
@@ -148,6 +157,7 @@
       type="button"
       class="btn btn-primary px-4"
       style="background-color: #0b2559"
+      onclick="updatePartner()"
     >
       Save
     </button>
@@ -156,35 +166,35 @@
 <div class="rounded shadow p-4 container">
   <div class="row">
     <div class="col">
-      <label for="FormControlInput1" class="form-label" style="font-weight: 700"
+      <label for="partbrand" class="form-label" style="font-weight: 700"
         >Nama Brand</label
       >
       <input
         type="text"
         class="form-control"
-        id="FormControlInput1"
+        id="partbrand"
         value="<%= brand %>"
       />
     </div>
     <div class="col">
-      <label for="FormControlInput2" class="form-label" style="font-weight: 700"
+      <label for="partname" class="form-label" style="font-weight: 700"
         >Nama PT</label
       >
       <input
         type="text"
         class="form-control"
-        id="FormControlInput2"
+        id="partname"
         value="<%= name %>"
       />
     </div>
     <div class="col">
-      <label for="FormControlInput3" class="form-label" style="font-weight: 700"
+      <label for="partdivisi" class="form-label" style="font-weight: 700"
         >Divisi</label
       >
       <input
         type="text"
         class="form-control"
-        id="FormControlInput3"
+        id="partdivisi"
         value="<%= divisi %>"
       />
     </div>
@@ -268,7 +278,7 @@
               style="font-size: 10px"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal2"
-              onclick="editPIC('<%= pic.name %>', '<%= pic.email %>', '<%= pic.phone %>', '<%= pic.password %>')"
+              onclick="editPIC('<%= pic.uid %>', '<%= pic.name %>', '<%= pic.email %>', '<%= pic.phone %>', '<%= pic.password %>')"
             >
               Edit
             </button>
@@ -276,6 +286,7 @@
               type="button"
               class="btn btn-light mx-1 border border-dark"
               style="font-size: 10px"
+              onclick="deletePIC('<%= pic.uid %>')"
             >
               Delete
             </button>
@@ -288,9 +299,10 @@
 </div>
 
 <script>
+  let id = "";
   $(document).ready(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
+    id = urlParams.get("id");
   });
   const goSch = () => {
     console.log($("#sch").val());
@@ -298,17 +310,106 @@
   const goBack = () => {
     window.location.replace("/admin/partnerlist");
   };
-  const editPIC = (nama, email, hp, password) => {
+
+  let idSelectPIC = "";
+  const editPIC = (id, nama, email, hp, password) => {
+    idSelectPIC = id;
     $("#upname").val(nama);
     $("#upemail").val(email);
     $("#uphp").val(hp);
-    $("#uppassword").val(password);
   };
   const updatePIC = () => {
-    const name = $("#upname").val();
-    const email = $("#upemail").val();
-    const hp = $("#uphp").val();
-    const password = $("#uppassword").val();
-    console.log("update PIC", name, email, hp, password);
+    let setData = {
+      name: $("#upname").val(),
+      email: $("#upemail").val(),
+      phone: $("#uphp").val(),
+    };
+    if ($("#uppassword").val()) {
+      setData = { ...setData, password: $("#uppassword").val() };
+    }
+    fetch(`/api/pics/updatePic/${idSelectPIC}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(setData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes update PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const addPIC = () => {
+    fetch(`/api/pics/addPic`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        partnerid: id,
+        name: $("#name").val(),
+        email: $("#email").val(),
+        phone: $("#hp").val(),
+        password: $("#password").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes add PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const deletePIC = (id) => {
+    fetch(`/api/pics/deletePic/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const updatePartner = () => {
+    fetch(`/api/partners/updatePartner/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: $("#partname").val(),
+        brand: $("#partbrand").val(),
+        divisi: $("#partdivisi").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes update Partner");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
   };
 </script>

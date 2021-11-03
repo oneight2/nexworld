@@ -174,8 +174,7 @@ router.get("/editpartner", async (req, res) => {
   // console.log(id);
   try {
     const data = await fetch(
-      process.env.FRONTEND_ADDRESS +
-        "/api/partners/getPartner/c246e1ec-95b3-4837-bd6a-de08528b7d03"
+      process.env.FRONTEND_ADDRESS + `/api/partners/getPartner/${id}`
     );
     const dataPartner = await data.json();
     const { name, brand, divisi, pics } = dataPartner.data;
