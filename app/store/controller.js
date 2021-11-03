@@ -20,7 +20,7 @@ module.exports = {
     try {
       const { id } = req.params;
       const store = await db.query(`SELECT * FROM stores WHERE uid = $1`, [id]);
-      if (store === null || undefined || "") {
+      if (!store) {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
       res.status(200).json({ data: store.rows[0] });
@@ -56,9 +56,10 @@ module.exports = {
         src.on("end", async () => {
           try {
             const image = filename;
+            const imageurl = `/public/store/${filename}`;
             await db.query(
-              `INSERT into stores (uid, name, url, image, created_at) values ($1, $2, $3, $4, $5)`,
-              [uid, name, url, image, created_at]
+              `INSERT into stores (uid, name, url, image, created_at, imageurl) values ($1, $2, $3, $4, $5, $6)`,
+              [uid, name, url, image, created_at, imageurl]
             );
 
             res
@@ -101,6 +102,8 @@ module.exports = {
 
         src.on("end", async () => {
           const image = filename;
+          const imageurl = `/public/store/${filename}`;
+
           const imageStore = await db.query(
             `SELECT * FROM stores WHERE uid = $1`,
             [id]
@@ -108,8 +111,8 @@ module.exports = {
           let currentImage = `${config.rootPath}/public/store/${imageStore.rows[0].image}`;
           try {
             await db.query(
-              `UPDATE Stores SET (name,url,image) = ($2, $3, $4) where uid = $1`,
-              [id, name, url, image]
+              `UPDATE stores SET (name,url,image, imageurl) = ($2, $3, $4, $5) where uid = $1`,
+              [id, name, url, image, imageurl]
             );
             if (fs.existsSync(currentImage)) {
               fs.unlinkSync(currentImage);
