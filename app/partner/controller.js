@@ -12,10 +12,10 @@ module.exports = {
       const store = await db.query("SELECT * FROM partners");
       totalData = store.rowCount;
 
-      const partners = await db.query(`SELECT * FROM LIMIT $1 OFFSET $2`, [
-        perPage,
-        page,
-      ]);
+      const partners = await db.query(
+        `SELECT * FROM partners LIMIT $1 OFFSET $2`,
+        [perPage, page]
+      );
       res.status(200).json({
         totalData,
         page: parseInt(currentPage),
