@@ -51,6 +51,7 @@
           type="button"
           class="btn btn-primary px-4"
           style="background-color: #0b2559"
+          onclick="addPartner()"
         >
           Save
         </button>
@@ -200,5 +201,29 @@
   const goEdit = (id) => {
     console.log(id, "nya");
     window.location.replace(`/admin/editpartner?id=${id}`);
+  };
+  const addPartner = () => {
+    fetch("/api/partners/addPartner", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: $("#pt").val(),
+        brand: $("#brand").val(),
+        divisi: $("#divisi").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes add Partner");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
   };
 </script>

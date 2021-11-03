@@ -181,5 +181,26 @@
     const name = $("#name").val();
     const email = $("#email").val();
     console.log("NAME", name, email);
+    fetch("/api/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: $("#name").val(),
+        email: $("#email").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes add Guest");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
   };
 </script>
