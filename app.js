@@ -14,7 +14,8 @@ const hostname = "localhost";
 const port = process.env.APP_PORT;
 
 const passport = require("passport");
-require("./middleware/passport");
+require("./middleware/authGoogle");
+require("./middleware/authFacebook");
 
 const pg = require("pg"),
   session = require("express-session"),
@@ -86,7 +87,7 @@ app.post("/auth", authMw.authToken, (req, res) => {
 });
 //
 
-// GOOGLE LOGIN
+// GOOGLE & FACEBOOK LOGIN
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -95,19 +96,32 @@ app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
+app.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
 
 app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     successRedirect: "/protected",
-    failureRedirect: "/auth/google/failure",
+    failureRedirect: "/",
+  })
+);
+app.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    successRedirect: "/dashfacebook",
+    failureRedirect: "/",
   })
 );
 const loginGoogle = require("./routes/signinGoogle");
+const loginFacebook = require("./routes/signinFacebook");
 
 app.get("/protected", loginGoogle);
+app.get("/dashFacebook", loginFacebook);
 
-// END LOGIN GOOGLE
+// END LOGIN GOOGLE & FACEBOOK
 
 //Login function
 const login = require("./routes/login");
