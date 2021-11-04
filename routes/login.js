@@ -20,12 +20,10 @@ router.post("/", async (req, res) => {
       let response = await pgdb.getUser(req.body.email.toLowerCase());
 
       if (response.length == 0) {
-        res
-          .status(500)
-          .send({
-            error: true,
-            message: "Your account does not exist or it has not verified yet.",
-          });
+        res.status(500).send({
+          error: true,
+          message: "Your account does not exist or it has not verified yet.",
+        });
       }
 
       let dbpassword = response[0].password;

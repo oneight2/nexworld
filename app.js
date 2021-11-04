@@ -13,6 +13,9 @@ const saltRounds = 10;
 const hostname = "localhost";
 const port = process.env.APP_PORT;
 
+const passport = require("passport");
+require("./middleware/passport");
+
 const pg = require("pg"),
   session = require("express-session"),
   pgSession = require("connect-pg-simple")(session);
@@ -82,6 +85,29 @@ app.post("/auth", authMw.authToken, (req, res) => {
   });
 });
 //
+
+// GOOGLE LOGIN
+
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/protected",
+    failureRedirect: "/auth/google/failure",
+  })
+);
+const loginGoogle = require("./routes/signinGoogle");
+
+app.get("/protected", loginGoogle);
+
+// END LOGIN GOOGLE
 
 //Login function
 const login = require("./routes/login");
