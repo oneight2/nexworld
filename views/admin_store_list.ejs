@@ -25,6 +25,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="uppreview"
+          src="/img/noimage.png"
+          alt="uppreview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="upimage" class="form-label" style="font-weight: 700"
             >Image</label
@@ -91,6 +97,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="preview"
+          src="/img/noimage.png"
+          alt="preview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="image" class="form-label" style="font-weight: 700"
             >Image</label
@@ -220,6 +232,7 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              onclick="deleteStore()"
             >
               Delete
             </button>
@@ -286,6 +299,26 @@
     const urlParams = new URLSearchParams(window.location.search);
     const schVal = urlParams.get("sch");
     console.log(schVal);
+
+    upimage.onchange = (evt) => {
+      const [file] = upimage.files;
+      if (file) {
+        uppreview.src = URL.createObjectURL(file);
+      } else {
+        uppreview.src = "/img/noimage.png";
+      }
+    };
+
+    image.onchange = (evt) => {
+      const [file] = image.files;
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+      } else {
+        preview.src = "/img/noimage.png";
+      }
+    };
+
+    console.log("<%= process.env.FRONTEND_ADDRESS %>");
   });
   const goSch = () => {
     console.log($("#sch").val());
@@ -342,6 +375,22 @@
       })
       .catch((error) => {
         alert(`${error}`);
+      });
+  };
+  const deleteStore = (id) => {
+    fetch(`/api/stores/deleteStore/8d5ccb92-e1e3-4d2a-aad3-4a1b81e50240`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete Store");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
       });
   };
 </script>

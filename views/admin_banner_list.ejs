@@ -25,6 +25,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="uppreview"
+          src="/img/noimage.png"
+          alt="uppreview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="upimage" class="form-label" style="font-weight: 700"
             >Image</label
@@ -86,6 +92,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="preview"
+          src="/img/noimage.png"
+          alt="preview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="image" class="form-label" style="font-weight: 700"
             >Image</label
@@ -218,6 +230,7 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              onclick="deleteBanner()"
             >
               Delete
             </button>
@@ -289,18 +302,97 @@
     const urlParams = new URLSearchParams(window.location.search);
     const schVal = urlParams.get("sch");
     console.log(schVal);
+
+    upimage.onchange = (evt) => {
+      const [file] = upimage.files;
+      if (file) {
+        uppreview.src = URL.createObjectURL(file);
+      } else {
+        uppreview.src = "/img/noimage.png";
+      }
+    };
+
+    image.onchange = (evt) => {
+      const [file] = image.files;
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+      } else {
+        preview.src = "/img/noimage.png";
+      }
+    };
   });
   const goSch = () => {
     console.log($("#sch").val());
   };
   const postNewBanner = () => {
-    const image = $("#image")[0].files[0];
-    const desc = $("#desc").val();
-    const url = $("#url").val();
-    let formData = new FormData();
-    console.log("NAME", image, url, desc);
+    if (!$("#image")[0].files[0]) {
+      alert("Please add image");
+    } else {
+      console.log("uploading...");
+      let formData = new FormData();
+      formData.append("name", $("#desc").val());
+      formData.append("url", $("#url").val());
+      formData.append("image", $("#image")[0].files[0]);
+
+      let requestHeaders = new Headers();
+      requestHeaders.delete("Content-Type");
+
+      fetch("/api/banners/addBanner", {
+        method: "POST",
+        headers: requestHeaders,
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert(`${error}`);
+        });
+    }
   };
   const updateBanner = () => {
-    console.log("update");
+    console.log("uploading...");
+    let formData = new FormData();
+    formData.append("name", $("#updesc").val());
+    formData.append("url", $("#upurl").val());
+
+    if ($("#image")[0].files[0]) {
+      formData.append("image", $("#upimage")[0].files[0]);
+    }
+
+    let requestHeaders = new Headers();
+    requestHeaders.delete("Content-Type");
+
+    fetch("/api/banners/updateBanner/4f07b268-1983-49ac-9f46-10d3abd2c837", {
+      method: "PUT",
+      headers: requestHeaders,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(`${error}`);
+      });
+  };
+  const deleteBanner = (id) => {
+    fetch(`/api/banners/deleteBanner/4f07b268-1983-49ac-9f46-10d3abd2c837`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete Banner");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
   };
 </script>
