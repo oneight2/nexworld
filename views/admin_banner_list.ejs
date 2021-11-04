@@ -218,6 +218,7 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              onclick="deleteBanner()"
             >
               Delete
             </button>
@@ -346,6 +347,22 @@
       })
       .catch((error) => {
         alert(`${error}`);
+      });
+  };
+  const deleteBanner = (id) => {
+    fetch(`/api/banners/deleteBanner/4f07b268-1983-49ac-9f46-10d3abd2c837`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete Banner");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
       });
   };
 </script>

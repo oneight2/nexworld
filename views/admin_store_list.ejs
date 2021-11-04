@@ -220,6 +220,7 @@
               type="button"
               class="btn btn-light px-3 border border-dark"
               style="font-size: 10px"
+              onclick="deleteStore()"
             >
               Delete
             </button>
@@ -342,6 +343,22 @@
       })
       .catch((error) => {
         alert(`${error}`);
+      });
+  };
+  const deleteStore = (id) => {
+    fetch(`/api/stores/deleteStore/8d5ccb92-e1e3-4d2a-aad3-4a1b81e50240`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete Store");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
       });
   };
 </script>
