@@ -25,6 +25,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="uppreview"
+          src="/img/noimage.png"
+          alt="uppreview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="upimage" class="form-label" style="font-weight: 700"
             >Image</label
@@ -86,6 +92,12 @@
         ></button>
       </div>
       <div class="modal-body">
+        <img
+          id="preview"
+          src="/img/noimage.png"
+          alt="preview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
         <div class="mb-3">
           <label for="image" class="form-label" style="font-weight: 700"
             >Image</label
@@ -290,6 +302,24 @@
     const urlParams = new URLSearchParams(window.location.search);
     const schVal = urlParams.get("sch");
     console.log(schVal);
+
+    upimage.onchange = (evt) => {
+      const [file] = upimage.files;
+      if (file) {
+        uppreview.src = URL.createObjectURL(file);
+      } else {
+        uppreview.src = "/img/noimage.png";
+      }
+    };
+
+    image.onchange = (evt) => {
+      const [file] = image.files;
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+      } else {
+        preview.src = "/img/noimage.png";
+      }
+    };
   });
   const goSch = () => {
     console.log($("#sch").val());
