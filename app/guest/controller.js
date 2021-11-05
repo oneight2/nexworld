@@ -67,12 +67,11 @@ module.exports = {
               [uid, email, hash, name, created_at]
             );
           }
+          res
+            .status(200)
+            .json({ status: "Success", message: "Add Guest Success!" });
         }
       }
-
-      res
-        .status(200)
-        .json({ status: "Success", message: "Add Guest Success!" });
     } catch (err) {
       res
         .status(500)
@@ -101,11 +100,11 @@ module.exports = {
               [id, email, hash, name]
             );
           }
+          res
+            .status(200)
+            .json({ status: "Success", message: "Update Guest Success!" });
         }
       }
-      res
-        .status(200)
-        .json({ status: "Success", message: "Update Guest Success!" });
     } catch (err) {
       res
         .status(500)

@@ -77,23 +77,30 @@ module.exports = {
   addPic: async (req, res) => {
     try {
       const { email, password, name, phone, partnerid } = req.body;
-
-      let salt = await bcrypt.genSalt(saltRounds);
-      const hash = await bcrypt.hash(password, salt);
       const uid = uuidv4();
       const created_at = new Date();
       if (email) {
         if (!validator.isEmail(email)) {
           res.status(500).json({ message: `Format email tidak sesuai` });
         } else {
-          await db.query(
-            `INSERT into pics (uid, email, password, name, phone, created_at, partnerid) values ($1, $2, $3, $4, $5, $6, $7)`,
-            [uid, email, hash, name, phone, created_at, partnerid]
-          );
+          if (!password) {
+            await db.query(
+              `INSERT into pics (uid, email,  name, phone, created_at, partnerid) values ($1, $2, $3, $4, $5, $6)`,
+              [uid, email, name, phone, created_at, partnerid]
+            );
+          } else {
+            let salt = await bcrypt.genSalt(saltRounds);
+            const hash = await bcrypt.hash(password, salt);
+            await db.query(
+              `INSERT into pics (uid, email, password, name, phone, created_at, partnerid) values ($1, $2, $3, $4, $5, $6, $7)`,
+              [uid, email, hash, name, phone, created_at, partnerid]
+            );
+          }
+          res
+            .status(200)
+            .json({ status: "Success", message: "Add Pic Success!" });
         }
       }
-
-      res.status(200).json({ status: "Success", message: "Add Pic Success!" });
     } catch (err) {
       res
         .status(500)
@@ -104,17 +111,24 @@ module.exports = {
     try {
       const { id } = req.params;
       const { email, password, name, phone } = req.body;
-      let salt = await bcrypt.genSalt(saltRounds);
-      const hash = await bcrypt.hash(password, salt);
 
       if (email) {
         if (!validator.isEmail(email)) {
           res.status(500).json({ message: `Format email tidak sesuai` });
         } else {
-          await db.query(
-            `UPDATE pics SET (email, password, name, phone) = ($2, $3, $4, $5) where uid = $1`,
-            [id, email, hash, name, phone]
-          );
+          if (!password) {
+            await db.query(
+              `UPDATE pics SET (email, name, phone) = ($2, $3, $4) where uid = $1`,
+              [id, email, name, phone]
+            );
+          } else {
+            let salt = await bcrypt.genSalt(saltRounds);
+            const hash = await bcrypt.hash(password, salt);
+            await db.query(
+              `UPDATE pics SET (email, password, name, phone) = ($2, $3, $4, $5) where uid = $1`,
+              [id, email, hash, name, phone]
+            );
+          }
           res
             .status(200)
             .json({ status: "Success", message: "Update Pic Success!" });
