@@ -1,107 +1,100 @@
 <head>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
 </head>
 <div class="wrapper">
-    <div class="card">
-        <div class="card-content">
-            <img class="logo" src="./img/Logo.png" />
-            <div class="card-header">
-                <div class="menu">
-                    <img src="./img/landing/stadium.png" alt="stadium-icon">
-                    <h2>BYGE ARENA</h2>
-                </div>
-                <div class="menu">
-                    <img src="./img/landing/barrier.png" alt="stadium-icon">
-                    <h2>BYGE EXPO</h2>
-                </div>
-                <div class="menu">
-                    <img src="./img/landing/prize.png" alt="stadium-icon">
-                    <h2>WIN PRIZES</h2>
-                </div>
-                <div class="menu">
-                    <img src="./img/landing/information.png" alt="stadium-icon">
-                    <h2>EVENT INFO</h2>
-                </div>
-                <div class="menu">
-                    <img src="./img/landing/hot-sale.png" alt="stadium-icon">
-                    <h2>SPECIAL DEAL</h2>
-                </div>
-            </div>
+  <div class="card">
+    <div class="card-content">
+      <img class="logo" src="./img/Logo.png" />
+      <div class="card-header">
+        <div class="menu px-5">
+          <img
+            src="./img/landing/stadium.png"
+            alt="stadium-icon"
+            class="img-fluid"
+          />
+          <h5>BYGE ARENA</h5>
         </div>
+        <div class="menu px-5">
+          <img src="./img/landing/barrier.png" alt="stadium-icon" />
+          <h5>BYGE EXPO</h5>
+        </div>
+        <div class="menu px-5">
+          <img src="./img/landing/prize.png" alt="stadium-icon" />
+          <h5>WIN PRIZES</h5>
+        </div>
+        <div class="menu px-5">
+          <img src="./img/landing/information.png" alt="stadium-icon" />
+          <h5>EVENT INFO</h5>
+        </div>
+        <div class="menu px-5">
+          <img src="./img/landing/hot-sale.png" alt="stadium-icon" />
+          <h5>SPECIAL DEAL</h5>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <style>
-    .wrapper{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100%;
-        background-image: url('./img/background.png');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-    }
-    .logo{
-        position: absolute;
-        margin-top: -80px;
-    }
-    .card{
-        width: 413px;
-        height: 551px;
-        background: rgba(0, 0, 0, 0.8);
-        border: 6px solid #C65A85;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 5px #d55085;
-        border-radius: 20px;
-        position: relative;
-        padding: 10px;
-    }
-    .card-header{
-        text-align: center;
-        margin-top: 70px;
-    }
-    .card-content{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-    }
-    .menu{
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-        border-bottom: 2px solid #B7025F;
-        box-sizing: border-box;
-        /* border-radius: 8px; */
-        width: 320px;
-        height: 70px;
-        padding-left: 45px;
-        padding-bottom: 15px;
-        /* padding-right: 20px; */
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-    .menu:last-child{
-        border: none;
-    }
-    .menu img{
-        width: 48px;
-    }
-    .menu h2{
-        color: #01CDF2;
-        font-size: 20px;
-        font-weight: 700;
-        padding-top: 8px;
-        margin-left: 20px;
-    }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: url("./img/background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  .logo {
+    position: absolute;
+    margin-top: -80px;
+  }
+  .card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 6px solid #c65a85;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px #d55085;
+    border-radius: 20px;
+    position: relative;
+    padding: 10px;
+  }
+  .card-header {
+    text-align: center;
+    margin-top: 70px;
+  }
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+  .menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    border-bottom: 2px solid #b7025f;
+    box-sizing: border-box;
+    padding-bottom: 15px;
+    padding-top: 10px;
+  }
+  .menu:last-child {
+    border: none;
+  }
+  .menu h5 {
+    /* color: #01cdf2; */
+    color: white;
+    padding-top: 8px;
+    margin-left: 20px;
+  }
 
-    @media (max-width: 414px) {
-        .card{
-            width: 358px;
-        }
+  @media (max-width: 414px) {
+    .card {
+      width: 90%;
     }
+  }
 </style>
