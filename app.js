@@ -38,6 +38,7 @@ const partner = require("./app/partner/router");
 const store = require("./app/store/router");
 const banner = require("./app/banner/router");
 const annotation = require("./app/annotation/router");
+const guest = require("./app/guest/router");
 
 // URL API
 const URL = `/api`;
@@ -48,6 +49,7 @@ app.use(`${URL}/partners`, partner);
 app.use(`${URL}/stores`, store);
 app.use(`${URL}/banners`, banner);
 app.use(`${URL}/annotations`, annotation);
+app.use(`${URL}/guests`, guest);
 
 /*
 const cors = require('cors')
@@ -74,21 +76,21 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
-app.get('/login-page', ((req, res) => {
-    res.render('login', { layout: 'layouts/bootstraplayout'})
-}))
+app.get("/login-page", (req, res) => {
+  res.render("login", { layout: "layouts/bootstraplayout" });
+});
 
-app.get('/landing-page', ((req, res) => {
-    res.render('landing', {layout: 'layouts/bootstraplayout'})
-}))
+app.get("/landing-page", (req, res) => {
+  res.render("landing", { layout: "layouts/bootstraplayout" });
+});
 
-app.get('/landing-page-2', ((req, res) => {
-    res.render('landing-2', {layout: 'layouts/bootstraplayout'})
-}))
+app.get("/landing-page-2", (req, res) => {
+  res.render("landing-2", { layout: "layouts/bootstraplayout" });
+});
 
-app.get('/landing-page-3', ((req, res) => {
-    res.render('landing-3', {layout: 'layouts/bootstraplayout'})
-}))
+app.get("/landing-page-3", (req, res) => {
+  res.render("landing-3", { layout: "layouts/bootstraplayout" });
+});
 
 //Auth
 app.post("/auth", authMw.authToken, (req, res) => {
