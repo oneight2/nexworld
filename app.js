@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const hostname = '0.0.0.0';
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT || 3000;
 
 const pg = require('pg'),
     session = require('express-session'),
@@ -49,6 +49,22 @@ const authMw = require('./middleware/authToken')
 app.get('/', function(req, res) {
     res.render('index')
 })
+
+app.get('/login-page', ((req, res) => {
+    res.render('login', { layout: 'layouts/bootstraplayout'})
+}))
+
+app.get('/landing-page', ((req, res) => {
+    res.render('landing', {layout: 'layouts/bootstraplayout'})
+}))
+
+app.get('/landing-page-2', ((req, res) => {
+    res.render('landing-2', {layout: 'layouts/bootstraplayout'})
+}))
+
+app.get('/landing-page-3', ((req, res) => {
+    res.render('landing-3', {layout: 'layouts/bootstraplayout'})
+}))
 
 //Auth
 app.post('/auth', authMw.authToken, (req, res) => {

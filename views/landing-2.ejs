@@ -1,0 +1,276 @@
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script>
+       $(document).ready(function() {
+            $('#leftmenu').click(function() {
+            var hidden = $('.sidebarmenu').data('hidden');
+            // $('#showmenu').text(hidden ? 'Hide Menu' : 'Show Menu');
+            var oldSrc = './img/landing/left-arrow.png';
+            var newSrc = './img/landing/right-arrow.png';
+            if(hidden){
+                $('.sidebarmenu').animate({
+                    left: '0px'
+                },500)
+                $('img[src="' + newSrc + '"]').attr('src', oldSrc);
+
+            } else {
+                $('.sidebarmenu').animate({
+                    left: '-450px'
+                },500)
+                $('img[src="' + oldSrc + '"]').attr('src', newSrc);
+            }
+            $('.sidebarmenu,.image').data("hidden", !hidden);
+
+            });
+
+            // $('#rightmenu').click(function() {
+            // var hidden = $('.sidebarmenu2').data('hidden');
+            // // $('#showmenu').text(hidden ? 'Hide Menu' : 'Show Menu');
+            // var oldSrc = './img/landing/left-arrow.png';
+            // var newSrc = './img/landing/right-arrow.png';
+            // if(hidden){
+            //     $('.sidebarmenu2').animate({
+            //         right: '0px'
+            //     },500)
+            //     $('img[src="' + newSrc + '"]').attr('src', oldSrc);
+
+            // } else {
+            //     $('.sidebarmenu2').animate({
+            //         right: '-450px'
+            //     },500)
+            //     $('img[src="' + oldSrc + '"]').attr('src', newSrc);
+            // }
+            // $('.sidebarmenu2,.image').data("hidden", !hidden);
+
+            // });
+        }); 
+
+        $(document).ready(function() {
+
+            $('#rightmenu').click(function() {
+            var hidden = $('.sidebarmenu2').data('hidden');
+            // $('#showmenu').text(hidden ? 'Hide Menu' : 'Show Menu');
+            var oldSrc = './img/landing/left-arrow.png';
+            var newSrc = './img/landing/right-arrow.png';
+            if(hidden){
+                $('.sidebarmenu2').animate({
+                    right: '0px'
+                },500)
+                $('img[src="' + newSrc + '"]').attr('src', oldSrc);
+
+            } else {
+                $('.sidebarmenu2').animate({
+                    right: '-450px'
+                },500)
+                $('img[src="' + oldSrc + '"]').attr('src', newSrc);
+            }
+            $('.sidebarmenu2,.image').data("hidden", !hidden);
+
+            });
+        }); 
+    </script>
+</head>
+<div class="wrapper">
+    <div class="card sidebarmenu">
+        <a id="leftmenu" class="left-arrow" href="#">
+            <img src="./img/landing/left-arrow.png" alt="">
+        </a>
+        <div class="card-content">
+            <img class="logo" src="./img/Logo.png" />
+            <div class="card-header">
+                <div class="menu">
+                    <img src="./img/landing/stadium.png" alt="stadium-icon">
+                    <h2>BYGE ARENA</h2>
+                </div>
+                <div class="menu">
+                    <img src="./img/landing/barrier.png" alt="stadium-icon">
+                    <h2>BYGE EXPO</h2>
+                </div>
+                <div class="menu">
+                    <img src="./img/landing/prize.png" alt="stadium-icon">
+                    <h2>WIN PRIZES</h2>
+                </div>
+                <div class="menu">
+                    <img src="./img/landing/information.png" alt="stadium-icon">
+                    <h2>EVENT INFO</h2>
+                </div>
+                <div class="menu">
+                    <img src="./img/landing/hot-sale.png" alt="stadium-icon">
+                    <h2>SPECIAL DEAL</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card sidebarmenu2">
+        <a id="rightmenu" class="right-arrow" href="#">
+            <img src="./img/landing/right-arrow.png" alt="">
+        </a>
+        <div class="name-list leaderboard">
+            <h1>Leaderboard</h1>
+            <ol>
+                <li>
+                    <div>
+                        <p>Rocketman</p>
+                        <span>1000</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>SPIDERTRON</p>
+                        <span>890</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>VOXCON</p>
+                        <span>780</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>PANGKO</p>
+                        <span>670</span>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>EXHIBITOR</p>
+                        <span>650</span>
+                    </div>
+                </li>
+            </ol>
+        </div>
+            <button class="view-btn">view all</button>
+    </div>
+</div>
+
+<style>
+    .sidebarmenu{
+        position: absolute;
+        left: 0px
+    }
+    .left-arrow{
+        position: relative;
+        top: 50%;
+        left: 98%;
+    }
+    .right-arrow{
+        position: relative;
+        top: 50%;
+        right: 10%;
+    }
+    .wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        padding-left: 4em;
+        padding-right: 4em;
+        background-image: url('./img/background.png');
+        /* background: no-repeat; */
+    }
+    .logo{
+        position: absolute;
+        margin-top: -130px;
+    }
+    .card{
+        width: 400px;
+        height: 580px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 6px solid #C65A85;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 5px #d55085;
+        border-radius: 20px;
+        position: relative;
+        padding: 10px;
+    }
+    .card-header{
+        text-align: center;
+        margin-top: 30px;
+    }
+    .card-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    .menu{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        border-bottom: 2px solid #B7025F;
+        box-sizing: border-box;
+        /* border-radius: 8px; */
+        width: 320px;
+        height: 70px;
+        padding-left: 45px;
+        padding-bottom: 15px;
+        /* padding-right: 20px; */
+        margin-top: 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+    .menu:last-child{
+        border: none;
+    }
+    .menu img{
+        width: 48px;
+    }
+    .menu h2{
+        color: #01CDF2;
+        font-size: 20px;
+        font-weight: 700;
+        padding-top: 8px;
+        margin-left: 20px;
+    }
+    .leaderboard h1{
+        font-size: 32px;
+        -webkit-text-stroke: 2px #FF6DB8;
+        text-shadow: 0px 0px 10px #B7025F, 0px 0px 10px #B7025F, 0px 0px 10px #B7025F;
+        text-transform: uppercase;
+        color: black;
+        text-align: center;
+    }
+    .name-list{
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+    .name-list ol li div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /* padding-left: 36px; */
+        padding-right: 36px;
+    }
+    ol{
+        margin-top: 72px;
+    }
+    li{
+        list-style-type: decimal;
+    }
+    .view-btn{
+        background: transparent;
+        /* width: 342px; */
+        height: 72px;
+        color: #01CDF2;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: 2px solid #B7025F;
+        box-sizing: border-box;
+        border-radius: 8px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 100px;
+    }
+    .view-btn:hover{
+        background-color: #B7025F;
+        transition: all 0.3s;
+    }
+</style>

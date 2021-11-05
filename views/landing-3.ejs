@@ -1,0 +1,124 @@
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<div class="wrapper">
+    <div class="carousel">
+        <img src="./img/landing/banner-1.png" alt="">
+    </div>
+    <div class="sponsor">
+        <div>
+            <div class="card">
+                <img src="./img/landing/aoc.png" alt="">
+            </div>
+            <p>AOC</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/acer.png" alt="">
+            </div>
+            <p>Acer</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/rog.png" alt="">
+            </div>
+            <p>Asus ROG</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/razer.png" alt="">
+            </div>
+            <p>Razer</p>
+        </div>
+
+        <div>
+            <div class="card">
+                <img src="./img/landing/alienware.png" alt="">
+            </div>
+            <p>Alienware</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/infinix.png" alt="">
+            </div>
+            <p>Infinix</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/asus.png" alt="">
+            </div>
+            <p>Asus</p>
+        </div>
+        <div>
+            <div class="card">
+                <img src="./img/landing/logitech.png" alt="">
+            </div>
+            <p>Logitech</p>
+        </div>
+</div>
+
+<style>
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center;
+        align-items: center; */
+        height: 100vh;
+        width: 100%;
+        background-image: url('./img/background-2.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .carousel{
+        display: flex;
+        justify-content: center;
+        margin-top: 3em;
+    }
+    .sponsor{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+    .sponsor div p{
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        line-height: 24px;
+        margin-top: 16px;
+    }
+    .card{
+        background: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 305px;
+        height: 152px;
+        border-radius: 10px;
+        margin-top: 60px;
+    }
+    
+
+    @media (max-width: 414px) {
+        .wrapper{
+            height: 100%;
+        }
+        .sponsor{
+            padding: 0;
+        }
+        .card{
+            width: 171px;
+            height: 86px;
+        }
+        .card img{
+            width: 110px;
+        }
+        .carousel img{
+            width: 358px;
+        }
+    }
+</style>

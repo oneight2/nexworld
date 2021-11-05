@@ -1,0 +1,151 @@
+<head>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<div class="wrapper">
+    <div class="card">
+        <div class="card-content">
+            <img class="logo" src="./img/Logo.png" />
+            <div class="card-header">
+                <h2>Welcome To</h2>
+                <h1>BYGE 2021</h1>
+            </div>
+            <div class="mb-3 col-10">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Full Name">
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn login-btn d-grid">Login</button>
+                </div>
+            </div>
+            <p class="option"><span>Or</span></p>
+            <div class="d-grid gap-2">
+                <a class="btn fb-login btn-lg btn-block" href="#">
+                    <img width="30" src="./img/facebook-icon.png"> 
+                    Continue with Facebook
+                </a>
+                <a class="btn google-login btn-lg btn-block" href="#">
+                    <img width="30" src="./img/google-icon.png"> 
+                    Continue with Google
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100%;
+        background-image: url('./img/login-background.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .logo{
+        position: absolute;
+        margin-top: -80px;
+    }
+    .card{
+        width: 400px;
+        height: 580px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 6px solid #C65A85;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 5px #d55085;
+        border-radius: 20px;
+        position: relative;
+        padding: 10px;
+    }
+    .card-header{
+        text-align: center;
+        margin-top: 70px;
+    }
+    .card-header h1{
+        color: white;
+        font-size: 36px;
+        font-weight: 700;
+    }
+    .card-header h2{
+        color: #C99EB4;
+        font-size: 36px;
+        font-weight: 400;
+    }
+    .card-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    input{
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+        height: 48px;
+    }
+    .login-btn{
+        background: #01A4C2;
+        color: white;
+        margin-top: 10px;
+        border-radius: 8px;
+        height: 48px;
+        align-items: center;
+    }
+    .login-btn:hover{
+        color: white;
+    }
+    .option{
+        color: white;
+        width: 80%;
+        text-align: center;
+        border-bottom: 1px solid #FFFFFF;
+        line-height: 0.1em;
+    }
+    .option span{
+        background: rgba(0, 0, 0, 0.8);
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    .fb-login{
+        background: #4769B0;
+        box-sizing: border-box;
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        width: 328px;
+        height: 48px;
+        padding: 10px;
+        margin-top: 15px;
+    }
+    .google-login{
+        background: #FFFFFF;
+        border: 1px solid #000000;
+        box-sizing: border-box;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        width: 328px;
+        height: 48px;
+        align-items: center;
+        padding-top: 10px;
+        padding-left: 5px;
+        margin-top: 10px;
+    }
+    a img{
+        width: 25px;
+        margin-right: 10px;
+    }
+
+    @media (max-width: 414px) {
+        .card{
+            width: 358px;
+        }
+    }
+ 
+    
+</style>
