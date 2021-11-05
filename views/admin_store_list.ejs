@@ -1,0 +1,396 @@
+<h3 style="font-weight: 600">Store List</h3>
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="exampleModalLabel2"
+          style="font-weight: 600"
+        >
+          Update Store
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <img
+          id="uppreview"
+          src="/img/noimage.png"
+          alt="uppreview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
+        <div class="mb-3">
+          <label for="upimage" class="form-label" style="font-weight: 700"
+            >Image</label
+          >
+          <input class="form-control" type="file" id="upimage" />
+        </div>
+        <div class="mb-3">
+          <label for="upstore-name" class="form-label" style="font-weight: 700"
+            >Store Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="upstore-name"
+            value="<%= sch %>"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="upurl" class="form-label" style="font-weight: 700"
+            >Url</label
+          >
+          <input type="text" class="form-control" id="upurl" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="updateStore()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 600">
+          Add New Store
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <img
+          id="preview"
+          src="/img/noimage.png"
+          alt="preview"
+          class="img-thumbnail rounded mx-auto d-block"
+        />
+        <div class="mb-3">
+          <label for="image" class="form-label" style="font-weight: 700"
+            >Image</label
+          >
+          <input class="form-control" type="file" id="image" />
+        </div>
+        <div class="mb-3">
+          <label for="store-name" class="form-label" style="font-weight: 700"
+            >Store Name</label
+          >
+          <input type="text" class="form-control" id="store-name" />
+        </div>
+        <div class="mb-3">
+          <label for="url" class="form-label" style="font-weight: 700"
+            >Url</label
+          >
+          <input type="text" class="form-control" id="url" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="postNewStore()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3 mb-3 p-1 d-flex justify-content-between">
+  <div class="d-flex">
+    <div class="my-2">Show</div>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-light dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        10
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">10</a></li>
+        <li><a class="dropdown-item" href="#">50</a></li>
+        <li><a class="dropdown-item" href="#">100</a></li>
+      </ul>
+    </div>
+    <div class="my-2">Entires</div>
+  </div>
+  <div class="d-flex">
+    <input
+      id="sch"
+      type="text"
+      class="form-control"
+      placeholder="Search here"
+      value="<%= sch %>"
+    />
+    <button
+      type="button"
+      class="btn btn-primary mx-1"
+      style="background-color: #0b2559"
+      onclick="goSch()"
+    >
+      <span data-feather="search"></span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="background-color: #0b2559; width: 200px; font-size: 12px"
+    >
+      <span data-feather="plus"></span>
+      Add store
+    </button>
+  </div>
+</div>
+<div class="shadow p-2 rounded">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">NO</th>
+        <th scope="col">Image</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Url</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/ASUS_Logo.svg/2560px-ASUS_Logo.svg.png"
+            style="width: 150px; height: 30px"
+          />
+        </td>
+        <td>Ottodwda</td>
+        <td>
+          <a style="color: blue" href="#"
+            >https://nexworld.synnexmetrodata.com/</a
+          >
+        </td>
+        <td>
+          <div>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+              onclick="deleteStore()"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/ASUS_Logo.svg/2560px-ASUS_Logo.svg.png"
+            style="width: 150px; height: 30px"
+          />
+        </td>
+        <td>Ottodwda</td>
+        <td>
+          <a style="color: blue" href="#"
+            >https://nexworld.synnexmetrodata.com/</a
+          >
+        </td>
+        <td>
+          <div>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light px-3 border border-dark"
+              style="font-size: 10px"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-end mt-4">
+  <nav>
+    <ul class="pagination">
+      <li class="page-item disabled">
+        <span class="page-link">Previous</span>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item active" aria-current="page">
+        <span class="page-link">2</span>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<script>
+  $(document).ready(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const schVal = urlParams.get("sch");
+    console.log(schVal);
+
+    upimage.onchange = (evt) => {
+      const [file] = upimage.files;
+      if (file) {
+        uppreview.src = URL.createObjectURL(file);
+      } else {
+        uppreview.src = "/img/noimage.png";
+      }
+    };
+
+    image.onchange = (evt) => {
+      const [file] = image.files;
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+      } else {
+        preview.src = "/img/noimage.png";
+      }
+    };
+
+    console.log("<%= process.env.FRONTEND_ADDRESS %>");
+  });
+  const goSch = () => {
+    console.log($("#sch").val());
+  };
+  const postNewStore = () => {
+    if (!$("#image")[0].files[0]) {
+      alert("Please add image");
+    } else {
+      console.log("uploading...");
+      let formData = new FormData();
+      formData.append("name", $("#store-name").val());
+      formData.append("url", $("#url").val());
+      formData.append("image", $("#image")[0].files[0]);
+
+      let requestHeaders = new Headers();
+      requestHeaders.delete("Content-Type");
+
+      fetch("/api/stores/addStore", {
+        method: "POST",
+        headers: requestHeaders,
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message);
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert(`${error}`);
+        });
+    }
+  };
+  const updateStore = () => {
+    console.log("uploading...");
+    let formData = new FormData();
+    formData.append("name", $("#upstore-name").val());
+    formData.append("url", $("#upurl").val());
+    if ($("#image")[0].files[0]) {
+      formData.append("image", $("#upimage")[0].files[0]);
+    }
+
+    let requestHeaders = new Headers();
+    requestHeaders.delete("Content-Type");
+
+    fetch("/api/stores/updateStore/7f7d4bcb-5179-4859-b50c-2fdcdba1a9ba", {
+      method: "PUT",
+      headers: requestHeaders,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.message);
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert(`${error}`);
+      });
+  };
+  const deleteStore = (id) => {
+    fetch(`/api/stores/deleteStore/8d5ccb92-e1e3-4d2a-aad3-4a1b81e50240`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete Store");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+</script>

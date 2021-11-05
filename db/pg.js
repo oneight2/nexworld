@@ -77,7 +77,8 @@ async function registerUser(uid, email, password, role, props = {}){
 
 async function getUser(email){
 	try{
-		let { rows } = await db.query("select * from users where email ILIKE $1 AND role = 'user'", [email]);
+		let { rows } = await db.query("select * from users where email = $1 AND role = 'user'", [email]);
+
 
 		return rows;
 	} catch (err){
@@ -209,7 +210,8 @@ async function editAnnotation(uid, aname, acontent){
 //BRIEFCASE
 async function getBriefcase(email){
 	try {
-		let {rows} = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email ILIKE $1", [email])
+		let {rows} = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
+
 
 		return rows;
 	} catch(err){
@@ -224,13 +226,15 @@ async function addBriefcase(email, briefcase){
 			name: briefcase.name
 		}) +']';
 
-		let { rows } = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email ILIKE $1", [email])
+		let { rows } = await db.query("SELECT props -> 'briefcase' AS briefcase from users where email = $1", [email])
+
 
 		let findBriefcase = rows[0].briefcase.find(bc => bc.file == briefcase.file);
 		if(findBriefcase){
 			return ({error: true, message: 'Briefcase already exist!'})
 		} else {
-			let response = await db.query(`UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') || $2) where email ILIKE $1`, [email, parseBriefcase])
+			let response = await db.query(`UPDATE users SET props=jsonb_set(props, '{briefcase}', (props->'briefcase') || $2) where email = $1`, [email, parseBriefcase])
+
 
 			return ({error: false, message: 'Add briefcase Succesful!'});
 		}		

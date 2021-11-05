@@ -1,0 +1,447 @@
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 600">
+          Update PIC
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="upname" class="form-label" style="font-weight: 700"
+            >Nama Lengkap</label
+          >
+          <input type="text" class="form-control" id="upname" />
+        </div>
+        <div class="mb-3">
+          <label for="upemail" class="form-label" style="font-weight: 700"
+            >Alamat Email</label
+          >
+          <input type="text" class="form-control" id="upemail" />
+        </div>
+        <div class="mb-3">
+          <label for="uphp" class="form-label" style="font-weight: 700"
+            >NO. HP</label
+          >
+          <input type="number" class="form-control" id="uphp" />
+        </div>
+        <div class="mb-3">
+          <label for="uppassword" class="form-label" style="font-weight: 700"
+            >Password</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="uppassword"
+            placeholder="set new password here"
+          />
+          <i style="font-size: 9px; color: blue"
+            >leave the password input blank if you don't want to change the
+            password</i
+          >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="updatePIC()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 600">
+          Add New PIC
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="name" class="form-label" style="font-weight: 700"
+            >Nama Lengkap</label
+          >
+          <input type="text" class="form-control" id="name" />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label" style="font-weight: 700"
+            >Alamat Email</label
+          >
+          <input type="text" class="form-control" id="email" />
+        </div>
+        <div class="mb-3">
+          <label for="hp" class="form-label" style="font-weight: 700"
+            >NO. HP</label
+          >
+          <input type="number" class="form-control" id="hp" />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label" style="font-weight: 700"
+            >Password</label
+          >
+          <input type="text" class="form-control" id="password" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-light px-4 border border-primary border-2"
+          data-bs-dismiss="modal"
+        >
+          Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          style="background-color: #0b2559"
+          onclick="addPIC()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mb-2">
+  <div>
+    <h3 style="font-weight: 600">Edit Partner</h3>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-light px-4 border border-primary border-2"
+      onclick="goBack()"
+    >
+      Back
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary px-4"
+      style="background-color: #0b2559"
+      onclick="updatePartner()"
+    >
+      Save
+    </button>
+  </div>
+</div>
+<div class="rounded shadow p-4 container">
+  <div class="row">
+    <div class="col">
+      <label for="partbrand" class="form-label" style="font-weight: 700"
+        >Nama Brand</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="partbrand"
+        value="<%= brand %>"
+      />
+    </div>
+    <div class="col">
+      <label for="partname" class="form-label" style="font-weight: 700"
+        >Nama PT</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="partname"
+        value="<%= name %>"
+      />
+    </div>
+    <div class="col">
+      <label for="partdivisi" class="form-label" style="font-weight: 700"
+        >Divisi</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="partdivisi"
+        value="<%= divisi %>"
+      />
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-4" style="font-weight: 600">PIC</h4>
+<hr />
+<div class="mt-3 mb-3 p-1 d-flex justify-content-between">
+  <div class="d-flex">
+    <div class="my-2">Show</div>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn btn-light dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        10
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">10</a></li>
+        <li><a class="dropdown-item" href="#">50</a></li>
+        <li><a class="dropdown-item" href="#">100</a></li>
+        <li><a class="dropdown-item" href="#">All</a></li>
+      </ul>
+    </div>
+    <div class="my-2">Entires</div>
+  </div>
+  <div class="d-flex">
+    <input
+      id="sch"
+      type="text"
+      class="form-control"
+      placeholder="Search here"
+      value=""
+    />
+    <button
+      type="button"
+      class="btn btn-primary mx-1"
+      style="background-color: #0b2559"
+      onclick="goSch()"
+    >
+      <span data-feather="search"></span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      style="background-color: #0b2559; width: 200px; font-size: 12px"
+    >
+      <span data-feather="plus"></span>
+      Add PIC
+    </button>
+  </div>
+</div>
+
+<div class="shadow p-3 rounded">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nama Lengkap</th>
+        <th scope="col">Alamat Email</th>
+        <th scope="col">No.HP</th>
+        <th scope="col">Password</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody id="t-body">
+      <% pics.forEach(function(pic){ %>
+      <tr>
+        <td><%= pic.name %></td>
+        <td><%= pic.email %></td>
+        <td><%= pic.phone %></td>
+        <td><div class="cut-text"><%= pic.password %></div></td>
+        <td>
+          <div>
+            <button
+              type="button"
+              class="btn btn-light border border-dark"
+              style="font-size: 10px"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              onclick="editPIC('<%= pic.uid %>', '<%= pic.name %>', '<%= pic.email %>', '<%= pic.phone %>', '<%= pic.password %>')"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-light mx-1 border border-dark"
+              style="font-size: 10px"
+              onclick="deletePIC('<%= pic.uid %>')"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  let id = "";
+  $(document).ready(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    id = urlParams.get("id");
+  });
+  const goSch = () => {
+    console.log($("#sch").val());
+    $("#t-body").empty();
+    $("#t-body").append(`
+      <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><div class="cut-text"></div></td>
+          <td>
+            <div>
+              <button
+                type="button"
+                class="btn btn-light border border-dark"
+                style="font-size: 10px"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal2"
+                onclick="editPIC('', '', '', '', '')"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="btn btn-light mx-1 border border-dark"
+                style="font-size: 10px"
+                onclick="deletePIC('')"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+    `);
+  };
+  const goBack = () => {
+    window.location.replace("/admin/partnerlist");
+  };
+
+  let idSelectPIC = "";
+  const editPIC = (id, nama, email, hp, password) => {
+    idSelectPIC = id;
+    $("#upname").val(nama);
+    $("#upemail").val(email);
+    $("#uphp").val(hp);
+  };
+  const updatePIC = () => {
+    let setData = {
+      name: $("#upname").val(),
+      email: $("#upemail").val(),
+      phone: $("#uphp").val(),
+    };
+    if ($("#uppassword").val()) {
+      setData = { ...setData, password: $("#uppassword").val() };
+    }
+    fetch(`/api/pics/updatePic/${idSelectPIC}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(setData),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes update PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const addPIC = () => {
+    fetch(`/api/pics/addPic`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        partnerid: id,
+        name: $("#name").val(),
+        email: $("#email").val(),
+        phone: $("#hp").val(),
+        password: $("#password").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes add PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const deletePIC = (id) => {
+    fetch(`/api/pics/deletePic/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes delete PIC");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+  const updatePartner = () => {
+    fetch(`/api/partners/updatePartner/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: $("#partname").val(),
+        brand: $("#partbrand").val(),
+        divisi: $("#partdivisi").val(),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("Succes update Partner");
+          window.location.reload();
+        } else {
+          alert(`${res.status} - ${res.statusText}`);
+        }
+      })
+      .catch((err) => {
+        alert(`${err}`);
+      });
+  };
+</script>
