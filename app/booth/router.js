@@ -6,8 +6,10 @@ const {
   addBooth,
   updateBooth,
   deleteBooth,
+  search,
 } = require("./controller");
 
+router.get("/", search);
 router.get("/getBooths", getBooths);
 router.get("/getBooth/:id", getBooth);
 router.post("/addBooth", addBooth);

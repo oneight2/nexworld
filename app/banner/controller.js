@@ -22,7 +22,7 @@ module.exports = {
       const store = await db.query(`SELECT * FROM banners WHERE uid = $1`, [
         id,
       ]);
-      if (store === null || undefined || "") {
+      if (!store?.rows[0]) {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
       res.status(200).json({ data: store.rows[0] });
@@ -167,6 +167,24 @@ module.exports = {
       res
         .status(200)
         .json({ status: "Success", message: "Delete Banner Success!" });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: err.message || `Terjadi kesalahan pada server` });
+    }
+  },
+  search: async (req, res) => {
+    try {
+      const query = req.query.search;
+      const banner = await db.query(
+        `SELECT * FROM banners WHERE concat(name, image, imageurl) ILIKE '%'|| $1 ||'%'`,
+        [query]
+      );
+      if (!Array.isArray(banner.rows) || !banner.rows.length) {
+        res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        res.status(200).json({ data: banner.rows });
+      }
     } catch (err) {
       res
         .status(500)

@@ -8,8 +8,10 @@ const {
   addBanner,
   updateBanner,
   deleteBanner,
+  search,
 } = require("./controller");
 
+router.get("/", search);
 router.get("/getBanners", getBanners);
 router.get("/getBanner/:id", getBanner);
 router.post(

@@ -8,8 +8,10 @@ const {
   addStore,
   updateStore,
   deleteStore,
+  search,
 } = require("./controller");
 
+router.get("/", search);
 router.get("/getStores", getStores);
 router.get("/getStore/:id", getStore);
 router.post(

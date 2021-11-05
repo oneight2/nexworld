@@ -31,7 +31,7 @@ module.exports = {
     try {
       const { id } = req.params;
       const booth = await db.query(`SELECT * FROM booths WHERE uid = $1`, [id]);
-      if (booth === null || undefined || "") {
+      if (!booth?.rows[0]) {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
       res.status(200).json({ data: booth.rows[0] });
@@ -82,6 +82,24 @@ module.exports = {
       res
         .status(200)
         .json({ status: "Success", message: "Delete Booth Success!" });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: err.message || `Terjadi kesalahan pada server` });
+    }
+  },
+  search: async (req, res) => {
+    try {
+      const query = req.query.search;
+      const booth = await db.query(
+        `SELECT * FROM booths WHERE concat(name, number) ILIKE '%'|| $1 ||'%'`,
+        [query]
+      );
+      if (!Array.isArray(booth.rows) || !booth.rows.length) {
+        res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        res.status(200).json({ data: booth.rows });
+      }
     } catch (err) {
       res
         .status(500)

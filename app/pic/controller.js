@@ -45,7 +45,7 @@ module.exports = {
         "SELECT * FROM pics WHERE partnerid = $1 LIMIT $2 OFFSET $3",
         [partnerid, perPage, page]
       );
-      if (pics === null || undefined || "") {
+      if (!pics?.rows[0]) {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
       res.status(200).json({
@@ -64,7 +64,7 @@ module.exports = {
     try {
       const { id } = req.params;
       const pic = await db.query(`SELECT * FROM pics WHERE uid = $1`, [id]);
-      if (pic === null || undefined || "") {
+      if (!pic?.rows[0]) {
         res.status(404).json({ message: "Data tidak ditemukan" });
       }
       res.status(200).json({ data: pic.rows[0] });
@@ -133,6 +133,24 @@ module.exports = {
       res
         .status(200)
         .json({ status: "Success", message: "Delete Pic Success!" });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: err.message || `Terjadi kesalahan pada server` });
+    }
+  },
+  search: async (req, res) => {
+    try {
+      const query = req.query.search;
+      const pic = await db.query(
+        `SELECT * FROM pics WHERE concat(email, name, phone) ILIKE '%'|| $1 ||'%'`,
+        [query]
+      );
+      if (!Array.isArray(pic.rows) || !pic.rows.length) {
+        res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        res.status(200).json({ data: pic.rows });
+      }
     } catch (err) {
       res
         .status(500)
