@@ -39,11 +39,12 @@ module.exports = {
       ]);
       const obj1 = partner.rows[0];
       const obj2 = { pics: pics.rows };
-      const data = Object.assign(obj1, obj2);
-      if (partner === null || undefined || "") {
+      if (!partner?.rows[0]) {
         res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        const data = Object.assign(obj1, obj2);
+        res.status(200).json({ data });
       }
-      res.status(200).json({ data });
     } catch (err) {
       res
         .status(500)
@@ -95,6 +96,24 @@ module.exports = {
       res
         .status(200)
         .json({ status: "Success", message: "Delete Partner Success!" });
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: err.message || `Terjadi kesalahan pada server` });
+    }
+  },
+  search: async (req, res) => {
+    try {
+      const query = req.query.search;
+      const partner = await db.query(
+        `SELECT * FROM partners WHERE concat(name, brand, divisi) ILIKE '%'|| $1 ||'%'`,
+        [query]
+      );
+      if (!Array.isArray(partner.rows) || !partner.rows.length) {
+        res.status(404).json({ message: "Data tidak ditemukan" });
+      } else {
+        res.status(200).json({ data: partner.rows });
+      }
     } catch (err) {
       res
         .status(500)
