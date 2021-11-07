@@ -41,19 +41,34 @@ module.exports = {
         partnerid,
       ]);
       totalData = store.rowCount;
-      const pics = await db.query(
-        "SELECT * FROM pics WHERE partnerid = $1 LIMIT $2 OFFSET $3",
-        [partnerid, perPage, page]
-      );
-      if (!pics?.rows[0]) {
-        res.status(404).json({ message: "Data tidak ditemukan" });
+      if (perPage >= 0) {
+        const pics = await db.query(
+          "SELECT * FROM pics WHERE partnerid = $1 LIMIT $2 OFFSET $3",
+          [partnerid, perPage, page]
+        );
+        if (!pics?.rows[0]) {
+          res.status(404).json({ message: "Data tidak ditemukan" });
+        }
+        res.status(200).json({
+          totalData,
+          page: parseInt(currentPage),
+          perPage,
+          data: pics.rows,
+        });
+      } else {
+        const pics = await db.query("SELECT * FROM pics WHERE partnerid = $1", [
+          partnerid,
+        ]);
+        if (!pics?.rows[0]) {
+          res.status(404).json({ message: "Data tidak ditemukan" });
+        }
+        res.status(200).json({
+          totalData,
+          page: parseInt(currentPage),
+          perPage,
+          data: pics.rows,
+        });
       }
-      res.status(200).json({
-        totalData,
-        page: parseInt(currentPage),
-        perPage,
-        data: pics.rows,
-      });
     } catch (err) {
       res
         .status(500)

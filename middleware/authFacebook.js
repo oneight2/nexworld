@@ -6,7 +6,7 @@ passport.use(
     {
       clientID: "240394078077637",
       clientSecret: "dbf9f0f3cc9fd695f7996c76620ec71c",
-      callbackURL: "http://localhost:5031/auth/facebook/callback",
+      callbackURL: "https://localhost:5031/auth/facebook/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
