@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-const hostname = "localhost";
+const hostname = "https://nexworld-5hmj16sc3-oneight2.vercel.app/";
 const port = process.env.APP_PORT;
 
 const passport = require("passport");
